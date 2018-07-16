@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Horizon</string>
+    <string name="nav_home">หน้าหลัก</string>
+    <string name="nav_location">สาขา</string>
+    <string name="nav_favorite">ราการโปรด</string>
+    <string name="nav_promotion">โปรโมชั่น</string>
+    <string name="nav_profile">บัญชี</string>
+    <string name="open_drawer">เปิด</string>
+    <string name="close_drawer">ปิด</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="btn_close">ปิด</string>
+    <string name="add_bucket">เพิ่มลงตะกร้า</string>
+
+</resources>
