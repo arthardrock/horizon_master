@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -42,6 +43,8 @@ public class ClHomeFragment extends Fragment {
     public String item;
     public String image;
     public String price;
+    public String dataAr;
+
     public static ClHomeFragment newInstance() {
         ClHomeFragment fragment = new ClHomeFragment();
         return fragment;
@@ -53,11 +56,10 @@ public class ClHomeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        progress = (SpinKitView)view.findViewById(R.id.spin_kit);
         recyclerView = (RecyclerView) view.findViewById(R.id.rcy_item);
         dataList = new ArrayList<>();
         get_item(getContext());
@@ -65,8 +67,37 @@ public class ClHomeFragment extends Fragment {
         gridLayoutManager = new GridLayoutManager(getContext(),2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        adapter = new ClCustomAdapter(getContext(),dataList);
+        adapter = new ClCustomAdapter(recyclerView,getContext(),dataList,getActivity());
         recyclerView.setAdapter(adapter);
+        //ToDay
+        adapter.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                if (dataList.size() <= 20 ){
+                    dataList.add(null);
+                    adapter.notifyItemInserted(dataList.size()-1);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            dataList.remove(dataList.size()-1);
+                            adapter.notifyItemRemoved(dataList.size());
+
+                            int index = dataList.size();
+                            int end = index + 10;
+                            for (int i = index; i < end; i++) {
+
+                            }
+                            adapter.notifyDataSetChanged();
+                            adapter.setLoaded();
+                            //get_item(getContext());
+                        }
+                    }, 5000);
+                } else {
+                    Toast.makeText(getActivity(),"Text!",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         return view;
     }
 
@@ -79,7 +110,7 @@ public class ClHomeFragment extends Fragment {
             @Override
 
             protected String doInBackground(Void... voids) {
-                return getDataPosPdt("api/apitestitem.jsp", fnPreparingSynDataPdt(""));//api/menu/1
+                return getDataPosPdtLocal("api/menu/1", fnPreparingSynDataPdt(""));//api/menu/1 ,api/apitestitem.jsp
             }
 
             @Override
