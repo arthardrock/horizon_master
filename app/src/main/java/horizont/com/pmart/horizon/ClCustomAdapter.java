@@ -3,7 +3,6 @@ package horizont.com.pmart.horizon;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -74,24 +73,22 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
         else if (viewType == VIEW_TYPE_LOADING) {
             View view = LayoutInflater.from(activity).inflate(R.layout.item_loading, parent, false);
-                LoadingViewHolder loadingViewHolder= new LoadingViewHolder(view);
-
-            return new LoadingViewHolder(view);
+                 return new LoadingViewHolder(view);
         }
         return null;
-
     }
 
     @Override
     public void onBindViewHolder(@Nullable RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof UserViewHolder){
+            //
             final ClDataItem dataItem = my_data.get(position);
             UserViewHolder viewHolder = (UserViewHolder)holder;
             viewHolder.item.setText(dataItem.getItem_name());
             viewHolder.price.setText(dataItem.getPrice());
             Glide.with(context).load(dataItem.getItem_image()).into(viewHolder.image);
 
-            mCardView.setOnClickListener(new View.OnClickListener() {
+            viewHolder.mCardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     //การส่งค่า ไปยัง activity
@@ -112,7 +109,7 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
-        return my_data ==null ? 0 : my_data.size();
+        return my_data == null ? 0 : my_data.size();
     }
     public void setLoaded() {
         isLoading = false;
@@ -123,7 +120,7 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         public LoadingViewHolder(View view) {
             super(view);
-            progressBar = (ProgressBar) view.findViewById(R.id.progressBarData);
+            progressBar = view.findViewById(R.id.progressBarData);
         }
     }
 

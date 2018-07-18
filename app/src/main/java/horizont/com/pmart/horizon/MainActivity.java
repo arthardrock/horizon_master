@@ -2,6 +2,7 @@ package horizont.com.pmart.horizon;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.media.VolumeShaper;
@@ -24,19 +25,22 @@ import android.widget.TextView;
 
 import com.github.ybq.android.spinkit.SpinKitView;
 
+import static horizont.com.pmart.horizon.R.color.colorWhite;
+
 
 public class MainActivity extends AppCompatActivity {
 private Toolbar myToolbar;
 private TextView myTextView;
 private DrawerLayout drawerLayout;
 private ActionBarDrawerToggle actionBarDrawerToggle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setToolbar();
         setHamburgerButton();
-        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+        final BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.navigation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener
@@ -79,9 +83,10 @@ private ActionBarDrawerToggle actionBarDrawerToggle;
         myTextView = (TextView)findViewById(R.id.txt_title);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        myTextView.setText("Horizon");
+        myTextView.setText(R.string.app_name);
     }
 
+    @SuppressLint("ResourceAsColor")
     private void setHamburgerButton(){
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this

@@ -34,6 +34,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            app:itemBackground="@color/colorRed"
+            app:itemIconTint="@color/colorWhite"
+            app:itemTextColor="@color/colorWhite"
             app:menu="@menu/bottom_nav_menu"/>
     </RelativeLayout>
 
@@ -43,14 +46,12 @@
         android:layout_width="240dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="#ffffff">
+        android:background="@color/colorRed">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="test"
-            />
         <TextView
+            style="@style/Text_50dp"
+            android:padding="10dp"
+            android:textColor="@color/colorWhite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/nav_home"/>

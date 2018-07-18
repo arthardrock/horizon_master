@@ -5,12 +5,14 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.github.ybq.android.spinkit.SpinKitView;
+
 public class SplashScreen extends AppCompatActivity {
     private Handler handler;
     private Runnable runnable;
     long delay_time;
     long time = 3000L;
-
+    private SpinKitView icon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

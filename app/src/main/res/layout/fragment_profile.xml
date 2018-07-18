@@ -5,11 +5,11 @@
     android:layout_height="match_parent">
 
     <TextView
+        style="@style/Text_50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="@string/nav_profile"
-        android:textSize="30sp"/>
+        android:text="@string/nav_profile" />
 
     <LinearLayout
         android:layout_marginLeft="16dp"

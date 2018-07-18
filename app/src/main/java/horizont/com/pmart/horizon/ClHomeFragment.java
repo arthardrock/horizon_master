@@ -38,12 +38,10 @@ public class ClHomeFragment extends Fragment {
     private ClCustomAdapter adapter;
     private List<ClDataItem> dataList;
 
-    SpinKitView progress;
 
     public String item;
     public String image;
     public String price;
-    public String dataAr;
 
     public static ClHomeFragment newInstance() {
         ClHomeFragment fragment = new ClHomeFragment();
@@ -62,44 +60,20 @@ public class ClHomeFragment extends Fragment {
 
         recyclerView = (RecyclerView) view.findViewById(R.id.rcy_item);
         dataList = new ArrayList<>();
-        get_item(getContext());
+        get_itemMore(getContext());
 
         gridLayoutManager = new GridLayoutManager(getContext(),2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
         adapter = new ClCustomAdapter(recyclerView,getContext(),dataList,getActivity());
         recyclerView.setAdapter(adapter);
+
         //ToDay
-        adapter.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore() {
-                if (dataList.size() <= 20 ){
-                    dataList.add(null);
-                    adapter.notifyItemInserted(dataList.size()-1);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            dataList.remove(dataList.size()-1);
-                            adapter.notifyItemRemoved(dataList.size());
 
-                            int index = dataList.size();
-                            int end = index + 10;
-                            for (int i = index; i < end; i++) {
-
-                            }
-                            adapter.notifyDataSetChanged();
-                            adapter.setLoaded();
-                            //get_item(getContext());
-                        }
-                    }, 5000);
-                } else {
-                    Toast.makeText(getActivity(),"Text!",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
 
         return view;
     }
+
 
 
     public void get_item(final Context context) {
@@ -155,6 +129,93 @@ public class ClHomeFragment extends Fragment {
                 }
             }
         }.execute();
+    }
+    public void get_itemMore(final Context context) {
+        new AsyncTask<Void, Void, String>() {
 
+            ProgressDialog progressDialog = getHttpLoading(context);
+            AlertDialog.Builder errorDialog = gerErrorDialog(context);
+            @Override
+
+            protected String doInBackground(Void... voids) {
+                return getDataPosPdtLocal("api/menu/2", fnPreparingSynDataPdt(""));//api/menu/1 ,api/apitestitem.jsp
+            }
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog.show();
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                progressDialog.dismiss();
+
+               ttt();
+                if(s.equals("error")){
+                    errorDialog.show();
+                }
+                else{
+                    super.onPostExecute(s);
+                    ObjectMapper rootMapper = new ObjectMapper();
+                    JsonNode obj = null;
+                    try {
+                        obj = rootMapper.readTree(s);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    JsonNode data = obj.path("menu");
+                    for (JsonNode nodeMember : data) {
+
+                        ClDataItem dataAr = new ClDataItem (nodeMember.path("item_name").asText(),nodeMember.path("item_image").asText(),
+                                nodeMember.path("price").asText());
+
+                        item = nodeMember.path("item_name").asText();
+                        image = nodeMember.path("item_image").asText();
+                        price = nodeMember.path("price").asText();
+
+                        dataList.add(dataAr);
+
+                        System.out.println("ITEM :" + dataAr);
+                        adapter.notifyDataSetChanged();
+                    }
+                    //progress.setVisibility(View.INVISIBLE);
+                }
+            }
+        }.execute();
+
+    }
+    public void ttt(){
+        adapter.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                if (dataList.size() <= 20){
+                    dataList.add(null);
+                    adapter.notifyItemInserted(dataList.size()-1);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            dataList.remove(dataList.size()-1);
+                            adapter.notifyItemRemoved(dataList.size());
+
+                            int index = dataList.size();
+                            int end = index + 20;
+
+                            for (int i = index; i < end; i++) {
+                                ClDataItem dataItem = new ClDataItem("name","image", "price");
+                                dataItem.getItem_name();
+                                dataItem.getItem_image();
+                                dataItem.getPrice();
+                                dataList.add(dataItem);
+                            }
+                            adapter.notifyDataSetChanged();
+                            adapter.setLoaded();
+                        }
+                    }, 5000);
+                } else {
+                    Toast.makeText(getActivity(),"END OF RESULT!",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }

@@ -7,19 +7,19 @@
         android:title="@string/nav_home"/>
     <item
         android:id="@+id/nav_location"
-        android:icon="@drawable/ic_action_home"
+        android:icon="@drawable/ic_action_location"
         android:title="@string/nav_location"/>
     <item
         android:id="@+id/nav_favorite"
-        android:icon="@drawable/ic_action_home"
+        android:icon="@drawable/ic_action_favorite"
         android:title="@string/nav_favorite"/>
     <item
         android:id="@+id/nav_promotion"
-        android:icon="@drawable/ic_action_home"
+        android:icon="@drawable/ic_action_promotion"
         android:title="@string/nav_promotion"/>
     <item
         android:id="@+id/nav_profile"
-        android:icon="@drawable/ic_action_home"
+        android:icon="@drawable/ic_action_profile"
         android:title="@string/nav_profile"/>
 
 </menu>

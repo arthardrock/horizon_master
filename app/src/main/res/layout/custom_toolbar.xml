@@ -10,13 +10,13 @@
         android:id="@+id/custom_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorGreen"
+        android:background="@color/colorRed"
         app:contentInsetLeft="0dp"
         app:contentInsetStart="0dp"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <TextView
-            style="@style/Text_30dp"
+            style="@style/Text_50dp"
             android:id="@+id/txt_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
