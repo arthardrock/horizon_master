@@ -54,7 +54,7 @@ public class ClHttpReq  {
         HttpURLConnection con = null;
         StringBuilder st = new StringBuilder();
         try {
-            System.out.println("test");
+           // System.out.println("test");
             object = new URL(url);
             con = (HttpURLConnection) object.openConnection();
             con.setDoOutput(true);
@@ -112,7 +112,7 @@ public class ClHttpReq  {
         HttpURLConnection con = null;
         StringBuilder st = new StringBuilder();
         try {
-            System.out.println("test");
+           // System.out.println("test");
             object = new URL(url);
             con = (HttpURLConnection) object.openConnection();
             con.setDoOutput(true);

@@ -2,16 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <include
         android:id="@+id/toolbar"
-        layout="@layout/custom_toolbar"></include>
-
-    <ImageView
-        android:layout_above="@+id/frame_layout"
-        android:id="@+id/img_back"
-        android:background="@drawable/ic_action_back"
-        android:layout_width="50dp"
-        android:layout_height="?attr/actionBarSize" />
+        layout="@layout/tb_itemdetail_custom"></include>
 
     <FrameLayout
         android:id="@+id/frame_layout"
@@ -19,6 +13,7 @@
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
         android:layout_above="@+id/navigation"
+        android:background="@color/colorWhite"
         android:animateLayoutChanges="true">
 
         <LinearLayout
@@ -41,12 +36,42 @@
                 android:id="@+id/img_item"
                 android:layout_width="match_parent"
                 android:layout_height="250dp" />
-            <Button
+
+    <!--        <Button
                 style="@style/Text_50dp"
+                android:textColor="@color/colorBlack"
+                android:background="@drawable/shape_item_inside"
                 android:text="@string/add_bucket"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
                 android:layout_width="match_parent"
                 android:layout_height="80dp" />
+                -->
 
+            <LinearLayout
+                android:background="@drawable/shape_item_inside"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="80dp">
+
+                <ImageView
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/ic_action_add"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
+
+                <TextView
+                    android:textColor="@color/colorBlack"
+                    style="@style/Text_50dp"
+                    android:paddingLeft="10dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:text="@string/add_bucket"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
         </LinearLayout>
     </FrameLayout>
 </RelativeLayout>

@@ -1,5 +1,6 @@
 package horizont.com.pmart.horizon;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -70,11 +71,8 @@ public class ClHomeFragment extends Fragment {
 
         //ToDay
 
-
         return view;
     }
-
-
 
     public void get_item(final Context context) {
         new AsyncTask<Void, Void, String>() {
@@ -84,7 +82,7 @@ public class ClHomeFragment extends Fragment {
             @Override
 
             protected String doInBackground(Void... voids) {
-                return getDataPosPdtLocal("api/menu/1", fnPreparingSynDataPdt(""));//api/menu/1 ,api/apitestitem.jsp
+                return getDataPosPdt("api/apitestitem.jsp", fnPreparingSynDataPdt(""));//api/menu/1 ,api/apitestitem.jsp
             }
 
             @Override
@@ -130,6 +128,8 @@ public class ClHomeFragment extends Fragment {
             }
         }.execute();
     }
+    @SuppressLint("StaticFieldLeak")
+
     public void get_itemMore(final Context context) {
         new AsyncTask<Void, Void, String>() {
 
@@ -138,7 +138,7 @@ public class ClHomeFragment extends Fragment {
             @Override
 
             protected String doInBackground(Void... voids) {
-                return getDataPosPdtLocal("api/menu/2", fnPreparingSynDataPdt(""));//api/menu/1 ,api/apitestitem.jsp
+                return getDataPosPdtLocal("api/menu/1", fnPreparingSynDataPdt(""));//api/menu/1 ,api/apitestitem.jsp
             }
 
             @Override
@@ -146,44 +146,61 @@ public class ClHomeFragment extends Fragment {
                 super.onPreExecute();
                 progressDialog.show();
             }
-
             @Override
-            protected void onPostExecute(String s) {
+            protected void onPostExecute(final String s) {
                 progressDialog.dismiss();
 
-               ttt();
                 if(s.equals("error")){
                     errorDialog.show();
                 }
                 else{
-                    super.onPostExecute(s);
-                    ObjectMapper rootMapper = new ObjectMapper();
-                    JsonNode obj = null;
-                    try {
-                        obj = rootMapper.readTree(s);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    JsonNode data = obj.path("menu");
-                    for (JsonNode nodeMember : data) {
+                    adapter.setOnLoadMoreListener(new OnLoadMoreListener() {
+                        @Override
+                        public void onLoadMore() {
+                            if (dataList.size() <= 20){
+                                dataList.add(null);
+                                adapter.notifyItemInserted(dataList.size()-1);
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        dataList.remove(dataList.size() - 1);
+                                        adapter.notifyItemRemoved(dataList.size());
 
-                        ClDataItem dataAr = new ClDataItem (nodeMember.path("item_name").asText(),nodeMember.path("item_image").asText(),
-                                nodeMember.path("price").asText());
+                                        int index = dataList.size();
+                                        int end = index + 20;
 
-                        item = nodeMember.path("item_name").asText();
-                        image = nodeMember.path("item_image").asText();
-                        price = nodeMember.path("price").asText();
+                                        ObjectMapper rootMapper = new ObjectMapper();
+                                        JsonNode obj = null;
+                                        try {
+                                            obj = rootMapper.readTree(s);
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
 
-                        dataList.add(dataAr);
-
-                        System.out.println("ITEM :" + dataAr);
-                        adapter.notifyDataSetChanged();
-                    }
-                    //progress.setVisibility(View.INVISIBLE);
+                                        JsonNode data = obj.path("menu");
+                                        for (JsonNode nodeMember : data) {
+                                             for (int i = index; i < end; i++) {
+                                                ClDataItem dataItem = new ClDataItem(nodeMember.path("item_name").asText(), nodeMember.path("item_image").asText(),
+                                                        nodeMember.path("price").asText());
+                                                dataItem.getItem_name();
+                                                dataItem.getItem_image();
+                                                dataItem.getPrice();
+                                                dataList.add(dataItem);
+                                            }
+                                            System.out.println("ITEM1 :" + dataList);
+                                            adapter.notifyDataSetChanged();
+                                            adapter.setLoaded();
+                                        }
+                                    }
+                                }, 5000);
+                            } else {
+                                Toast.makeText(getActivity(),"END OF RESULT!",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 }
             }
         }.execute();
-
     }
     public void ttt(){
         adapter.setOnLoadMoreListener(new OnLoadMoreListener() {
@@ -195,21 +212,21 @@ public class ClHomeFragment extends Fragment {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            dataList.remove(dataList.size()-1);
+                            dataList.remove(dataList.size() - 1);
                             adapter.notifyItemRemoved(dataList.size());
 
                             int index = dataList.size();
                             int end = index + 20;
 
                             for (int i = index; i < end; i++) {
-                                ClDataItem dataItem = new ClDataItem("name","image", "price");
-                                dataItem.getItem_name();
-                                dataItem.getItem_image();
-                                dataItem.getPrice();
-                                dataList.add(dataItem);
-                            }
-                            adapter.notifyDataSetChanged();
-                            adapter.setLoaded();
+                                    ClDataItem dataItem = new ClDataItem("","","");
+                                    dataItem.getItem_name();
+                                    dataItem.getItem_image();
+                                    dataItem.getPrice();
+                                    dataList.add(dataItem);
+                                }
+                                adapter.notifyDataSetChanged();
+                                adapter.setLoaded();
                         }
                     }, 5000);
                 } else {

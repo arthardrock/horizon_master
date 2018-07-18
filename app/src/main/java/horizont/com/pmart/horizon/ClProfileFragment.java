@@ -81,7 +81,7 @@ public class ClProfileFragment extends Fragment{
             @Override
 
             protected String doInBackground(Void... voids) {
-                return getDataPosPdt("apimember?para=1;MjAxOC0wNi0yNyAxNzoyODowNC4zODg4OTk=", fnPreparingSynDataPdt(""));
+                return getDataPosPdt("apimember?para=1;MjAxOC0wNi0yNyAxNzoyODowNC4zODg4OTk=", fnPreparingSynDataPdt("4445555555"));
             }
 
             @Override

@@ -11,5 +11,6 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="btn_close">ปิด</string>
     <string name="add_bucket">เพิ่มลงตะกร้า</string>
+    <string name="txt_price">ราคา</string>
 
 </resources>
