@@ -7,16 +7,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import static android.app.PendingIntent.getActivity;
 import static horizont.com.pmart.horizon.ClDialogBox.getHttpLoading;
 
 public class ClItemDetail extends AppCompatActivity {
  private TextView txt_item,myTextView;
  private ImageView img_item ,img_back;
  private Toolbar myToolbar;
+ private LinearLayout btn_add;
 
 
     ProgressDialog loadingDialog;
@@ -46,6 +50,14 @@ public class ClItemDetail extends AppCompatActivity {
                     .placeholder(R.drawable.iconhorizon)
                     .into(img_item);
         }
+        btn_add = findViewById(R.id.btn_add);
+        btn_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ClItemDetail.this, "ยังไม่พร้อมใช้งาน",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
     }
     private void setToolbar(){
         myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);

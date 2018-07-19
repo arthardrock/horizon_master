@@ -1,6 +1,6 @@
 package horizont.com.pmart.horizon;
 
-class ClDataItem {
+public class ClDataItem {
 
     private String item_name;
     private String item_image;
@@ -35,4 +35,5 @@ class ClDataItem {
     public void setPrice(String price) {
         this.price = price;
     }
+
 }

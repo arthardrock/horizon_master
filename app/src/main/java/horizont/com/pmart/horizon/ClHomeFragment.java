@@ -1,25 +1,23 @@
 package horizont.com.pmart.horizon;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.ybq.android.spinkit.SpinKitView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,7 +26,6 @@ import java.util.List;
 import static horizont.com.pmart.horizon.ClDialogBox.gerErrorDialog;
 import static horizont.com.pmart.horizon.ClDialogBox.getHttpLoading;
 import static horizont.com.pmart.horizon.ClHttpReq.fnPreparingSynDataPdt;
-import static horizont.com.pmart.horizon.ClHttpReq.getDataPosPdt;
 import static horizont.com.pmart.horizon.ClHttpReq.getDataPosPdtLocal;
 
 public class ClHomeFragment extends Fragment {
@@ -38,11 +35,13 @@ public class ClHomeFragment extends Fragment {
     private ClCustomAdapter adapter;
     private List<ClDataItem> dataList;
 
-    SpinKitView progress;
+    ProgressBar progress;
 
     public String item;
     public String image;
     public String price;
+
+    int page = 1;
 
     public static ClHomeFragment newInstance() {
         ClHomeFragment fragment = new ClHomeFragment();
@@ -61,6 +60,9 @@ public class ClHomeFragment extends Fragment {
 
         recyclerView = (RecyclerView) view.findViewById(R.id.rcy_item);
         dataList = new ArrayList<>();
+
+
+        //ttt();
         get_itemMore(getContext());
 
         gridLayoutManager = new GridLayoutManager(getContext(),2);
@@ -69,10 +71,8 @@ public class ClHomeFragment extends Fragment {
         adapter = new ClCustomAdapter(recyclerView,getContext(),dataList,getActivity());
         recyclerView.setAdapter(adapter);
 
-
         return view;
     }
-
 /*
     public void get_item(final Context context) {
         new AsyncTask<Void, Void, String>() {
@@ -128,6 +128,7 @@ public class ClHomeFragment extends Fragment {
             }
         }.execute();
     }*/
+    @SuppressLint("StaticFieldLeak")
     public void get_itemMore(final Context context) {
         new AsyncTask<Void, Void, String>() {
 
@@ -136,7 +137,7 @@ public class ClHomeFragment extends Fragment {
             @Override
 
             protected String doInBackground(Void... voids) {
-                return getDataPosPdtLocal("api/menu/2", fnPreparingSynDataPdt(""));//api/menu/1 ,api/apitestitem.jsp
+                return getDataPosPdtLocal("api/menu/"+page, fnPreparingSynDataPdt(""));//api/menu/1 ,api/apitestitem.jsp
             }
 
             @Override
@@ -148,12 +149,16 @@ public class ClHomeFragment extends Fragment {
             @Override
             protected void onPostExecute(String s) {
                 progressDialog.dismiss();
-
-                ttt();
+            /*    for (int i = page; page <= 5 ; page++ ){
+                    get_itemMore(getContext());
+                    Log.d("page",""+(page+1));
+                    continue;
+                }*/
                 if(s.equals("error")){
                     errorDialog.show();
                 }
                 else{
+                    loaddata();
                     super.onPostExecute(s);
                     ObjectMapper rootMapper = new ObjectMapper();
                     JsonNode obj = null;
@@ -176,44 +181,176 @@ public class ClHomeFragment extends Fragment {
 
                         System.out.println("ITEM :" + dataAr);
                         adapter.notifyDataSetChanged();
+
                     }
-                    //progress.setVisibility(View.INVISIBLE);
                 }
+                //adapter.setLoaded();
             }
         }.execute();
-
     }
-    public void ttt(){
+    public void loaddata(){
         adapter.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
-                if (dataList.size() <= 20){
+                    if (dataList.size() == 20) {
+                        dataList.add(null);
+                        adapter.notifyItemInserted(dataList.size() - 1);
+                        recyclerView.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                dataList.remove(dataList.size() - 1);
+                                adapter.notifyItemRemoved(dataList.size());
+
+                                int index = dataList.size();
+                                int end = index + 20;
+
+                                for (int i = index; i < end; i++) {
+                                    //progress.setVisibility(View.GONE);
+                                    ClDataItem dataItem = new ClDataItem("name", "image", "price");
+                                    dataItem.getItem_name();
+                                    dataItem.getItem_image();
+                                    dataItem.getPrice();
+
+                                    for (int j = page; page < 2 ; page++ ) {
+                                        get_itemMore(getContext());
+                                        Log.d("page", "" + (page + 1));
+                                        continue;
+                                    }
+                                }
+                                adapter.notifyDataSetChanged();
+                                adapter.setLoaded();
+                            }
+                        }, 5000);
+
+                    }
+                else if (dataList.size() == 40) {
                     dataList.add(null);
-                    adapter.notifyItemInserted(dataList.size()-1);
-                    new Handler().postDelayed(new Runnable() {
+                    adapter.notifyItemInserted(dataList.size() - 1);
+                    recyclerView.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            dataList.remove(dataList.size()-1);
+                            dataList.remove(dataList.size() - 1);
                             adapter.notifyItemRemoved(dataList.size());
 
                             int index = dataList.size();
-                            int end = index + 20;
+                            int end = index + 21;
 
                             for (int i = index; i < end; i++) {
-                                ClDataItem dataItem = new ClDataItem("name","image", "price");
+                                //progress.setVisibility(View.GONE);
+                                ClDataItem dataItem = new ClDataItem("name", "image", "price");
                                 dataItem.getItem_name();
                                 dataItem.getItem_image();
                                 dataItem.getPrice();
-                                dataList.add(dataItem);
+
+                                for (int j = page; page < 3 ; page++ ) {
+                                    get_itemMore(getContext());
+                                    Log.d("page", "" + (page + 1));
+                                    continue;
+                                }
                             }
                             adapter.notifyDataSetChanged();
                             adapter.setLoaded();
                         }
                     }, 5000);
-                } else {
-                    Toast.makeText(getActivity(),"END OF RESULT!",Toast.LENGTH_SHORT).show();
+
                 }
-            }
+                    else if (dataList.size() == 60) {
+                        dataList.add(null);
+                        adapter.notifyItemInserted(dataList.size() - 1);
+                        recyclerView.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                dataList.remove(dataList.size() - 1);
+                                adapter.notifyItemRemoved(dataList.size());
+
+                                int index = dataList.size();
+                                int end = index + 20;
+
+                                for (int i = index; i < end; i++) {
+                                    //progress.setVisibility(View.GONE);
+                                    ClDataItem dataItem = new ClDataItem("name", "image", "price");
+                                    dataItem.getItem_name();
+                                    dataItem.getItem_image();
+                                    dataItem.getPrice();
+
+                                    for (int j = page; page < 4 ; page++ ) {
+                                        get_itemMore(getContext());
+                                        Log.d("page", "" + (page + 1));
+                                        continue;
+                                    }
+                                }
+                                adapter.notifyDataSetChanged();
+                                adapter.setLoaded();
+                            }
+                        }, 5000);
+
+                    }
+                    else if (dataList.size() == 80) {
+                        dataList.add(null);
+                        adapter.notifyItemInserted(dataList.size() - 1);
+                        recyclerView.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                dataList.remove(dataList.size() - 1);
+                                adapter.notifyItemRemoved(dataList.size());
+
+                                int index = dataList.size();
+                                int end = index + 20;
+
+                                for (int i = index; i < end; i++) {
+                                    //progress.setVisibility(View.GONE);
+                                    ClDataItem dataItem = new ClDataItem("name", "image", "price");
+                                    dataItem.getItem_name();
+                                    dataItem.getItem_image();
+                                    dataItem.getPrice();
+
+                                    for (int j = page; page < 5 ; page++ ) {
+                                        get_itemMore(getContext());
+                                        Log.d("page", "" + (page + 1));
+                                        continue;
+                                    }
+                                }
+                                adapter.notifyDataSetChanged();
+                                adapter.setLoaded();
+                            }
+                        }, 5000);
+                    }
+                    else if (dataList.size() == 100) {
+                        dataList.add(null);
+                        adapter.notifyItemInserted(dataList.size() - 1);
+                        recyclerView.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                dataList.remove(dataList.size() - 1);
+                                adapter.notifyItemRemoved(dataList.size());
+
+                                int index = dataList.size();
+                                int end = index + 20;
+
+                                for (int i = index; i < end; i++) {
+                                    //progress.setVisibility(View.GONE);
+                                    ClDataItem dataItem = new ClDataItem("name", "image", "price");
+                                    dataItem.getItem_name();
+                                    dataItem.getItem_image();
+                                    dataItem.getPrice();
+
+                                    for (int j = page; page < 6 ; page++ ) {
+                                        get_itemMore(getContext());
+                                        Log.d("page", "" + (page + 1));
+                                        continue;
+                                    }
+                                }
+                                adapter.notifyDataSetChanged();
+                                adapter.setLoaded();
+                            }
+
+                        }, 5000);
+                    }
+                else {
+                        Toast.makeText(getActivity(), "END OF RESULT!", Toast.LENGTH_SHORT).show();
+                    }
+                }
         });
     }
+
 }

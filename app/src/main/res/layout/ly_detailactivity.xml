@@ -49,6 +49,7 @@
                 -->
 
             <LinearLayout
+                android:id="@+id/btn_add"
                 android:background="@drawable/shape_item_inside"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"

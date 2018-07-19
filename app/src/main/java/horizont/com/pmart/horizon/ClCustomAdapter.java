@@ -24,7 +24,7 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private final int VIEW_TYPE_ITEM = 0;
     private final int VIEW_TYPE_LOADING = 1;
     private OnLoadMoreListener onLoadMoreListener;
-    private boolean isLoading;
+    private boolean isLoading ;
     private Activity activity;
     private int visibleThreshold = 5;
     private int lastVisibleItem, totalItemCount;
@@ -67,13 +67,14 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         if (viewType == VIEW_TYPE_ITEM){
-            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.ly_cardview,parent,false);
+            View itemView = LayoutInflater.from(activity).inflate(R.layout.ly_cardview,parent,false);
             return new UserViewHolder(itemView);
         }
-        else if (viewType == VIEW_TYPE_LOADING) {
+        else if (viewType == VIEW_TYPE_LOADING){
             View view = LayoutInflater.from(activity).inflate(R.layout.item_loading, parent, false);
-                 return new LoadingViewHolder(view);
+            return  new LoadingViewHolder(view);
         }
         return null;
     }
@@ -109,7 +110,7 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
-        return my_data == null ? 0 : my_data.size();
+        return ( my_data == null ? 0 : my_data.size());
     }
     public void setLoaded() {
         isLoading = false;
@@ -120,7 +121,7 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         public LoadingViewHolder(View view) {
             super(view);
-            progressBar = view.findViewById(R.id.progressBarData);
+            progressBar = (ProgressBar) view.findViewById(R.id.progressBarData);
         }
     }
 
