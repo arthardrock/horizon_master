@@ -2,34 +2,32 @@ package horizont.com.pmart.horizon;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
-import android.media.VolumeShaper;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.ybq.android.spinkit.SpinKitView;
 
-import static horizont.com.pmart.horizon.R.color.colorWhite;
-
-
 public class MainActivity extends AppCompatActivity {
 private Toolbar myToolbar;
+private ImageView img_logo;
 private TextView myTextView;
 private DrawerLayout drawerLayout;
 private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -40,6 +38,8 @@ private ActionBarDrawerToggle actionBarDrawerToggle;
         setContentView(R.layout.activity_main);
         setToolbar();
         setHamburgerButton();
+        img_logo = (ImageView)findViewById(R.id.img_logo);
+
         final BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.navigation);
 
@@ -80,11 +80,12 @@ private ActionBarDrawerToggle actionBarDrawerToggle;
 
     private void setToolbar(){
         myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
-        myTextView = (TextView)findViewById(R.id.txt_title);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        myTextView.setText(R.string.app_name);
     }
+    /*Set HamburgerButton
+        drawerLayout
+    */
 
     @SuppressLint("ResourceAsColor")
     private void setHamburgerButton(){
@@ -102,6 +103,26 @@ private ActionBarDrawerToggle actionBarDrawerToggle;
     protected void onPostCreate(@Nullable Bundle saveInstanceState) {
         super.onPostCreate(saveInstanceState);
         actionBarDrawerToggle.syncState();
+    }
+    // Search Data
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_search, menu);
+        MenuItem item = menu.findItem(R.id.menu_search);
+        SearchView searchView = (SearchView)item.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String s) {
+                //ClHomeFragment
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override

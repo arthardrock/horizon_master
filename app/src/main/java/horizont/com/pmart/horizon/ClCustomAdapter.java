@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.github.ybq.android.spinkit.SpinKitView;
 
 import java.util.List;
 
@@ -28,13 +30,13 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private Activity activity;
     private int visibleThreshold = 5;
     private int lastVisibleItem, totalItemCount;
+    private GridLayoutManager gridLayoutManager;
 
     private CardView mCardView;
 
 
     private Context context;
     private List<ClDataItem> my_data;
-
 
     public ClCustomAdapter(RecyclerView recyclerView ,Context context, List<ClDataItem>my_data,Activity activity){
         this.context = context;
@@ -117,11 +119,11 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public class LoadingViewHolder extends RecyclerView.ViewHolder {
-        public ProgressBar progressBar;
+        public SpinKitView progressBar;
 
         public LoadingViewHolder(View view) {
             super(view);
-            progressBar = (ProgressBar) view.findViewById(R.id.progressBarData);
+            progressBar = (SpinKitView) view.findViewById(R.id.progressBarData);
         }
     }
 
