@@ -79,6 +79,7 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             return  new LoadingViewHolder(view);
         }
         return null;
+
     }
 
     @Override
@@ -124,6 +125,7 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         public LoadingViewHolder(View view) {
             super(view);
             progressBar = (SpinKitView) view.findViewById(R.id.progressBarData);
+//            progressBar.setVisibility(View.GONE);
         }
     }
 

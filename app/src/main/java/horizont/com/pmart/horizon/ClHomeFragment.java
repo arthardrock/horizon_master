@@ -68,10 +68,23 @@ public class ClHomeFragment extends Fragment {
         //ttt();
         get_itemMore(getContext());
 
-        RecyclerView.LayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
-
         adapter = new ClCustomAdapter(recyclerView, getContext(), dataList, getActivity());
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                switch(adapter.getItemViewType(position)){
+                    case 0:
+                        return 1;
+                    case 1:
+                        return 2;
+                    default:
+                        return -1;
+                }
+            }
+        });
+        loaddata();
         recyclerView.setAdapter(adapter);
         return view;
     }
@@ -85,7 +98,8 @@ public class ClHomeFragment extends Fragment {
             @Override
 
             protected String doInBackground(Void... voids) {
-                return getDataPosPdtLocal("api/menu/"+page , fnPreparingSynDataPdt(""));//api/menu/1 ,api/apitestitem.jsp
+                     //config Class HttpReq
+                return getDataPosPdtLocal( "api/menu/"+page, fnPreparingSynDataPdt(""));//"api/menu/"+page ,api/apitestitem.jsp
             }
 
             @Override
@@ -101,7 +115,7 @@ public class ClHomeFragment extends Fragment {
                 if (s.equals("error")) {
                     errorDialog.show();
                 } else {
-                    loaddata();
+//                    loaddata();
                     super.onPostExecute(s);
                     ObjectMapper rootMapper = new ObjectMapper();
                     JsonNode obj = null;
@@ -111,20 +125,26 @@ public class ClHomeFragment extends Fragment {
                         e.printStackTrace();
                     }
                     JsonNode data = obj.path("menu");
-                    for (JsonNode nodeMember : data) {
+                    System.out.println("data size is"+data.size());
+                    if(data.size()>0){
+                        for (JsonNode nodeMember : data) {
 
-                        ClDataItem dataAr = new ClDataItem(nodeMember.path("item_name").asText(), nodeMember.path("item_image").asText(),
-                                nodeMember.path("price").asText());
+                            ClDataItem dataAr = new ClDataItem(nodeMember.path("item_name").asText(), nodeMember.path("item_image").asText(),
+                                    nodeMember.path("price").asText());
 
-                        item = nodeMember.path("item_name").asText();
-                        image = nodeMember.path("item_image").asText();
-                        price = nodeMember.path("price").asText();
+                            item = nodeMember.path("item_name").asText();
+                            image = nodeMember.path("item_image").asText();
+                            price = nodeMember.path("price").asText();
 
-                        dataList.add(dataAr);
+                            dataList.add(dataAr);
 
-                        System.out.println("ITEM :" + dataAr);
-                        adapter.notifyDataSetChanged();
+                            System.out.println("ITEM :" + dataAr);
+                            adapter.notifyDataSetChanged();
 
+                        }
+                    }
+                    else{
+                        System.out.println("else");
                     }
                 }
             }
@@ -132,75 +152,101 @@ public class ClHomeFragment extends Fragment {
     }
 
     public void loaddata() {
+
         adapter.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
-                if (dataList.size() == 20) {
-                    dataList.add(null);
-                    adapter.notifyItemInserted(dataList.size() - 1);
-                    recyclerView.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            dataList.remove(dataList.size() - 1);
-                            adapter.notifyItemRemoved(dataList.size());
+                page++;
+                dataList.add(null);
+                adapter.notifyItemInserted(dataList.size() - 1);
+                recyclerView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        dataList.remove(dataList.size() - 1);
+                        adapter.notifyItemRemoved(dataList.size());
+//                        dataList.remove(dataList.size() - 1);
+//                        adapter.notifyItemRemoved(dataList.size());
 
-                            int index = dataList.size();
-                            int end = index + 20;
-
-                            for (int i = index; i < end; i++) {
-                                //progress.setVisibility(View.GONE);
-                                ClDataItem dataItem = new ClDataItem("name", "image", "price");
-                                dataItem.getItem_name();
-                                dataItem.getItem_image();
-                                dataItem.getPrice();
-
-                            }
-                            for (int j = page; page < 2; page++) {
-                                get_itemMore(getContext());
-                                Log.d("page", "" + (page + 1));
-                                continue;
-                            }
-                            adapter.notifyDataSetChanged();
-                            adapter.setLoaded();
-                        }
-                    }, 3000);
-                }
-                else if (dataList.size() == 40){
-                    dataList.add(null);
-                    adapter.notifyItemInserted(dataList.size() - 1);
-                    recyclerView.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            dataList.remove(dataList.size() - 1);
-                            adapter.notifyItemRemoved(dataList.size());
-
-                            int index = dataList.size();
-                            int end = index + 20;
-
-                            for (int i = index; i < end; i++) {
-                                //progress.setVisibility(View.GONE);
-                                ClDataItem dataItem = new ClDataItem("name", "image", "price");
-                                dataItem.getItem_name();
-                                dataItem.getItem_image();
-                                dataItem.getPrice();
-
-                                for (int j = page; page < 3; page++) {
-                                    get_itemMore(getContext());
-                                    Log.d("page", "" + (page + 1));
-                                    continue;
-                                }
-
-                            }
-                            adapter.notifyDataSetChanged();
-                            adapter.setLoaded();
-                        }
-                    }, 3000);
-                    //progressBarData.setVisibility(View.GONE);
-                }
-                else {
-                    Toast.makeText(getActivity(),"สิ้นสุดการค้นหา",LENGTH_LONG).show();
-                }
+                        get_itemMore(getContext());
+//                            for (int j = page; page < 2; page++) {
+//                                Log.d("page", "" + (page + 1));
+//                                continue;
+//                            }
+                        adapter.setLoaded();
+                        adapter.notifyDataSetChanged();
+                    }
+                }, 3000);
             }
         });
+//                dataList.add(null);
+//                adapter.notifyItemInserted(dataList.size() - 1);
+//                get_itemMore(getActivity());
+//                if (dataList.size() == 20) {
+//                    dataList.add(null);
+//                    adapter.notifyItemInserted(dataList.size() - 1);
+//                    recyclerView.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            dataList.remove(dataList.size() - 1);
+//                            adapter.notifyItemRemoved(dataList.size());
+//
+//                            int index = dataList.size();
+//                            int end = index + 20;
+//
+//                            for (int i = index; i < end; i++) {
+//                                //progress.setVisibility(View.GONE);
+//                                ClDataItem dataItem = new ClDataItem("name", "image", "price");
+//                                dataItem.getItem_name();
+//                                dataItem.getItem_image();
+//                                dataItem.getPrice();
+//
+//                            }
+//                            for (int j = page; page < 2; page++) {
+//                                get_itemMore(getContext());
+//                                Log.d("page", "" + (page + 1));
+//                                continue;
+//                            }
+//                            adapter.notifyDataSetChanged();
+//                            adapter.setLoaded();
+//                        }
+//                    }, 3000);
+//                }
+//                else if (dataList.size() == 40){
+//                    dataList.add(null);
+//                    adapter.notifyItemInserted(dataList.size() - 1);
+//                    recyclerView.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            dataList.remove(dataList.size() - 1);
+//                            adapter.notifyItemRemoved(dataList.size());
+//
+//                            int index = dataList.size();
+//                            int end = index + 20;
+//
+//                            for (int i = index; i < end; i++) {
+//                                //progress.setVisibility(View.GONE);
+//                                ClDataItem dataItem = new ClDataItem("name", "image", "price");
+//                                dataItem.getItem_name();
+//                                dataItem.getItem_image();
+//                                dataItem.getPrice();
+//
+//                                for (int j = page; page < 3; page++) {
+//                                    get_itemMore(getContext());
+//                                    Log.d("page", "" + (page + 1));
+//                                    continue;
+//                                }
+//
+//                            }
+//                            adapter.notifyDataSetChanged();
+//                            adapter.setLoaded();
+//                        }
+//                    }, 3000);
+//                    //progressBarData.setVisibility(View.GONE);
+//                }
+//                else {
+//                    Toast.makeText(getActivity(),"สิ้นสุดการค้นหา",LENGTH_LONG).show();
+//                }
+//            }
+//        });
     }
 }
