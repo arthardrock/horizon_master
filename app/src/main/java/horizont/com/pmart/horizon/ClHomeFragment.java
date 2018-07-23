@@ -65,9 +65,6 @@ public class ClHomeFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.rcy_item);
         dataList = new ArrayList<>();
 
-        //ttt();
-        get_itemMore(getContext());
-
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
         adapter = new ClCustomAdapter(recyclerView, getContext(), dataList, getActivity());
@@ -84,7 +81,7 @@ public class ClHomeFragment extends Fragment {
                 }
             }
         });
-        loaddata();
+        get_itemMore(getContext());
         recyclerView.setAdapter(adapter);
         return view;
     }
@@ -115,7 +112,7 @@ public class ClHomeFragment extends Fragment {
                 if (s.equals("error")) {
                     errorDialog.show();
                 } else {
-//                    loaddata();
+                    loaddata();
                     super.onPostExecute(s);
                     ObjectMapper rootMapper = new ObjectMapper();
                     JsonNode obj = null;
@@ -140,17 +137,17 @@ public class ClHomeFragment extends Fragment {
 
                             System.out.println("ITEM :" + dataAr);
                             adapter.notifyDataSetChanged();
-
-                        }
+                            adapter.setLoaded();
+                            }
                     }
-                    else{
-                        System.out.println("else");
+                        else{
+                            Toast.makeText(getActivity(),"สิ้นสุดการค้นหา",LENGTH_LONG).show();
+                            System.out.println("else");
                     }
                 }
             }
         }.execute();
     }
-
     public void loaddata() {
 
         adapter.setOnLoadMoreListener(new OnLoadMoreListener() {
@@ -164,18 +161,11 @@ public class ClHomeFragment extends Fragment {
                     public void run() {
                         dataList.remove(dataList.size() - 1);
                         adapter.notifyItemRemoved(dataList.size());
-//                        dataList.remove(dataList.size() - 1);
-//                        adapter.notifyItemRemoved(dataList.size());
-
                         get_itemMore(getContext());
-//                            for (int j = page; page < 2; page++) {
-//                                Log.d("page", "" + (page + 1));
-//                                continue;
-//                            }
-                        adapter.setLoaded();
                         adapter.notifyDataSetChanged();
                     }
                 }, 3000);
+                adapter.setLoaded();
             }
         });
 //                dataList.add(null);

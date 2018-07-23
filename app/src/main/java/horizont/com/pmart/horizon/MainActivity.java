@@ -118,7 +118,7 @@ private ActionBarDrawerToggle actionBarDrawerToggle;
             }
             @Override
             public boolean onQueryTextChange(String s) {
-                //ClHomeFragment
+
                 return false;
             }
         });
