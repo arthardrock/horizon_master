@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Horizon</string>
+    <string name="app_name">HoRiZon</string>
     <string name="nav_home">หน้าหลัก</string>
     <!--TextNavigation-->
     <string name="nav_location">สาขา</string>

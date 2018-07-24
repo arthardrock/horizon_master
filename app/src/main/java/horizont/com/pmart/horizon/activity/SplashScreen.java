@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.github.ybq.android.spinkit.SpinKitView;
 
+import horizont.com.pmart.horizon.Information;
 import horizont.com.pmart.horizon.R;
 
 public class SplashScreen extends AppCompatActivity {
@@ -29,7 +30,7 @@ public class SplashScreen extends AppCompatActivity {
         };
     }
     public void openMainAct() {
-        Intent intent = new Intent(this,MainActivity.class);
+        Intent intent = new Intent(this,Information.class);
         startActivity(intent);
         finish();
     }
