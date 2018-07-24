@@ -31,7 +31,7 @@ import java.util.Locale;
 
 
 public class ClHttpReq  {
-    private final static  String URL_ENDPOINT = "http://hoz.horizont.co.th/"; //http://hoz.pmart.co.th:88/  http://hoz.horizont.co.th/
+    private final static  String URL_ENDPOINT = "http://hoz.horizont.co.th:88/"; //http://hoz.pmart.co.th:88/  http://hoz.horizont.co.th/
     private final static  String LOCAL_URL_ENDPOINT = "http://172.17.8.99:3000/";
 
     //private final static  String URL_ENDPOINT = "http://192.168.43.17:3000/";

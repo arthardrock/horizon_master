@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HoRiZon</string>
+    <string name="app_name">HoRiZont FOODS E-Commerce</string>
     <string name="nav_home">หน้าหลัก</string>
     <!--TextNavigation-->
     <string name="nav_location">สาขา</string>
@@ -21,5 +21,7 @@
     <string name="txt_address">ที่อยู่</string>
     <string name="txt_phone">เบอร์โทร</string>
     <string name="txt_email">อีเมล</string>
+    <string name="txt_wel_TH">ยินดีต้อนรับ</string>
+    <string name="txt_wel_EN">Welcome</string>
 
 </resources>

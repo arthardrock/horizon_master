@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import horizont.com.pmart.horizon.ClCustomAdapter;
+import horizont.com.pmart.horizon.ClDetectConnection;
 import horizont.com.pmart.horizon.activity.ClDataItem;
 import horizont.com.pmart.horizon.OnLoadMoreListener;
 import horizont.com.pmart.horizon.R;
@@ -84,9 +85,12 @@ public class ClHome extends Fragment {
                 }
             }
         });
-        get_itemMore(getContext());
-        recyclerView.setAdapter(adapter);
-        return view;
+        if (!ClDetectConnection.checkInternetConnection(getActivity())) {
+            Toast.makeText(getActivity(), "กรุณาเชื่อมต่ออินเทอร์เน็ต", Toast.LENGTH_SHORT).show();
+        }else
+            get_itemMore(getContext());
+            recyclerView.setAdapter(adapter);
+            return view;
     }
     @SuppressLint("StaticFieldLeak")
     public void get_itemMore(final Context context) {
@@ -101,7 +105,6 @@ public class ClHome extends Fragment {
                      //config Class HttpReq
                 return getDataPosPdtLocal( "api/menu/"+page, fnPreparingSynDataPdt(""));//"api/menu/"+page ,api/apitestitem.jsp
             }
-
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
