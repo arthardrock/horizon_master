@@ -1,4 +1,4 @@
-package horizont.com.pmart.horizon;
+package horizont.com.pmart.horizon.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ClPromotionFragment extends Fragment{
-    public static ClPromotionFragment newInstance() {
-        ClPromotionFragment fragment = new ClPromotionFragment();
+import horizont.com.pmart.horizon.R;
+
+public class ClRegister extends Fragment {
+    public static ClRegister newInstance() {
+        ClRegister fragment = new ClRegister();
         return fragment;
     }
 
@@ -20,6 +22,7 @@ public class ClPromotionFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_promotion, container, false);
+        View view = inflater.inflate(R.layout.frag_register, container, false);
+        return view;
     }
 }

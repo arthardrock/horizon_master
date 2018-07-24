@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="horizont.com.pmart.horizon.fragment.ClLogin">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_name"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:layout_centerInParent="true"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--EditText-->
+            <LinearLayout
+                android:background="@drawable/shape_item_inside"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent" />
+                <EditText
+                    android:hint="@string/txt_name"
+                    android:textColor="@color/colorBlack"
+                    style="@style/Text_20dp"
+                    android:paddingLeft="10dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+            <!--blankSpace-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="10dp">
+            </LinearLayout>
+            <!--EditText-->
+            <LinearLayout
+                android:background="@drawable/shape_item_inside"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent" />
+                <EditText
+                    android:hint="@string/txt_name"
+                    android:textColor="@color/colorBlack"
+                    style="@style/Text_20dp"
+                    android:paddingLeft="10dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+            <!--blankSpace-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="10dp">
+            </LinearLayout>
+            <!--EditText-->
+            <LinearLayout
+                android:background="@drawable/shape_item_inside"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent" />
+                <EditText
+                    android:hint="@string/txt_name"
+                    android:textColor="@color/colorBlack"
+                    style="@style/Text_20dp"
+                    android:paddingLeft="10dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+            <!--blankSpace-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="10dp">
+            </LinearLayout>
+            <!--EditText-->
+            <LinearLayout
+                android:background="@drawable/shape_item_inside"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent" />
+                <EditText
+                    android:hint="@string/txt_name"
+                    android:textColor="@color/colorBlack"
+                    style="@style/Text_20dp"
+                    android:paddingLeft="10dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+            <!--blankSpace-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="10dp">
+            </LinearLayout>
+            <!--EditText-->
+            <LinearLayout
+                android:background="@drawable/shape_item_inside"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent" />
+                <EditText
+                    android:hint="@string/txt_name"
+                    android:textColor="@color/colorBlack"
+                    style="@style/Text_20dp"
+                    android:paddingLeft="10dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+            <!--blankSpace-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="30dp">
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <Button
+                    style="@style/Text_30dp"
+                    android:textColor="@color/colorWhite"
+                    android:text="@string/btn_confirm"
+                    android:background="@color/colorRed"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</RelativeLayout>

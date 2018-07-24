@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Horizon</string>
     <string name="nav_home">หน้าหลัก</string>
+    <!--TextNavigation-->
     <string name="nav_location">สาขา</string>
     <string name="nav_favorite">ราการโปรด</string>
     <string name="nav_promotion">โปรโมชั่น</string>
@@ -9,8 +10,16 @@
     <string name="close_drawer">ปิด</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <!--TextBtn-->
     <string name="btn_close">ปิด</string>
+    <string name="btn_confirm">ยืนยัน</string>
     <string name="add_bucket">เพิ่มลงตะกร้า</string>
+    <!--TextView-->
     <string name="txt_price">ราคา</string>
+    <string name="txt_password">รหัสผ่าน</string>
+    <string name="txt_name">ชื่อ</string>
+    <string name="txt_address">ที่อยู่</string>
+    <string name="txt_phone">เบอร์โทร</string>
+    <string name="txt_email">อีเมล</string>
 
 </resources>

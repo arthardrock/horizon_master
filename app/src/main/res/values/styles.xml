@@ -9,6 +9,14 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
         <style name="AppTheme.NoActionBar">
             <item name="windowActionBar">false</item>
             <item name="windowNoTitle">true</item>
@@ -23,27 +31,27 @@
             <item name="android:windowCloseOnTouchOutside">true</item>
         </style>
         <style name="Text_10dp">
-            <item name="android:fontFamily">@font/thsaraunnew</item>
+            <item name="android:fontFamily">@font/rusrecular</item>
             <item name="android:textSize">10dp</item>
         </style>
 
         <style name="Text_20dp">
-            <item name="android:fontFamily">@font/thsaraunnew</item>
+            <item name="android:fontFamily">@font/rusrecular</item>
             <item name="android:textSize">20dp</item>
         </style>
 
         <style name="Text_30dp">
-            <item name="android:fontFamily">@font/thsaraunnew</item>
+            <item name="android:fontFamily">@font/rusrecular</item>
             <item name="android:textSize">30dp</item>
         </style>
 
         <style name="Text_40dp">
-            <item name="android:fontFamily">@font/thsaraunnew</item>
+            <item name="android:fontFamily">@font/rusrecular</item>
             <item name="android:textSize">40dp</item>
         </style>
 
         <style name="Text_50dp">
-            <item name="android:fontFamily">@font/thsaraunnew</item>
+            <item name="android:fontFamily">@font/rusrecular</item>
             <item name="android:textSize">50dp</item>
         </style>
 

@@ -1,4 +1,4 @@
-package horizont.com.pmart.horizon;
+package horizont.com.pmart.horizon.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -14,16 +14,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.github.ybq.android.spinkit.SpinKitView;
+import horizont.com.pmart.horizon.fragment.ClFavorite;
+import horizont.com.pmart.horizon.fragment.ClHome;
+import horizont.com.pmart.horizon.fragment.ClLocation;
+import horizont.com.pmart.horizon.fragment.ClProfile;
+import horizont.com.pmart.horizon.fragment.ClPromotion;
+import horizont.com.pmart.horizon.R;
 
 public class MainActivity extends AppCompatActivity {
 private Toolbar myToolbar;
@@ -35,7 +37,7 @@ private ActionBarDrawerToggle actionBarDrawerToggle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.act_main);
         setToolbar();
         setHamburgerButton();
         img_logo = (ImageView)findViewById(R.id.img_logo);
@@ -50,19 +52,19 @@ private ActionBarDrawerToggle actionBarDrawerToggle;
                         Fragment selectedFragment = null;
                         switch (item.getItemId()) {
                             case R.id.nav_home:
-                                selectedFragment = ClHomeFragment.newInstance();
+                                selectedFragment = ClHome.newInstance();
                                 break;
                             case R.id.nav_location:
-                                selectedFragment = ClLocationFragment.newInstance();
+                                selectedFragment = ClLocation.newInstance();
                                 break;
                             case R.id.nav_favorite:
-                                selectedFragment = ClFavoriteFragment.newInstance();
+                                selectedFragment = ClFavorite.newInstance();
                                 break;
                             case R.id.nav_promotion:
-                                selectedFragment = ClPromotionFragment.newInstance();
+                                selectedFragment = ClPromotion.newInstance();
                                 break;
                             case R.id.nav_profile:
-                                selectedFragment = ClProfileFragment.newInstance();
+                                selectedFragment = ClProfile.newInstance();
                                 break;
                         }
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -73,7 +75,7 @@ private ActionBarDrawerToggle actionBarDrawerToggle;
                 });
         startActivity(new Intent(MainActivity.this,PopInfo.class));
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout, ClHomeFragment.newInstance());
+        transaction.replace(R.id.frame_layout, ClHome.newInstance());
         transaction.commit();
 
     }

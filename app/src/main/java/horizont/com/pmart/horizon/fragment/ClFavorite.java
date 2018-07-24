@@ -1,4 +1,4 @@
-package horizont.com.pmart.horizon;
+package horizont.com.pmart.horizon.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ClFavoriteFragment extends Fragment{
-    public static ClFavoriteFragment newInstance() {
-        ClFavoriteFragment fragment = new ClFavoriteFragment();
+import horizont.com.pmart.horizon.R;
+
+public class ClFavorite extends Fragment{
+    public static ClFavorite newInstance() {
+        ClFavorite fragment = new ClFavorite();
         return fragment;
     }
 
@@ -20,6 +22,6 @@ public class ClFavoriteFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_favorite, container, false);
+        return inflater.inflate(R.layout.frag_favorite, container, false);
     }
 }

@@ -1,4 +1,4 @@
-package horizont.com.pmart.horizon;
+package horizont.com.pmart.horizon.activity;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;

@@ -1,29 +1,22 @@
-package horizont.com.pmart.horizon;
+package horizont.com.pmart.horizon.fragment;
 
-import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
+import horizont.com.pmart.horizon.R;
 
-import static android.content.Context.LOCATION_SERVICE;
-import static android.support.v4.content.ContextCompat.getSystemService;
-
-public class ClLocationFragment extends Fragment {
+public class ClLocation extends Fragment {
 
     private LocationManager locationManager;
     private LocationListener locationListener;
 
-    public static ClLocationFragment newInstance() {
-        ClLocationFragment fragment = new ClLocationFragment();
+    public static ClLocation newInstance() {
+        ClLocation fragment = new ClLocation();
         return fragment;
     }
 
@@ -35,7 +28,7 @@ public class ClLocationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-       View view = inflater.inflate(R.layout.fragment_location, container, false);
+       View view = inflater.inflate(R.layout.frag_location, container, false);
        /*locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
        locationListener = new LocationListener() {
           /@Override

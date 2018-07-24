@@ -1,14 +1,11 @@
-package horizont.com.pmart.horizon;
+package horizont.com.pmart.horizon.fragment;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,15 +15,15 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-import static horizont.com.pmart.horizon.ClDialogBox.gerErrorDialog;
-import static horizont.com.pmart.horizon.ClDialogBox.getHttpLoading;
+import horizont.com.pmart.horizon.R;
+
+import static horizont.com.pmart.horizon.activity.ClDialogBox.gerErrorDialog;
+import static horizont.com.pmart.horizon.activity.ClDialogBox.getHttpLoading;
 import static horizont.com.pmart.horizon.ClHttpReq.fnPreparingSynDataPdt;
 import static horizont.com.pmart.horizon.ClHttpReq.getDataPosPdt;
 
-public class ClProfileFragment extends Fragment{
+public class ClProfile extends Fragment{
     public String name;
     public String sername;
     public String company;
@@ -45,8 +42,8 @@ public class ClProfileFragment extends Fragment{
     private TextView txt_district;
     private TextView txt_province;
 
-    public static ClProfileFragment newInstance() {
-        ClProfileFragment fragment = new ClProfileFragment();
+    public static ClProfile newInstance() {
+        ClProfile fragment = new ClProfile();
         return fragment;
     }
 
@@ -58,7 +55,7 @@ public class ClProfileFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.frag_profile, container, false);
         get_item(getContext());
 
         txt_name = (TextView)view.findViewById(R.id.txt_name);

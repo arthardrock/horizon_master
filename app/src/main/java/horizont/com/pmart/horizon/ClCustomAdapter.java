@@ -13,13 +13,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.github.ybq.android.spinkit.SpinKitView;
 
 import java.util.List;
+
+import horizont.com.pmart.horizon.activity.ClDataItem;
+import horizont.com.pmart.horizon.activity.ClItemDetail;
 
 public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
@@ -75,7 +77,7 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             return new UserViewHolder(itemView);
         }
         else if (viewType == VIEW_TYPE_LOADING){
-            View view = LayoutInflater.from(activity).inflate(R.layout.item_loading, parent, false);
+            View view = LayoutInflater.from(activity).inflate(R.layout.ly_loading, parent, false);
             return  new LoadingViewHolder(view);
         }
         return null;

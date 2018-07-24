@@ -1,4 +1,4 @@
-package horizont.com.pmart.horizon;
+package horizont.com.pmart.horizon.activity;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.github.ybq.android.spinkit.SpinKitView;
+
+import horizont.com.pmart.horizon.R;
 
 public class SplashScreen extends AppCompatActivity {
     private Handler handler;

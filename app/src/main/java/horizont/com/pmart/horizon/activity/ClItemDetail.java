@@ -1,4 +1,4 @@
-package horizont.com.pmart.horizon;
+package horizont.com.pmart.horizon.activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -13,8 +13,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import horizont.com.pmart.horizon.R;
+
 import static android.app.PendingIntent.getActivity;
-import static horizont.com.pmart.horizon.ClDialogBox.getHttpLoading;
 
 public class ClItemDetail extends AppCompatActivity {
  private TextView txt_item,myTextView;
@@ -22,13 +23,10 @@ public class ClItemDetail extends AppCompatActivity {
  private Toolbar myToolbar;
  private LinearLayout btn_add;
 
-
-    ProgressDialog loadingDialog;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ly_detailactivity);
+        setContentView(R.layout.ly_detailitem);
         myTextView = (TextView)findViewById(R.id.txt_title);
         setToolbar();
         txt_item = findViewById(R.id.txt_item);

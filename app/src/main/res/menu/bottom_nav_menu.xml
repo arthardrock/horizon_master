@@ -2,22 +2,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        style="@style/Text_10dp"
         android:id="@+id/nav_home"
         android:icon="@drawable/ic_action_home"
         android:title="@string/nav_home"/>
     <item
+        style="@style/Text_10dp"
         android:id="@+id/nav_location"
         android:icon="@drawable/ic_action_location"
         android:title="@string/nav_location"/>
     <item
+        style="@style/Text_10dp"
         android:id="@+id/nav_favorite"
         android:icon="@drawable/ic_action_favorite"
         android:title="@string/nav_favorite"/>
     <item
+        style="@style/Text_10dp"
         android:id="@+id/nav_promotion"
         android:icon="@drawable/ic_action_promotion"
         android:title="@string/nav_promotion"/>
     <item
+        style="@style/Text_10dp"
         android:id="@+id/nav_profile"
         android:icon="@drawable/ic_action_profile"
         android:title="@string/nav_profile"/>

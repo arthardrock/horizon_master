@@ -1,4 +1,4 @@
-package horizont.com.pmart.horizon;
+package horizont.com.pmart.horizon.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -8,12 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import horizont.com.pmart.horizon.R;
+
 
 public class PopInfo extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.popup_info);
+        setContentView(R.layout.ly_popup_info);
 
         TextView txt_promotion1 = (TextView)findViewById(R.id.txt_promotion1);
         DisplayMetrics dm = new DisplayMetrics();
