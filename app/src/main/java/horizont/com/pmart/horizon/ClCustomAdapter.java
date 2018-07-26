@@ -97,10 +97,11 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             viewHolder.mCardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //การส่งค่า ไปยัง activity
+                    //การส่งค่า ไปยัง activity ClItemDetail
                     Intent intent = new Intent(context, ClItemDetail.class);
                     intent.putExtra("item",dataItem.getItem_name());
                     intent.putExtra("image",dataItem.getItem_image());
+                    intent.putExtra("price",dataItem.getPrice());
                     context.startActivity(intent);
                     Log.d("","TEXT"+ dataItem.getItem_name());
                     Log.d("","TEXT"+ dataItem.getItem_image());
@@ -127,7 +128,6 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         public LoadingViewHolder(View view) {
             super(view);
             progressBar = (SpinKitView) view.findViewById(R.id.progressBarData);
-//            progressBar.setVisibility(View.GONE);
         }
     }
 

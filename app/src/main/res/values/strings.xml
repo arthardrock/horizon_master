@@ -19,9 +19,11 @@
     <string name="txt_password">รหัสผ่าน</string>
     <string name="txt_name">ชื่อ</string>
     <string name="txt_address">ที่อยู่</string>
-    <string name="txt_phone">เบอร์โทร</string>
+    <string name="txt_phone">กรอกเบอร์โทร</string>
     <string name="txt_email">อีเมล</string>
     <string name="txt_wel_TH">ยินดีต้อนรับ</string>
     <string name="txt_wel_EN">Welcome</string>
+    <!--TextTitle-->
+    <string name="title_register">เข้าสู่ระบบ/สมัครสมาชิก</string>
 
 </resources>

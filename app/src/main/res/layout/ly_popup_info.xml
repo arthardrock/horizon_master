@@ -5,6 +5,7 @@
     android:background="@color/colorPrimary">
 
     <RelativeLayout
+        android:id="@+id/img_pop"
         android:background="@drawable/promotion"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

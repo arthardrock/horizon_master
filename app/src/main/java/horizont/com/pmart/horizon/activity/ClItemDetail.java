@@ -18,7 +18,7 @@ import horizont.com.pmart.horizon.R;
 import static android.app.PendingIntent.getActivity;
 
 public class ClItemDetail extends AppCompatActivity {
- private TextView txt_item,myTextView;
+ private TextView txt_item,myTextView,txt_price;
  private ImageView img_item ,img_back;
  private Toolbar myToolbar;
  private LinearLayout btn_add;
@@ -31,6 +31,7 @@ public class ClItemDetail extends AppCompatActivity {
         setToolbar();
         txt_item = findViewById(R.id.txt_item);
         img_item = findViewById(R.id.img_item);
+        txt_price = findViewById(R.id.txt_price);
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,6 +43,7 @@ public class ClItemDetail extends AppCompatActivity {
         if (mBundle != null){
             txt_item.setText(mBundle.getString("item"));
             myTextView.setText(mBundle.getString("item"));
+            txt_price.setText(mBundle.getString("price"));
             String image = getIntent().getExtras().getString("image");
             Glide.with(this)
                     .load(image)

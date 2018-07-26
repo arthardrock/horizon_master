@@ -35,7 +35,7 @@ public class SplashScreen extends AppCompatActivity {
     }
     public void openMainAct() {
         welcome.setText(R.string.txt_wel_EN);
-        Intent intent = new Intent(this,Information.class);
+        Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
         finish();
     }

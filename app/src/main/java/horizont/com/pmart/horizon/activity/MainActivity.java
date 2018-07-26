@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,8 +30,7 @@ import horizont.com.pmart.horizon.R;
 
 public class MainActivity extends AppCompatActivity {
 private Toolbar myToolbar;
-private ImageView img_logo;
-private TextView myTextView;
+private TextView profile;
 private DrawerLayout drawerLayout;
 private ActionBarDrawerToggle actionBarDrawerToggle;
 
@@ -40,7 +40,14 @@ private ActionBarDrawerToggle actionBarDrawerToggle;
         setContentView(R.layout.act_main);
         setToolbar();
         setHamburgerButton();
-        img_logo = (ImageView)findViewById(R.id.img_logo);
+
+        profile = (TextView)findViewById(R.id.txt_nav_profile);
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openRegis();
+            }
+        });
 
         final BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.navigation);
@@ -77,7 +84,6 @@ private ActionBarDrawerToggle actionBarDrawerToggle;
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_layout, ClHome.newInstance());
         transaction.commit();
-
     }
 
     private void setToolbar(){
@@ -88,7 +94,6 @@ private ActionBarDrawerToggle actionBarDrawerToggle;
     /*Set HamburgerButton
         drawerLayout
     */
-
     @SuppressLint("ResourceAsColor")
     private void setHamburgerButton(){
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
@@ -100,7 +105,6 @@ private ActionBarDrawerToggle actionBarDrawerToggle;
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
-
     @Override
     protected void onPostCreate(@Nullable Bundle saveInstanceState) {
         super.onPostCreate(saveInstanceState);
@@ -120,24 +124,25 @@ private ActionBarDrawerToggle actionBarDrawerToggle;
             }
             @Override
             public boolean onQueryTextChange(String s) {
-
                 return false;
             }
         });
         return super.onCreateOptionsMenu(menu);
     }
-
     @Override
     public void onConfigurationChanged(Configuration newConfig){
         super.onConfigurationChanged(newConfig);
         actionBarDrawerToggle.onConfigurationChanged(newConfig);
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         if(actionBarDrawerToggle.onOptionsItemSelected(item)){
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    public void openRegis(){
+        Intent intent = new Intent(this,RegisterActivity.class);
+        startActivity(intent);
     }
 }

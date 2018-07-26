@@ -32,7 +32,7 @@ import java.util.Locale;
 
 public class ClHttpReq  {
     private final static  String URL_ENDPOINT = "http://hoz.horizont.co.th:88/"; //http://hoz.pmart.co.th:88/  http://hoz.horizont.co.th/
-    private final static  String LOCAL_URL_ENDPOINT = "http://172.17.8.99:3000/";
+    private final static  String LOCAL_URL_ENDPOINT = "http://172.17.9.219:3000/";
 
     //private final static  String URL_ENDPOINT = "http://192.168.43.17:3000/";
 
@@ -54,7 +54,7 @@ public class ClHttpReq  {
         HttpURLConnection con = null;
         StringBuilder st = new StringBuilder();
         try {
-           // System.out.println("test");
+           //System.out.println("test");
             object = new URL(url);
             con = (HttpURLConnection) object.openConnection();
             con.setDoOutput(true);
@@ -98,14 +98,12 @@ public class ClHttpReq  {
             con.disconnect();
             Log.d(getDateAndTime()+"",String.valueOf(e));
             return "error";
-
         }
 
         finally{
             con.disconnect();
         }
     }
-
     public static String getDataPosPdtLocal(String path, String pPara) {
         String url= getUrlWithPartLocal(path); //getUrlWithPath(path);   //"http://172.16.0.31:88/";//http://61.7.141.119:88/apimember?para=1;MjAxOC0wNi0yNyAxNzoyODowNC4zODg4OTk=
         URL object = null;
@@ -149,13 +147,11 @@ public class ClHttpReq  {
                 con.disconnect();
                 return "error";
             }
-
         }
         catch (Exception e) {
             con.disconnect();
             Log.e(getDateAndTime()+"",String.valueOf(e));
             return "error";
-
         }
         finally{
             con.disconnect();
@@ -182,10 +178,10 @@ public class ClHttpReq  {
         jo.addProperty("STATUS", "");
         jo.addProperty("MODE", "VIEW");
         jo.addProperty("KEY", "MjAxOC0wNi0yNyAxNzoyODowNC4zODg4OTk=");
-        jo.addProperty("SREC", "");
+       /* jo.addProperty("SREC", "");
         jo.addProperty("EREC", "");
         jo.addProperty("TPAGE", "");
-        jo.addProperty("RCOUNT", "");
+        jo.addProperty("RCOUNT", "");*/
 
         jo.addProperty("MKTC_KEY", "");
         jo.addProperty("MKTC_ID_CARD_NO", "");
