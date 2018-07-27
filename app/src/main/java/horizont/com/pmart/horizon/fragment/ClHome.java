@@ -145,7 +145,7 @@ public class ClHome extends Fragment {
                             adapter.notifyDataSetChanged();
                             adapter.setLoaded();
                             }
-                    }
+                         }
                         else{
                             Toast.makeText(getActivity(),"สิ้นสุดการค้นหา",LENGTH_LONG).show();
                             System.out.println("else");
