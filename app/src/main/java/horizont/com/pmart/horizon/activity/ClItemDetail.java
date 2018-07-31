@@ -1,10 +1,13 @@
 package horizont.com.pmart.horizon.activity;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,6 +25,7 @@ public class ClItemDetail extends AppCompatActivity {
  private ImageView img_item ,img_back;
  private Toolbar myToolbar;
  private LinearLayout btn_add;
+ private RecyclerView carditem;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +62,7 @@ public class ClItemDetail extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
             }
         });
+
     }
     private void setToolbar(){
         myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);

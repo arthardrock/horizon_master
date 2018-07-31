@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HoRiZont FOODS E-Commerce</string>
+    <string name="app_name">HoRiZont</string>
     <string name="nav_home">หน้าหลัก</string>
     <!--TextNavigation-->
     <string name="nav_location">สาขา</string>
@@ -10,6 +10,7 @@
     <string name="close_drawer">ปิด</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_login">เข้าสู่ระบบ</string>
     <!--TextBtn-->
     <string name="btn_close">ปิด</string>
     <string name="btn_confirm">ยืนยัน</string>

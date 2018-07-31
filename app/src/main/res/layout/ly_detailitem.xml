@@ -5,7 +5,8 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/tb_itemdetail_custom"></include>
+        layout="@layout/tb_itemdetail_custom">
+    </include>
     <FrameLayout
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"
@@ -16,9 +17,11 @@
         android:animateLayoutChanges="true">
 
         <LinearLayout
+            android:id="@+id/list_detail"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="250dp">
@@ -27,6 +30,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -66,10 +70,19 @@
                 android:layout_gravity="center"
                 android:text="รายละเอียด" />
         </LinearLayout>
+
     </FrameLayout>
+
     <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginBottom="2dp"
         android:id="@+id/btn_add"
-        android:background="@drawable/shape_item_inside"
+        android:background="@drawable/shape_item"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:orientation="horizontal"
@@ -77,18 +90,10 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true" >
 
-        <ImageView
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/ic_action_add"
-            android:layout_width="50dp"
-            android:layout_height="match_parent" />
-
         <TextView
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorWhite"
             style="@style/Text_20dp"
-            android:paddingLeft="10dp"
-            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_gravity="center_vertical|center_horizontal"
             android:text="@string/add_bucket"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

@@ -24,7 +24,6 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ly_splash_screen);
         welcome = (TextView)findViewById(R.id.txt_welcome);
-//        welcome.setText(R.string.txt_wel_EN);
         handler = new Handler();
         runnable = new Runnable() {
             @Override
@@ -51,4 +50,5 @@ public class SplashScreen extends AppCompatActivity {
         handler.removeCallbacks(runnable);
         time = delay_time - (System.currentTimeMillis()-time);
     }
+    
 }

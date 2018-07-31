@@ -4,18 +4,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import horizont.com.pmart.horizon.ClPageAdapter;
 import horizont.com.pmart.horizon.R;
@@ -40,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         appBarLayout = (AppBarLayout) findViewById(R.id.appbar_layout);
         tabLayout = (TabLayout) findViewById(R.id.tabs_layout);
+
         ClPageAdapter pageAdapter = new ClPageAdapter(getSupportFragmentManager());
         // Adding Fragments
         pageAdapter.AddFragment(new ClLogin(),"เข้าสู่ระบบ");
@@ -47,7 +42,6 @@ public class RegisterActivity extends AppCompatActivity {
         //Set Adapter
         viewPager.setAdapter(pageAdapter);
         tabLayout.setupWithViewPager(viewPager);
-
         setToolbar();
     }
     private void setToolbar(){

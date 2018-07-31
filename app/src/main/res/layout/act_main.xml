@@ -17,7 +17,6 @@
             android:id="@+id/toolbar"
             layout="@layout/tb_home_custom"></include>
 
-
         <FrameLayout
             android:id="@+id/frame_layout"
             android:layout_width="match_parent"
@@ -48,10 +47,6 @@
         android:clickable="true"
         android:background="@color/colorRed">
 
-        <!--<ImageView
-            android:layout_width="match_parent"
-            android:layout_height="" />-->
-
         <ImageView
             android:padding="10dp"
             android:src="@drawable/logohor"
@@ -62,7 +57,7 @@
             style="@style/Text_30dp"
             android:padding="10dp"
             android:textColor="@color/colorWhite"
-            android:text="@string/nav_profile"
+            android:text="@string/nav_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

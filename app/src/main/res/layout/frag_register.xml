@@ -22,7 +22,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:orientation="vertical"
-                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_marginTop="@dimen/custom_tab_layout_height"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -80,7 +80,7 @@
                         style="@style/Text_30dp"
                         android:textColor="@color/colorWhite"
                         android:text="@string/btn_confirm"
-                        android:background="@color/colorRed"
+                        android:background="@drawable/shape_item"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </LinearLayout>
