@@ -21,11 +21,12 @@ import horizont.com.pmart.horizon.R;
 import static android.app.PendingIntent.getActivity;
 
 public class ClItemDetail extends AppCompatActivity {
- private TextView txt_item,myTextView,txt_price;
+ private TextView txt_item,myTextView,txt_price,displayInteger;
  private ImageView img_item ,img_back;
  private Toolbar myToolbar;
- private LinearLayout btn_add;
+ private LinearLayout btn_add,decrease;
  private RecyclerView carditem;
+ int minteger = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,6 +37,10 @@ public class ClItemDetail extends AppCompatActivity {
         txt_item = findViewById(R.id.txt_item);
         img_item = findViewById(R.id.img_item);
         txt_price = findViewById(R.id.txt_price);
+
+        decrease = (LinearLayout)findViewById(R.id.btn_decrease);
+
+        displayInteger  = (TextView) findViewById(R.id.qty_number);
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,19 +60,47 @@ public class ClItemDetail extends AppCompatActivity {
                     .into(img_item);
         }
         btn_add = findViewById(R.id.btn_add);
+        decrease.setVisibility(View.INVISIBLE);
+    }
+    public void increaseInteger(View view) {
+        minteger = minteger + 1;
+        display(minteger);
+
+    }public void decreaseInteger(View view) {
+        minteger = minteger - 1;
+        display(minteger);
+        if (minteger == 0){
+            decrease.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private void display(final int number) {
+        displayInteger.setText("" + number);
+        if (displayInteger.toString().length() == 0){
+            decrease.setVisibility(View.INVISIBLE);
+        }
+        else {
+            decrease.setVisibility(View.VISIBLE);
+        }
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ClItemDetail.this, "ยังไม่พร้อมใช้งาน",
+                if(number==0){
+                    Toast.makeText(ClItemDetail.this, "เพิ่มจำนวนสินค้า",
+                            Toast.LENGTH_LONG).show();
+                }
+                else
+                Toast.makeText(ClItemDetail.this, "จำนวน : "+number,
                         Toast.LENGTH_LONG).show();
             }
         });
-
     }
     private void setToolbar(){
         myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
         img_back = findViewById(R.id.img_back);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+    }
+    private void checkButton(){
     }
 }
