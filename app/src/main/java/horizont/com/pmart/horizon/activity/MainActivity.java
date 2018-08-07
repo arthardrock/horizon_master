@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -42,7 +43,7 @@ import horizont.com.pmart.horizon.R;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar myToolbar;
-    private TextView profile, versionName;
+    private TextView  versionName;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView[] dots;
 
     ViewPager viewAdPager;
-    LinearLayout slideDots;
+    LinearLayout slideDots,profile,basket,store;
 
 
     ClCustomAdapter adapter;
@@ -115,13 +116,30 @@ public class MainActivity extends AppCompatActivity {
         versionName = (TextView)findViewById(R.id.txt_version);
         versionName.setText("Version : "+ BuildConfig.VERSION_NAME);
 
-        profile = (TextView)findViewById(R.id.txt_nav_profile);
+        profile = (LinearLayout)findViewById(R.id.txt_nav_profile);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openRegis();
             }
         });
+
+        basket = (LinearLayout)findViewById(R.id.txt_nav_cart);
+        basket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openCart();
+            }
+        });
+        store = (LinearLayout)findViewById(R.id.txt_nav_store);
+        store.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+
         final BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.navigation);
 
@@ -244,6 +262,10 @@ public class MainActivity extends AppCompatActivity {
     }
     public void openRegis(){
         Intent intent = new Intent(this,RegisterActivity.class);
+        startActivity(intent);
+    }
+    public void openCart(){
+        Intent intent = new Intent(this,ClCartShopping.class);
         startActivity(intent);
     }
 }
