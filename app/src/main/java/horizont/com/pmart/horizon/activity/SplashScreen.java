@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.github.ybq.android.spinkit.SpinKitView;
 
-import horizont.com.pmart.horizon.Information;
 import horizont.com.pmart.horizon.R;
 
 public class SplashScreen extends AppCompatActivity {
@@ -50,5 +49,5 @@ public class SplashScreen extends AppCompatActivity {
         handler.removeCallbacks(runnable);
         time = delay_time - (System.currentTimeMillis()-time);
     }
-    
+
 }

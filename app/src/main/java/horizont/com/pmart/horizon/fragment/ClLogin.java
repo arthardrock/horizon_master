@@ -1,12 +1,23 @@
 package horizont.com.pmart.horizon.fragment;
 
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.AppCompatCheckBox;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.regex.Pattern;
@@ -16,6 +27,8 @@ import horizont.com.pmart.horizon.R;
 public class ClLogin extends Fragment {
     private Button buttonConfirm;
     private EditText editTextPhone,editTextPassword;
+    private AppCompatCheckBox checkbox;
+    private TextView deviceID,forgetPass;
 
     public static ClLogin newInstance() {
         ClLogin fragment = new ClLogin();
@@ -34,6 +47,31 @@ public class ClLogin extends Fragment {
         buttonConfirm = (Button)view.findViewById(R.id.btn_confirm);
         editTextPhone = (EditText)view.findViewById(R.id.edt_phone);
         editTextPassword = (EditText)view.findViewById(R.id.edt_password);
+        forgetPass = (TextView)view.findViewById(R.id.txt_forgotpass);
+        forgetPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        String id = Settings.Secure.getString(getActivity().getContentResolver(), Settings.Secure.ANDROID_ID);
+
+        checkbox = (AppCompatCheckBox) view.findViewById(R.id.checkbox);
+        checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (!isChecked) {
+                    // show password
+                    editTextPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                } else {
+                    // hide password
+                    editTextPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }
+            }
+        });
+        deviceID = (TextView)view.findViewById(R.id.txt_device);
+
+        deviceID.setText("deviceID : "+id);
         checkLogin();
         return view;
     }
@@ -64,7 +102,7 @@ public class ClLogin extends Fragment {
     }
     private boolean isValidPhone(String phone)
     {
-     //   phone = "0"+phone;
+     // phone = "0"+phone;
         boolean check = false;
         if(!Pattern.matches("[0-9]", phone))
         {

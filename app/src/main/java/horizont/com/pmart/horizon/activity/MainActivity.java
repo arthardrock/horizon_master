@@ -1,6 +1,7 @@
 package horizont.com.pmart.horizon.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.annotation.NonNull;
@@ -8,6 +9,9 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,8 +23,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.sql.Time;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import horizont.com.pmart.horizon.AdViewPagerAdapter;
+import horizont.com.pmart.horizon.BuildConfig;
+import horizont.com.pmart.horizon.ClCustomAdapter;
 import horizont.com.pmart.horizon.fragment.ClFavorite;
 import horizont.com.pmart.horizon.fragment.ClHome;
 import horizont.com.pmart.horizon.fragment.ClLocation;
@@ -29,10 +41,20 @@ import horizont.com.pmart.horizon.fragment.ClPromotion;
 import horizont.com.pmart.horizon.R;
 
 public class MainActivity extends AppCompatActivity {
-private Toolbar myToolbar;
-private TextView profile;
-private DrawerLayout drawerLayout;
-private ActionBarDrawerToggle actionBarDrawerToggle;
+    private Toolbar myToolbar;
+    private TextView profile, versionName;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
+
+    private int dotscount;
+    private ImageView[] dots;
+
+    ViewPager viewAdPager;
+    LinearLayout slideDots;
+
+
+    ClCustomAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +63,58 @@ private ActionBarDrawerToggle actionBarDrawerToggle;
         setToolbar();
         setHamburgerButton();
 
+        // Set viewPage ad and dotslid
+        viewAdPager = (ViewPager)findViewById(R.id.viewAdPager);
+        slideDots = (LinearLayout)findViewById(R.id.sliderDot);
+        AdViewPagerAdapter adViewPagerAdapter = new AdViewPagerAdapter(this);
+        viewAdPager.setAdapter(adViewPagerAdapter);
+
+
+        dotscount = adViewPagerAdapter.getCount();
+        dots = new ImageView[dotscount];
+
+        for (int i = 1; i < dotscount; i++){
+
+            dots[i] = new ImageView(this);
+            dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.noactive_dot));
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(8,0,8,0);
+
+            slideDots.addView(dots[i],params);
+        }
+
+        //dots[0].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.noactive_dot));
+
+        /*viewAdPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+                for (int i = 0; i< dotscount; i++ ){
+                    dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.noactive_dot));
+                }
+                    dots[position].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.active_dot));
+
+            }
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });*/
+
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new MyTimeTask(),2000,4000);
+
+        // Set Text version name
+        versionName = (TextView)findViewById(R.id.txt_version);
+        versionName.setText("Version : "+ BuildConfig.VERSION_NAME);
+
         profile = (TextView)findViewById(R.id.txt_nav_profile);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +122,6 @@ private ActionBarDrawerToggle actionBarDrawerToggle;
                 openRegis();
             }
         });
-
         final BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.navigation);
 
@@ -85,7 +158,34 @@ private ActionBarDrawerToggle actionBarDrawerToggle;
         transaction.replace(R.id.frame_layout, ClHome.newInstance());
         transaction.commit();
     }
+    public class MyTimeTask extends TimerTask{
 
+        @Override
+        public void run() {
+            MainActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if(viewAdPager.getCurrentItem() == 0){
+                        viewAdPager.setCurrentItem(1);
+                    } else if (viewAdPager.getCurrentItem() == 1){
+                        viewAdPager.setCurrentItem(2);
+                    }else {
+                        viewAdPager.setCurrentItem(0);
+                    }
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
     private void setToolbar(){
         myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
         setSupportActionBar(myToolbar);
@@ -124,6 +224,7 @@ private ActionBarDrawerToggle actionBarDrawerToggle;
             }
             @Override
             public boolean onQueryTextChange(String s) {
+                //adapter.getFilter().filter(s);
                 return false;
             }
         });

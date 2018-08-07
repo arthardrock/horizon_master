@@ -38,10 +38,8 @@ import static horizont.com.pmart.horizon.ClHttpReq.getDataPosPdtLocal;
 public class ClHome extends Fragment {
     public String name;
     private RecyclerView recyclerView;
-    private GridLayoutManager gridLayoutManager;
     private ClCustomAdapter adapter;
     private List<ClDataItem> dataList;
-    private SpinKitView progressBarData;
 
     ProgressBar progress;
 
@@ -100,7 +98,6 @@ public class ClHome extends Fragment {
             AlertDialog.Builder errorDialog = gerErrorDialog(context);
 
             @Override
-
             protected String doInBackground(Void... voids) {
                      //config Class HttpReq
                 return getDataPosPdtLocal( "api/menu/"+page, fnPreparingSynDataPdt(""));//"api/menu/"+page ,api/apitestitem.jsp
@@ -110,7 +107,6 @@ public class ClHome extends Fragment {
                 super.onPreExecute();
                 progressDialog.show();
             }
-
             @Override
             protected void onPostExecute(String s) {
                 progressDialog.dismiss();
@@ -134,13 +130,11 @@ public class ClHome extends Fragment {
 
                             ClDataItem dataAr = new ClDataItem(nodeMember.path("item_name").asText(), nodeMember.path("item_image").asText(),
                                     nodeMember.path("price").asText());
-
                             item = nodeMember.path("item_name").asText();
                             image = nodeMember.path("item_image").asText();
                             price = nodeMember.path("price").asText();
 
                             dataList.add(dataAr);
-
                             System.out.println("ITEM :" + dataAr);
                             adapter.notifyDataSetChanged();
                             adapter.setLoaded();

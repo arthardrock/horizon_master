@@ -18,7 +18,7 @@ import horizont.com.pmart.horizon.fragment.ClRegister;
 
 public class RegisterActivity extends AppCompatActivity {
     private TextView myTextView;
-    private ImageView img_back;
+    private ImageView img_back,img_busket;
     private Toolbar myToolbar;
     private AppBarLayout appBarLayout;
     private TabLayout tabLayout;
@@ -46,7 +46,9 @@ public class RegisterActivity extends AppCompatActivity {
     }
     private void setToolbar(){
         myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
-        img_back = findViewById(R.id.img_back);
+        img_busket = findViewById(R.id.img_busket);
+        img_busket.setVisibility(View.INVISIBLE);
+        img_back = (ImageView) findViewById(R.id.img_back);
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

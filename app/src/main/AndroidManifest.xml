@@ -24,7 +24,10 @@
             android:name=".activity.ClItemDetail"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.SplashScreen">
+
+        <activity android:name=".activity.SplashScreen"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

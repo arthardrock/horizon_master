@@ -5,25 +5,27 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.github.ybq.android.spinkit.SpinKitView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import horizont.com.pmart.horizon.activity.ClDataItem;
 import horizont.com.pmart.horizon.activity.ClItemDetail;
 
-public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Filterable{
 
     private final int VIEW_TYPE_ITEM = 0;
     private final int VIEW_TYPE_LOADING = 1;
@@ -32,10 +34,7 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private Activity activity;
     private int visibleThreshold = 5;
     private int lastVisibleItem, totalItemCount;
-    private GridLayoutManager gridLayoutManager;
-
-    private CardView mCardView;
-
+    ValueFilter valueFilter;
 
     private Context context;
     private List<ClDataItem> my_data;
@@ -81,9 +80,7 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             return  new LoadingViewHolder(view);
         }
         return null;
-
     }
-
     @Override
     public void onBindViewHolder(@Nullable RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof UserViewHolder){
@@ -122,6 +119,43 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         isLoading = false;
     }
 
+    @Override
+    public Filter getFilter() {
+        if (valueFilter == null) {
+            valueFilter = new ValueFilter();
+        }
+        return valueFilter;
+    }
+    private class ValueFilter extends Filter{
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+
+            if (constraint != null && constraint.length() > 0) {
+                List<ClDataItem> filterList = new ArrayList<>();
+                for (int i = 0; i < my_data.size(); i++) {
+                    if ((my_data.get(i).toString().toUpperCase()).contains(constraint.toString().toUpperCase())) {
+                        filterList.add(my_data.get(i));
+                    }
+                }
+                results.count = filterList.size();
+                results.values = filterList;
+            } else {
+                results.count = my_data.size();
+                results.values = my_data;
+            }
+            return results;
+    }
+        @Override
+        protected void publishResults(CharSequence constraint,
+                                      FilterResults results) {
+            my_data = (List<ClDataItem>) results.values;
+            notifyDataSetChanged();
+        }
+
+    }
+
+
     public class LoadingViewHolder extends RecyclerView.ViewHolder {
         public SpinKitView progressBar;
 
@@ -130,19 +164,17 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             progressBar = (SpinKitView) view.findViewById(R.id.progressBarData);
         }
     }
-
-    public class UserViewHolder extends RecyclerView.ViewHolder{
+    public class UserViewHolder extends RecyclerView.ViewHolder {
         public TextView item;
         public ImageView image;
         public TextView price;
         public CardView mCardView;
-
-            public UserViewHolder(View itemView){
-                super(itemView);
-                mCardView = (CardView)itemView.findViewById(R.id.card_view);
-                item = (TextView)itemView.findViewById(R.id.txt_item);
-                image = (ImageView)itemView.findViewById(R.id.img_item);
-                price = (TextView)itemView.findViewById(R.id.txt_price);
-            }
+        public UserViewHolder(View itemView) {
+            super(itemView);
+            mCardView = (CardView) itemView.findViewById(R.id.card_view);
+            item = (TextView) itemView.findViewById(R.id.txt_item);
+            image = (ImageView) itemView.findViewById(R.id.img_item);
+            price = (TextView) itemView.findViewById(R.id.txt_price);
+        }
     }
 }

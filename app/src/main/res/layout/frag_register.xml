@@ -34,7 +34,7 @@
                     android:layout_height="50dp">
 
                     <EditText
-                        android:hint="@string/txt_phone"
+                        android:hint="@string/txt_phoneOrmail"
                         android:textColor="@color/colorBlack"
                         style="@style/Text_20dp"
                         android:paddingLeft="10dp"
@@ -57,7 +57,7 @@
                     android:layout_height="50dp">
 
                     <EditText
-                        android:hint="@string/txt_password"
+                        android:hint="@string/txt_fristname"
                         android:textColor="@color/colorBlack"
                         style="@style/Text_20dp"
                         android:paddingLeft="10dp"
@@ -67,6 +67,36 @@
 
                 </LinearLayout>
                 <!--blankSpace-->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp">
+                </LinearLayout>
+                <!--EditText-->
+                <LinearLayout
+                    android:background="@drawable/shape_item_inside"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <EditText
+                        android:hint="@string/txt_lastname"
+                        android:textColor="@color/colorBlack"
+                        style="@style/Text_20dp"
+                        android:paddingLeft="10dp"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp" />
+
+                </LinearLayout>
+                <!--blankSpace-->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp">
+                </LinearLayout>
+
+
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"

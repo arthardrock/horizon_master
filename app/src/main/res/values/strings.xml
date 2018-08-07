@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">HoRiZont</string>
+    <string name="app_name">HoRiZontDEV</string>
     <string name="nav_home">หน้าหลัก</string>
     <!--TextNavigation-->
     <string name="nav_location">สาขา</string>
-    <string name="nav_favorite">ราการโปรด</string>
+    <string name="nav_favorite">รายการโปรด</string>
     <string name="nav_promotion">โปรโมชั่น</string>
     <string name="nav_profile">บัญชี</string>
     <string name="open_drawer">เปิด</string>
@@ -11,6 +11,9 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_login">เข้าสู่ระบบ</string>
+    <string name="nav_cart">ตะกร้า</string>
+    <string name="nav_store">ร้านค้า</string>
+    <string name="nav_inventory">ประวัติการสั่งซื้อ</string>
     <!--TextBtn-->
     <string name="btn_close">ปิด</string>
     <string name="btn_confirm">ยืนยัน</string>
@@ -18,12 +21,15 @@
     <!--TextView-->
     <string name="txt_price">ราคา</string>
     <string name="txt_password">รหัสผ่าน</string>
-    <string name="txt_name">ชื่อ</string>
+    <string name="txt_fristname">ชื่อ</string>
+    <string name="txt_lastname">นามสกุล</string>
     <string name="txt_address">ที่อยู่</string>
+    <string name="txt_phoneOrmail">เบอร์โทร หรือ อีเมล</string>
     <string name="txt_phone">กรอกเบอร์โทร</string>
     <string name="txt_email">อีเมล</string>
     <string name="txt_wel_TH">ยินดีต้อนรับ</string>
     <string name="txt_wel_EN">Welcome</string>
+    <string name="txt_forgetpass">ลืมรหัสผ่าน?</string>
     <!--TextTitle-->
     <string name="title_register">เข้าสู่ระบบ/สมัครสมาชิก</string>
 
