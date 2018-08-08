@@ -12,17 +12,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.IOException;
 import java.io.InputStream;
 
 import horizont.com.pmart.horizon.R;
-
-import static horizont.com.pmart.horizon.ClHttpReq.fnPreparingSynDataPdt;
-import static horizont.com.pmart.horizon.ClHttpReq.getDataPosPdtLocal;
-
 
 public class PopInfo extends AppCompatActivity {
     public String promotion;
@@ -75,7 +67,6 @@ public class PopInfo extends AppCompatActivity {
             protected void onPostExecute(Bitmap bitmap) {
                 super.onPostExecute(bitmap);
                 img_promotion.setImageBitmap(bitmap);
-
             }
     }
 }

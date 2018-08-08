@@ -4,18 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <RelativeLayout
-        android:id="@+id/add"
-        android:background="@color/colorBlack"
-        android:layout_weight="1"
-        android:layout_above="@+id/rcy_item"
-        android:layout_width="match_parent"
-        android:layout_height="150dp">
-    </RelativeLayout>
+
     <android.support.v7.widget.RecyclerView
+        android:scrollbars="none"
         android:id="@+id/rcy_item"
-        android:layout_margin="5dp"
+        android:layout_marginRight="5dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
     </android.support.v7.widget.RecyclerView>
 </RelativeLayout>

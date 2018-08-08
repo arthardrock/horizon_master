@@ -66,24 +66,24 @@ public class MainActivity extends AppCompatActivity {
 
         // Set viewPage ad and dotslid
         viewAdPager = (ViewPager)findViewById(R.id.viewAdPager);
-        slideDots = (LinearLayout)findViewById(R.id.sliderDot);
+        //slideDots = (LinearLayout)findViewById(R.id.sliderDot);
         AdViewPagerAdapter adViewPagerAdapter = new AdViewPagerAdapter(this);
         viewAdPager.setAdapter(adViewPagerAdapter);
 
 
         dotscount = adViewPagerAdapter.getCount();
-        dots = new ImageView[dotscount];
+//        dots = new ImageView[dotscount];
+//
+//        for (int i = 1; i < dotscount; i++){
+//
+//            dots[i] = new ImageView(this);
+//            dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.noactive_dot));
+//
+//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+//            params.setMargins(8,0,8,0);
 
-        for (int i = 1; i < dotscount; i++){
-
-            dots[i] = new ImageView(this);
-            dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.noactive_dot));
-
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(8,0,8,0);
-
-            slideDots.addView(dots[i],params);
-        }
+            //slideDots.addView(dots[i],params);
+//              }
 
         //dots[0].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.noactive_dot));
 
@@ -138,7 +138,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
 
         final BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.navigation);

@@ -41,12 +41,7 @@ public class ClItemDetail extends AppCompatActivity {
         decrease = (LinearLayout)findViewById(R.id.btn_decrease);
 
         displayInteger  = (TextView) findViewById(R.id.qty_number);
-        img_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+
 
         Bundle mBundle = getIntent().getExtras();
         if (mBundle != null){
@@ -98,9 +93,13 @@ public class ClItemDetail extends AppCompatActivity {
     private void setToolbar(){
         myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
         img_back = findViewById(R.id.img_back);
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-    }
-    private void checkButton(){
     }
 }

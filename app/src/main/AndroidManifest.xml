@@ -3,8 +3,7 @@
     package="horizont.com.pmart.horizon">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -13,19 +12,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".activity.MainActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".activity.ClItemDetail"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".activity.SplashScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SplashScreen"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -34,21 +30,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activity.PopInfo"
             android:configChanges="orientation"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.RegisterActivity"></activity>
+        <activity android:name=".Information"></activity>
+        <activity android:name=".activity.ClCartShopping"></activity>
 
-        <activity android:name=".activity.RegisterActivity">
-
-        </activity>
-        <activity android:name=".Information">
-        </activity>
-        <activity android:name=".activity.ClCartShopping">
-
-        </activity>
     </application>
 
 </manifest>
