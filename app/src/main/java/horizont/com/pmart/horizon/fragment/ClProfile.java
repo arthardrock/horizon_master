@@ -1,5 +1,6 @@
 package horizont.com.pmart.horizon.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -24,23 +25,9 @@ import static horizont.com.pmart.horizon.ClHttpReq.fnPreparingSynDataPdt;
 import static horizont.com.pmart.horizon.ClHttpReq.getDataPosPdt;
 
 public class ClProfile extends Fragment{
-    public String name;
-    public String sername;
-    public String company;
-    public String titlename;
-    public String address;
-    public String sub_district;
-    public String district;
-    public String province;
-
-    private TextView txt_name;
-    private TextView txt_titlename;
-    private TextView txt_company;
-    private TextView txt_address;
-    private TextView txt_sername;
-    private TextView txt_sub_district;
-    private TextView txt_district;
-    private TextView txt_province;
+    public String name,sername,company,titlename,address,sub_district,district,province;
+    private TextView txt_name,txt_titlename,txt_company,txt_address,
+            txt_sername,txt_sub_district,txt_district,txt_province;
 
     public static ClProfile newInstance() {
         ClProfile fragment = new ClProfile();
@@ -69,6 +56,7 @@ public class ClProfile extends Fragment{
 
         return view;
     }
+    @SuppressLint("StaticFieldLeak")
     public void get_item(final Context context) {
         new AsyncTask<Void, Void, String>() {
 
@@ -123,8 +111,10 @@ public class ClProfile extends Fragment{
                         district = nodeAddress.path("MCMA_ADDR_PREFECTURE").asText();
                         province = nodeAddress.path("MCMA_ADDR_PROVINCE").asText();
 
-                        System.out.println("Address : " + address + sub_district + district + province);
+
                     }
+                    System.out.println("Address : " + address + sub_district + district + province);
+
                     txt_titlename.setText(titlename);
                     txt_name.setText(name);
                     txt_company.setText(company);

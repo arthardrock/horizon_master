@@ -154,7 +154,6 @@
             </LinearLayout>
 
             <Button
-                android:onClick="showNotification"
                 android:id="@+id/btn_noti"
                 android:text="test notifica"
                 android:layout_width="match_parent"

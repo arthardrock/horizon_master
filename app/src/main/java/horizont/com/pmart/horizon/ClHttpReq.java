@@ -199,5 +199,12 @@ public class ClHttpReq  {
         jo.add("address", jaAddr);
         return jo.toString();
     }
-
+    public static String fnPreparingNotification(){
+        JsonObject jo = new JsonObject();
+        JsonArray jaNotifi = new JsonArray();
+        JsonObject jsonObject = new JsonObject();
+        jaNotifi.add(jsonObject);
+        jo.add("notification",jaNotifi);
+        return jo.toString();
+    }
 }

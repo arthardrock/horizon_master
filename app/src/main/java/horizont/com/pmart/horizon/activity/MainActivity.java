@@ -50,16 +50,17 @@ import horizont.com.pmart.horizon.fragment.ClPromotion;
 import horizont.com.pmart.horizon.R;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TITLE = "HoRiZont News";
-    private static final String MESSAGE = "สวัสดี นี่เป็นข่าวสาร !";
     private Toolbar myToolbar;
     private TextView  versionName;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private Button myButton;
 
-    private int dotscount;
-    private ImageView[] dots;
+    String title;
+    String message;
+
+
+    PushActivity pushActivity = new PushActivity();
 
     ViewPager viewAdPager;
     LinearLayout slideDots,profile,basket,store;
@@ -73,50 +74,12 @@ public class MainActivity extends AppCompatActivity {
         setToolbar();
         setHamburgerButton();
 
+        pushActivity.get_notification();
         // Set viewPage ad and dotslid
         viewAdPager = (ViewPager)findViewById(R.id.viewAdPager);
         //slideDots = (LinearLayout)findViewById(R.id.sliderDot);
         AdViewPagerAdapter adViewPagerAdapter = new AdViewPagerAdapter(this);
         viewAdPager.setAdapter(adViewPagerAdapter);
-
-
-        dotscount = adViewPagerAdapter.getCount();
-//        dots = new ImageView[dotscount];
-//
-//        for (int i = 1; i < dotscount; i++){
-//
-//            dots[i] = new ImageView(this);
-//            dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.noactive_dot));
-//
-//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-//            params.setMargins(8,0,8,0);
-
-            //slideDots.addView(dots[i],params);
-//              }
-
-        //dots[0].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.noactive_dot));
-
-        /*viewAdPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-                for (int i = 0; i< dotscount; i++ ){
-                    dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.noactive_dot));
-                }
-                    dots[position].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.active_dot));
-
-            }
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });*/
 
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new MyTimeTask(),2000,4000);
@@ -133,6 +96,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        PushActivity pushActivity = new PushActivity();
+        pushActivity.get_notification();
+
         basket = (LinearLayout)findViewById(R.id.txt_nav_cart);
         basket.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,11 +110,19 @@ public class MainActivity extends AppCompatActivity {
         store.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
             }
         });
+        myButton = (Button)findViewById(R.id.btn_noti);
+        myButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                get_notification();
+            }
+        });
+
         final BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.navigation);
-
         bottomNavigationView.setOnNavigationItemSelectedListener
                 (new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -200,7 +174,6 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
@@ -274,32 +247,32 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,ClCartShopping.class);
         startActivity(intent);
     }
+
     // set Onclick On xml file
-    public void showNotification(View view) {
-        Intent intent = new Intent(this, PushActivity.class);
-        intent.putExtra("message", MESSAGE);
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        stackBuilder.addParentStack(PushActivity.class);
-        stackBuilder.addNextIntent(intent);
-        PendingIntent pendingIntent =
-                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        public void get_notification() {
+            Intent intent = new Intent(this, PushActivity.class);
+            intent.putExtra("title", title);
+            intent.putExtra("message", message);
+            TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+            stackBuilder.addParentStack(PushActivity.class);
+            stackBuilder.addNextIntent(intent);
+            PendingIntent pendingIntent =
+                    stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Notification notification =
-                new NotificationCompat.Builder(this)
-                        .setWhen(System.currentTimeMillis())
-                        .setSmallIcon(R.drawable.icon1)
-                        .setContentTitle(TITLE)
-                        .setContentText(MESSAGE)
-                        .setVibrate(new long[] { 1000, 300})
-                        .setLights(Color.GREEN, 3000, 3000)
-                        .setAutoCancel(true)
-                        .setContentIntent(pendingIntent)
-                        .build();
-
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        notificationManager.notify(1000, notification);
-
+            Notification notification = new NotificationCompat
+                    .Builder(this)
+                            .setWhen(System.currentTimeMillis())
+                            .setSmallIcon(R.drawable.icon1)
+                            .setContentTitle(pushActivity.title)
+                            .setContentText(pushActivity.message)
+                            .setVibrate(new long[] { 1000, 300})
+                            .setLights(Color.GREEN, 3000, 3000)
+                            .setAutoCancel(true)
+                            .setContentIntent(pendingIntent)
+                            .setNumber(1)
+                            .build();
+            NotificationManager notificationManager =
+                    (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            notificationManager.notify(1000, notification);
+        }
     }
-
-}
