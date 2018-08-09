@@ -55,11 +55,12 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:clickable="true"
+                    android:id="@+id/icon_fav"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_action_heart"
+                    android:src="@drawable/ic_action_fav_border"
                     android:tint="@color/colorRed"
                     style="@style/Text_20dp"
+                    android:clickable="true"
                     android:text="@string/txt_price"
                     android:layout_width="20dp"
                     android:layout_height="20dp"/>

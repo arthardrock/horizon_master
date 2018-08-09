@@ -20,6 +20,7 @@
             app:cardElevation="4dp"
             app:cardUseCompatPadding="true"
             app:cardCornerRadius="10px">
+
             <LinearLayout
                 android:layout_marginTop="@dimen/custom_tab_layout_height"
                 android:layout_marginLeft="20dp"
@@ -41,7 +42,6 @@
                         android:textColor="@color/colorBlack"
                         style="@style/Text_20dp"
                         android:paddingLeft="10dp"
-                        android:inputType="number"
                         android:layout_gravity="center_horizontal|center_vertical"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"/>

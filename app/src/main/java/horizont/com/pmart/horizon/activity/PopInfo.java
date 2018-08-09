@@ -26,6 +26,8 @@ public class PopInfo extends AppCompatActivity {
         setContentView(R.layout.ly_popup_info);
 
         img_promotion = (ImageView) findViewById(R.id.img_promotion);
+        img_promotion.setImageResource(R.drawable.mom);
+
         String URLIMAGE = "http://172.17.9.238:3000/api/promotion/2";
         //new get_promotion(img_promotion).execute(URLIMAGE);
         //TextView txt_promotion1 = (TextView)findViewById(R.id.txt_promotion1);
@@ -46,27 +48,27 @@ public class PopInfo extends AppCompatActivity {
     }
     @SuppressLint("StaticFieldLeak")
     public class get_promotion extends AsyncTask<String, Void, Bitmap>{
-            ImageView imageView;
+        ImageView imageView;
 
-            public get_promotion(ImageView img_promotion){
-                this.imageView = img_promotion;
-            }
-            @Override
-            protected Bitmap doInBackground(String... url) {
-                String urldisplay = url [0];
+        public get_promotion(ImageView img_promotion){
+            this.imageView = img_promotion;
+        }
+        @Override
+        protected Bitmap doInBackground(String... url) {
+            String urldisplay = url [0];
 
-                try{
-                    InputStream srt = new java.net.URL(urldisplay).openStream();
-                    bitmap = BitmapFactory.decodeStream(srt);
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-                return null;
+            try{
+                InputStream srt = new java.net.URL(urldisplay).openStream();
+                bitmap = BitmapFactory.decodeStream(srt);
+            } catch (Exception e){
+                e.printStackTrace();
             }
-            @Override
-            protected void onPostExecute(Bitmap bitmap) {
-                super.onPostExecute(bitmap);
-                img_promotion.setImageBitmap(bitmap);
-            }
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+            img_promotion.setImageBitmap(bitmap);
+        }
     }
 }

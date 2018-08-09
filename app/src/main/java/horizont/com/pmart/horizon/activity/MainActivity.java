@@ -1,14 +1,20 @@
 package horizont.com.pmart.horizon.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -23,6 +29,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -34,6 +41,7 @@ import java.util.TimerTask;
 import horizont.com.pmart.horizon.AdViewPagerAdapter;
 import horizont.com.pmart.horizon.BuildConfig;
 import horizont.com.pmart.horizon.ClCustomAdapter;
+import horizont.com.pmart.horizon.PushActivity;
 import horizont.com.pmart.horizon.fragment.ClFavorite;
 import horizont.com.pmart.horizon.fragment.ClHome;
 import horizont.com.pmart.horizon.fragment.ClLocation;
@@ -42,10 +50,13 @@ import horizont.com.pmart.horizon.fragment.ClPromotion;
 import horizont.com.pmart.horizon.R;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TITLE = "HoRiZont News";
+    private static final String MESSAGE = "สวัสดี นี่เป็นข่าวสาร !";
     private Toolbar myToolbar;
     private TextView  versionName;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
+    private Button myButton;
 
     private int dotscount;
     private ImageView[] dots;
@@ -53,9 +64,7 @@ public class MainActivity extends AppCompatActivity {
     ViewPager viewAdPager;
     LinearLayout slideDots,profile,basket,store;
 
-
     ClCustomAdapter adapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,10 +144,8 @@ public class MainActivity extends AppCompatActivity {
         store.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
             }
         });
-
         final BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.navigation);
 
@@ -267,4 +274,32 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,ClCartShopping.class);
         startActivity(intent);
     }
+    // set Onclick On xml file
+    public void showNotification(View view) {
+        Intent intent = new Intent(this, PushActivity.class);
+        intent.putExtra("message", MESSAGE);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addParentStack(PushActivity.class);
+        stackBuilder.addNextIntent(intent);
+        PendingIntent pendingIntent =
+                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Notification notification =
+                new NotificationCompat.Builder(this)
+                        .setWhen(System.currentTimeMillis())
+                        .setSmallIcon(R.drawable.icon1)
+                        .setContentTitle(TITLE)
+                        .setContentText(MESSAGE)
+                        .setVibrate(new long[] { 1000, 300})
+                        .setLights(Color.GREEN, 3000, 3000)
+                        .setAutoCancel(true)
+                        .setContentIntent(pendingIntent)
+                        .build();
+
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.notify(1000, notification);
+
+    }
+
 }

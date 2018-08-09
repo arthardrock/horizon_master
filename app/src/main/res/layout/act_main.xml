@@ -50,7 +50,6 @@
 
             </LinearLayout>
 
-
         <android.support.design.widget.BottomNavigationView
             style="@style/Text_10dp"
             android:id="@+id/navigation"
@@ -154,7 +153,15 @@
                     android:layout_height="wrap_content"/>
             </LinearLayout>
 
+            <Button
+                android:onClick="showNotification"
+                android:id="@+id/btn_noti"
+                android:text="test notifica"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
+
         <LinearLayout
             android:background="@color/colorRed"
             android:layout_alignParentBottom="true"

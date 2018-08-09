@@ -80,12 +80,12 @@ public class ClLogin extends Fragment {
             @Override
             public void onClick(View view) {
                 if (editTextPhone.getText().toString().trim().length()!=0) {
-                    if(isValidPhone(editTextPhone.getText().toString())){
-//                        Toast.makeText(getActivity(), "OK", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        editTextPhone.setError("รูปแบบไม่ถูกต้อง");
-                    }
+//                    if(isValidPhone(editTextPhone.getText().toString())){
+////                        Toast.makeText(getActivity(), "OK", Toast.LENGTH_SHORT).show();
+//                    }
+//                    else {
+//                        editTextPhone.setError("รูปแบบไม่ถูกต้อง");
+//                    }
                 }
                 else {
                     editTextPhone.setError("กรุณากรอกเบอร์โทร");

@@ -36,6 +36,7 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private int visibleThreshold = 5;
     private int lastVisibleItem, totalItemCount;
     ValueFilter valueFilter;
+    private ImageView iconfav;
 
     private Context context;
     private List<ClDataItem> my_data;
@@ -74,6 +75,7 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         if (viewType == VIEW_TYPE_ITEM){
             View itemView = LayoutInflater.from(activity).inflate(R.layout.ly_cardview,parent,false);
+
             return new UserViewHolder(itemView);
         }
         else if (viewType == VIEW_TYPE_LOADING){
@@ -91,6 +93,7 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             viewHolder.item.setText(dataItem.getItem_name());
             viewHolder.price.setText(dataItem.getPrice());
             Glide.with(context).load(dataItem.getItem_image()).into(viewHolder.image);
+
 
             viewHolder.mCardView.setOnClickListener(new View.OnClickListener() {
                 @Override
