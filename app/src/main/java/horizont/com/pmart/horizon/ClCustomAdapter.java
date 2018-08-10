@@ -151,8 +151,7 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             return results;
     }
         @Override
-        protected void publishResults(CharSequence constraint,
-                                      FilterResults results) {
+        protected void publishResults(CharSequence constraint,FilterResults results) {
             my_data = (List<ClDataItem>) results.values;
             notifyDataSetChanged();
         }
@@ -162,7 +161,6 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public class LoadingViewHolder extends RecyclerView.ViewHolder {
         public SpinKitView progressBar;
-
         public LoadingViewHolder(View view) {
             super(view);
             progressBar = (SpinKitView) view.findViewById(R.id.progressBarData);

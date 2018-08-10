@@ -30,7 +30,6 @@ public class PopInfo extends AppCompatActivity {
 
         String URLIMAGE = "http://172.17.9.238:3000/api/promotion/2";
         //new get_promotion(img_promotion).execute(URLIMAGE);
-        //TextView txt_promotion1 = (TextView)findViewById(R.id.txt_promotion1);
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         LinearLayout btn_close = (LinearLayout) findViewById(R.id.btn_close);

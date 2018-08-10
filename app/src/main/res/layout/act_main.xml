@@ -17,38 +17,14 @@
             android:id="@+id/toolbar"
             layout="@layout/tb_home_custom">
         </include>
-
-
-            <LinearLayout
-                android:layout_above="@+id/navigation"
-                android:orientation="vertical"
-                android:layout_below="@id/toolbar"
+            <FrameLayout
+                android:layout_above="@id/navigation"
+                android:duplicateParentState="true"
+                android:id="@+id/frame_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <RelativeLayout
-                    android:id="@+id/rl"
-                    android:layout_below="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp">
-
-                    <android.support.v4.view.ViewPager
-                        android:id="@+id/viewAdPager"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                    </android.support.v4.view.ViewPager>
-
-                </RelativeLayout>
-
-                <FrameLayout
-                    android:duplicateParentState="true"
-                    android:id="@+id/frame_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/rl">
-                </FrameLayout>
-
-            </LinearLayout>
+                android:layout_height="match_parent"
+                android:layout_below="@id/toolbar">
+            </FrameLayout>
 
         <android.support.design.widget.BottomNavigationView
             style="@style/Text_10dp"
@@ -61,6 +37,7 @@
             app:itemIconTint="@color/colorWhite"
             app:itemTextColor="@color/colorWhite"
             app:menu="@menu/bottom_nav_menu"/>
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -160,7 +137,6 @@
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
-
         <LinearLayout
             android:background="@color/colorRed"
             android:layout_alignParentBottom="true"
@@ -177,5 +153,7 @@
                 android:textAlignment="center"
                 android:text="version :"/>
         </LinearLayout>
+
     </RelativeLayout>
+
 </android.support.v4.widget.DrawerLayout>

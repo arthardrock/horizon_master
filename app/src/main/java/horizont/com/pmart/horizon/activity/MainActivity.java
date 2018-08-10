@@ -5,7 +5,6 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -15,32 +14,21 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.sql.Time;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import horizont.com.pmart.horizon.AdViewPagerAdapter;
 import horizont.com.pmart.horizon.BuildConfig;
-import horizont.com.pmart.horizon.ClCustomAdapter;
 import horizont.com.pmart.horizon.PushActivity;
 import horizont.com.pmart.horizon.fragment.ClFavorite;
 import horizont.com.pmart.horizon.fragment.ClHome;
@@ -49,23 +37,15 @@ import horizont.com.pmart.horizon.fragment.ClProfile;
 import horizont.com.pmart.horizon.fragment.ClPromotion;
 import horizont.com.pmart.horizon.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements  View.OnClickListener{
     private Toolbar myToolbar;
     private TextView  versionName;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private Button myButton;
-
     String title;
     String message;
-
-
     PushActivity pushActivity = new PushActivity();
-
-    ViewPager viewAdPager;
-    LinearLayout slideDots,profile,basket,store;
-
-    ClCustomAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,46 +53,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.act_main);
         setToolbar();
         setHamburgerButton();
-
         pushActivity.get_notification();
-        // Set viewPage ad and dotslid
-        viewAdPager = (ViewPager)findViewById(R.id.viewAdPager);
-        //slideDots = (LinearLayout)findViewById(R.id.sliderDot);
-        AdViewPagerAdapter adViewPagerAdapter = new AdViewPagerAdapter(this);
-        viewAdPager.setAdapter(adViewPagerAdapter);
-
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new MyTimeTask(),2000,4000);
 
         // Set Text version name
         versionName = (TextView)findViewById(R.id.txt_version);
         versionName.setText("Version : "+ BuildConfig.VERSION_NAME);
 
-        profile = (LinearLayout)findViewById(R.id.txt_nav_profile);
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openRegis();
-            }
-        });
+        findViewById(R.id.txt_nav_profile).setOnClickListener(this);
+        findViewById(R.id.txt_nav_cart).setOnClickListener(this);
+        findViewById(R.id.txt_nav_store).setOnClickListener(this);
+
 
         PushActivity pushActivity = new PushActivity();
         pushActivity.get_notification();
 
-        basket = (LinearLayout)findViewById(R.id.txt_nav_cart);
-        basket.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openCart();
-            }
-        });
-        store = (LinearLayout)findViewById(R.id.txt_nav_store);
-        store.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
         myButton = (Button)findViewById(R.id.btn_noti);
         myButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,22 +110,18 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.frame_layout, ClHome.newInstance());
         transaction.commit();
     }
-    public class MyTimeTask extends TimerTask{
 
-        @Override
-        public void run() {
-            MainActivity.this.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if(viewAdPager.getCurrentItem() == 0){
-                        viewAdPager.setCurrentItem(1);
-                    } else if (viewAdPager.getCurrentItem() == 1){
-                        viewAdPager.setCurrentItem(2);
-                    }else {
-                        viewAdPager.setCurrentItem(0);
-                    }
-                }
-            });
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+        if (id == R.id.txt_nav_profile){
+            openRegis();
+        }
+        if(id == R.id.txt_nav_cart){
+            openCart();
+        }
+        if(id == R.id.txt_nav_store){
+
         }
     }
     @Override

@@ -1,5 +1,7 @@
 package horizont.com.pmart.horizon.fragment;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
@@ -23,6 +25,7 @@ import android.widget.Toast;
 import java.util.regex.Pattern;
 
 import horizont.com.pmart.horizon.R;
+import horizont.com.pmart.horizon.activity.ClForgetPassword;
 
 public class ClLogin extends Fragment {
     private Button buttonConfirm;
@@ -30,6 +33,7 @@ public class ClLogin extends Fragment {
     private AppCompatCheckBox checkbox;
     private TextView deviceID,forgetPass;
 
+    private Context context;
     public static ClLogin newInstance() {
         ClLogin fragment = new ClLogin();
         return fragment;
@@ -51,7 +55,7 @@ public class ClLogin extends Fragment {
         forgetPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                forgetPass();
             }
         });
         String id = Settings.Secure.getString(getActivity().getContentResolver(), Settings.Secure.ANDROID_ID);
@@ -81,7 +85,7 @@ public class ClLogin extends Fragment {
             public void onClick(View view) {
                 if (editTextPhone.getText().toString().trim().length()!=0) {
 //                    if(isValidPhone(editTextPhone.getText().toString())){
-////                        Toast.makeText(getActivity(), "OK", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getActivity(), "OK", Toast.LENGTH_SHORT).show();
 //                    }
 //                    else {
 //                        editTextPhone.setError("รูปแบบไม่ถูกต้อง");
@@ -99,6 +103,10 @@ public class ClLogin extends Fragment {
                 }
             }
         });
+    }
+    public void forgetPass(){
+        Intent intent = new Intent(context,ClForgetPassword.class);
+        context.startActivity(intent);
     }
     private boolean isValidPhone(String phone)
     {

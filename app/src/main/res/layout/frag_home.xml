@@ -5,11 +5,89 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:scrollbars="none"
-        android:id="@+id/rcy_item"
-        android:layout_marginRight="5dp"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_below="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewAdPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </android.support.v4.view.ViewPager>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                style="@style/Text_10dp"
+                android:text="หมวดหมู่"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp">
+            <LinearLayout
+                android:src="@drawable/cate_seafood"
+                android:background="@drawable/shape_item_inside"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:scaleType="fitXY"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/cate_seafood"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:src="@drawable/cate_seafood"
+                android:background="@drawable/shape_item_inside"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <ImageView
+                android:layout_margin="10dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/cate_beef"
+                android:layout_width="100dp"
+                android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:src="@drawable/cate_seafood"
+                android:background="@drawable/shape_item_inside"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <ImageView
+                android:scaleType="fitXY"
+                android:layout_margin="10dp"
+                android:src="@drawable/cate_appetizer"
+                android:layout_width="100dp"
+                android:layout_height="match_parent" />
+            </LinearLayout>
+        </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:scrollbars="none"
+            android:id="@+id/rcy_item"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
 </RelativeLayout>

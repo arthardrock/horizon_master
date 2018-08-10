@@ -6,7 +6,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -24,12 +27,16 @@ import com.github.ybq.android.spinkit.SpinKitView;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import horizont.com.pmart.horizon.AdViewPagerAdapter;
 import horizont.com.pmart.horizon.ClCustomAdapter;
 import horizont.com.pmart.horizon.ClDetectConnection;
 import horizont.com.pmart.horizon.activity.ClDataItem;
 import horizont.com.pmart.horizon.OnLoadMoreListener;
 import horizont.com.pmart.horizon.R;
+import horizont.com.pmart.horizon.activity.MainActivity;
 
 import static android.widget.Toast.LENGTH_LONG;
 import static horizont.com.pmart.horizon.activity.ClDialogBox.gerErrorDialog;
@@ -50,12 +57,14 @@ public class ClHome extends Fragment {
     public String image;
     public String price;
 
+    ViewPager viewAdPager;
     int page = 1;
 
     public static ClHome newInstance() {
         ClHome fragment = new ClHome();
         return fragment;
     }
+    private Handler mHandler = new Handler(Looper.getMainLooper());
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,6 +78,13 @@ public class ClHome extends Fragment {
 
         recyclerView = (RecyclerView) view.findViewById(R.id.rcy_item);
         dataList = new ArrayList<>();
+
+        viewAdPager = (ViewPager)view.findViewById(R.id.viewAdPager);
+        //slideDots = (LinearLayout)findViewById(R.id.sliderDot);
+        AdViewPagerAdapter adViewPagerAdapter = new AdViewPagerAdapter(getActivity());
+        viewAdPager.setAdapter(adViewPagerAdapter);
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new MyTimeTask(),2000,4000);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -130,7 +146,6 @@ public class ClHome extends Fragment {
                     System.out.println("data size is"+data.size());
                     if(data.size()>0){
                         for (JsonNode nodeMember : data) {
-
                             ClDataItem dataAr = new ClDataItem(nodeMember.path("item_name").asText(), nodeMember.path("item_image").asText(),
                                     nodeMember.path("price").asText());
                             item = nodeMember.path("item_name").asText();
@@ -150,6 +165,23 @@ public class ClHome extends Fragment {
                 }
             }
         }.execute();
+    }
+    public class MyTimeTask extends TimerTask {
+        @Override
+        public void run() {
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if(viewAdPager.getCurrentItem() == 0){
+                        viewAdPager.setCurrentItem(1);
+                    } else if (viewAdPager.getCurrentItem() == 1){
+                        viewAdPager.setCurrentItem(2);
+                    }else {
+                        viewAdPager.setCurrentItem(0);
+                    }
+                }
+            });
+        }
     }
     public void loaddata() {
         adapter.setOnLoadMoreListener(new OnLoadMoreListener() {

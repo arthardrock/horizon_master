@@ -16,7 +16,6 @@
         app:cardCornerRadius="10px">
 
         <LinearLayout
-            android:background="@color/colorWhite"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:layout_width="match_parent"
@@ -25,8 +24,8 @@
 
         <LinearLayout
             android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
             android:orientation="vertical">
 
             <ImageView
