@@ -17,14 +17,13 @@
             android:id="@+id/toolbar"
             layout="@layout/tb_home_custom">
         </include>
-            <FrameLayout
-                android:layout_above="@id/navigation"
-                android:duplicateParentState="true"
-                android:id="@+id/frame_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/toolbar">
-            </FrameLayout>
+        <FrameLayout
+            android:layout_above="@id/navigation"
+            android:id="@+id/frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar">
+        </FrameLayout>
 
         <android.support.design.widget.BottomNavigationView
             style="@style/Text_10dp"
@@ -60,11 +59,7 @@
                 android:background="@color/colorRed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-                <ImageView
-                    android:padding="10dp"
-                    android:src="@drawable/logohor"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+
             </LinearLayout>
 
             <LinearLayout

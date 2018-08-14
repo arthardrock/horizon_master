@@ -68,6 +68,12 @@
             <item name="android:textSize">15dp</item>
             <item name="android:textStyle">bold</item>
         </style>
+
+        <style name="Text_bold_20dp">
+            <item name="android:fontFamily">@font/rusrecular</item>
+            <item name="android:textSize">20dp</item>
+            <item name="android:textStyle">bold</item>
+        </style>
         <style name="Text_bold_30dp">
             <item name="android:fontFamily">@font/rusrecular</item>
             <item name="android:textSize">30dp</item>

@@ -3,7 +3,9 @@ package horizont.com.pmart.horizon;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,6 +38,8 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private int visibleThreshold = 5;
     private int lastVisibleItem, totalItemCount;
     ValueFilter valueFilter;
+    ViewPager viewAdPager;
+    LinearLayout linearLayoutHead;
     private ImageView iconfav;
 
     private Context context;
@@ -60,7 +64,7 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 isLoading = true;
             }
         }
-    });
+        });
     }
     public void setOnLoadMoreListener(OnLoadMoreListener mOnLoadMoreListener) {
         this.onLoadMoreListener = mOnLoadMoreListener;
@@ -93,7 +97,6 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             viewHolder.item.setText(dataItem.getItem_name());
             viewHolder.price.setText(dataItem.getPrice());
             Glide.with(context).load(dataItem.getItem_image()).into(viewHolder.image);
-
 
             viewHolder.mCardView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -155,9 +158,7 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             my_data = (List<ClDataItem>) results.values;
             notifyDataSetChanged();
         }
-
     }
-
 
     public class LoadingViewHolder extends RecyclerView.ViewHolder {
         public SpinKitView progressBar;

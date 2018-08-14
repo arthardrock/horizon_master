@@ -17,7 +17,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -48,7 +50,6 @@ public class ClHome extends Fragment {
     public String name;
     private RecyclerView recyclerView;
     private ClCustomAdapter adapter;
-    private ImageView iconfav;
     private List<ClDataItem> dataList;
 
     ProgressBar progress;
@@ -58,6 +59,7 @@ public class ClHome extends Fragment {
     public String price;
 
     ViewPager viewAdPager;
+    LinearLayout linearLayoutHead;
     int page = 1;
 
     public static ClHome newInstance() {
@@ -78,6 +80,8 @@ public class ClHome extends Fragment {
 
         recyclerView = (RecyclerView) view.findViewById(R.id.rcy_item);
         dataList = new ArrayList<>();
+
+        linearLayoutHead = view.findViewById(R.id.liner_head);
 
         viewAdPager = (ViewPager)view.findViewById(R.id.viewAdPager);
         //slideDots = (LinearLayout)findViewById(R.id.sliderDot);
@@ -107,7 +111,19 @@ public class ClHome extends Fragment {
         }else
             get_itemMore(getContext());
             recyclerView.setAdapter(adapter);
-            return view;
+
+
+        LinearLayout cateid = view.findViewById(R.id.cateid);
+        for (int i = 0; i < 6; i++){
+            View v = inflater.inflate(R.layout.item_cate,cateid,false);
+
+            TextView textView = v.findViewById(R.id.text_cate);
+            textView.setText("Category : "+i);
+            ImageView imageView = v.findViewById(R.id.img_cate);
+            imageView.setImageResource(R.drawable.cate_beef);
+            cateid.addView(v);
+        }
+        return view;
     }
     @SuppressLint("StaticFieldLeak")
     public void get_itemMore(final Context context) {

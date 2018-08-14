@@ -12,8 +12,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import java.io.InputStream;
-
 import horizont.com.pmart.horizon.R;
 
 public class PopInfo extends AppCompatActivity {

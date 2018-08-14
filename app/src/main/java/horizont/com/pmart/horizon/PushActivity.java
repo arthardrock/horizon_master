@@ -50,7 +50,7 @@ public class PushActivity extends AppCompatActivity{
         new AsyncTask<Void, Void, String>() {
             @Override
             protected String doInBackground(Void... voids) {
-                return getDataPosPdtLocal( "api/notification/1", fnPreparingNotification());
+                return getDataPosPdtLocal("api/notification/1",fnPreparingNotification());
             }
 
             @Override
