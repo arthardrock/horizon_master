@@ -19,7 +19,7 @@ import horizont.com.pmart.horizon.R;
 public class PopInfo extends AppCompatActivity {
     public String promotion;
     private ImageView img_promotion;
-    Bitmap bitmap;
+    //Bitmap bitmap;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +45,7 @@ public class PopInfo extends AppCompatActivity {
 
         getWindow().setLayout((int)(width*.8),(int)(hight*.6));
     }
-    @SuppressLint("StaticFieldLeak")
+   /* @SuppressLint("StaticFieldLeak")
     public class get_promotion extends AsyncTask<String, Void, Bitmap>{
         ImageView imageView;
 
@@ -69,5 +69,5 @@ public class PopInfo extends AppCompatActivity {
             super.onPostExecute(bitmap);
             img_promotion.setImageBitmap(bitmap);
         }
-    }
+    }*/
 }
