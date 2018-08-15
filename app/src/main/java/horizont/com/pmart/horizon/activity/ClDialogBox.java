@@ -1,10 +1,12 @@
 package horizont.com.pmart.horizon.activity;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.support.v4.app.DialogFragment;
 
-public class ClDialogBox {
+public class ClDialogBox extends DialogFragment {
     public static ProgressDialog getHttpLoading(Context context){
         ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.setTitle("");

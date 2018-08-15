@@ -33,4 +33,16 @@
     <!--TextTitle-->
     <string name="title_register">เข้าสู่ระบบ/สมัครสมาชิก</string>
 
+    <string-array name="club">
+        <item>=เลือกสาขา=</item>
+        <item>สาขาเชียงใหม่</item>
+        <item>สาขาข่อนแก่น</item>
+        <item>สาขาอุดรธานี</item>
+        <item>สาขาอุบลราชธานี</item>
+        <item>สาขาสกลนคร</item>
+        <item>สาขาสุรินทร์</item>
+        <item>สาขาหนองคาย</item>
+        <item>สาขาเชียงราย 1</item>
+        <item>สาขาบุรีรัมย์</item>
+    </string-array>
 </resources>

@@ -32,10 +32,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
-            <android.support.v7.widget.CardView
-                android:layout_margin="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -44,7 +40,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:paddingRight="20dp"
+                        android:paddingRight="0dp"
                         android:layout_gravity="right">
                         <TextView
                             style="@style/Text_30dp"
@@ -60,6 +56,11 @@
                             android:text="฿"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
+                        <ImageView
+                            android:id="@+id/btn_pricelist"
+                            android:src="@drawable/ic_action_set_price"
+                            android:layout_width="20dp"
+                            android:layout_height="30dp" />
                     </LinearLayout>
                     <TextView
                         style="@style/Text_20dp"
@@ -78,9 +79,7 @@
                         android:layout_gravity="center"
                         android:text="รายละเอียด" />
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
         </LinearLayout>
-
     </FrameLayout>
 
     <LinearLayout

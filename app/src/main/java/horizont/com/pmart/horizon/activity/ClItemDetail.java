@@ -2,6 +2,7 @@ package horizont.com.pmart.horizon.activity;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -22,14 +23,14 @@ import static android.app.PendingIntent.getActivity;
 
 public class ClItemDetail extends AppCompatActivity {
  private TextView txt_item,myTextView,txt_price,displayInteger;
- private ImageView img_item ,img_back;
+ private ImageView img_item ,img_back,btn_pricelist;
  private Toolbar myToolbar;
  private LinearLayout btn_add,decrease;
  private RecyclerView carditem;
  int minteger = 0;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ly_detailitem);
         myTextView = (TextView)findViewById(R.id.txt_title);
@@ -37,6 +38,15 @@ public class ClItemDetail extends AppCompatActivity {
         txt_item = findViewById(R.id.txt_item);
         img_item = findViewById(R.id.img_item);
         txt_price = findViewById(R.id.txt_price);
+        btn_pricelist = findViewById(R.id.btn_pricelist);
+        btn_pricelist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ClItemDetail.this,PopPriceList.class);
+                startActivity(intent);
+
+            }
+        });
 
         decrease = (LinearLayout)findViewById(R.id.btn_decrease);
 

@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
@@ -57,10 +58,11 @@ public class ClHome extends Fragment {
     public String item;
     public String image;
     public String price;
+    public String promo_price;
 
     ViewPager viewAdPager;
     LinearLayout linearLayoutHead;
-    int page = 1;
+    int page = 5;
 
     public static ClHome newInstance() {
         ClHome fragment = new ClHome();
@@ -68,31 +70,21 @@ public class ClHome extends Fragment {
     }
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frag_home, container, false);
-
-        recyclerView = (RecyclerView) view.findViewById(R.id.rcy_item);
-        dataList = new ArrayList<>();
-
-        linearLayoutHead = view.findViewById(R.id.liner_head);
-
-        viewAdPager = (ViewPager)view.findViewById(R.id.viewAdPager);
-        //slideDots = (LinearLayout)findViewById(R.id.sliderDot);
-        AdViewPagerAdapter adViewPagerAdapter = new AdViewPagerAdapter(getActivity());
-        viewAdPager.setAdapter(adViewPagerAdapter);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new MyTimeTask(),2000,4000);
-
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
         adapter = new ClCustomAdapter(recyclerView, getContext(), dataList, getActivity());
+        recyclerView.setAdapter(adapter);
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
@@ -106,17 +98,29 @@ public class ClHome extends Fragment {
                 }
             }
         });
-        if (!ClDetectConnection.checkInternetConnection(getActivity())) {
-            Toast.makeText(getActivity(), "กรุณาเชื่อมต่ออินเทอร์เน็ต", Toast.LENGTH_SHORT).show();
-        }else
-            get_itemMore(getContext());
-            recyclerView.setAdapter(adapter);
+        if (savedInstanceState == null) {
+                get_itemMore(getContext());
+        }
+        else {
+        }
+    }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.frag_home, container, false);
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.rcy_item);
+        dataList = new ArrayList<>();
+        linearLayoutHead = view.findViewById(R.id.liner_head);
+        viewAdPager = (ViewPager)view.findViewById(R.id.viewAdPager);
+        //slideDots = (LinearLayout)findViewById(R.id.sliderDot);
+        AdViewPagerAdapter adViewPagerAdapter = new AdViewPagerAdapter(getActivity());
+        viewAdPager.setAdapter(adViewPagerAdapter);
 
         LinearLayout cateid = view.findViewById(R.id.cateid);
         for (int i = 0; i < 6; i++){
             View v = inflater.inflate(R.layout.item_cate,cateid,false);
-
             TextView textView = v.findViewById(R.id.text_cate);
             textView.setText("Category : "+i);
             ImageView imageView = v.findViewById(R.id.img_cate);
@@ -128,18 +132,18 @@ public class ClHome extends Fragment {
     @SuppressLint("StaticFieldLeak")
     public void get_itemMore(final Context context) {
         new AsyncTask<Void, Void, String>() {
-
             ProgressDialog progressDialog = getHttpLoading(context);
             AlertDialog.Builder errorDialog = gerErrorDialog(context);
-
             @Override
             protected String doInBackground(Void... voids) {
                      //config Class HttpReq
+
                 return getDataPosPdtLocal( "api/menu/"+page, fnPreparingSynDataPdt(""));//"api/menu/"+page ,api/apitestitem.jsp
             }
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
+
                 progressDialog.show();
             }
             @Override
@@ -161,12 +165,13 @@ public class ClHome extends Fragment {
                     JsonNode data = obj.path("menu");
                     System.out.println("data size is"+data.size());
                     if(data.size()>0){
-                        for (JsonNode nodeMember : data) {
-                            ClDataItem dataAr = new ClDataItem(nodeMember.path("item_name").asText(), nodeMember.path("item_image").asText(),
-                                    nodeMember.path("price").asText());
-                            item = nodeMember.path("item_name").asText();
-                            image = nodeMember.path("item_image").asText();
-                            price = nodeMember.path("price").asText();
+                        for (JsonNode nodeItem : data) {
+                            ClDataItem dataAr = new ClDataItem(nodeItem.path("item_name").asText(), nodeItem.path("item_image").asText(),
+                                    nodeItem.path("price").asText(),nodeItem.path("promo_price").asText());
+                            item = nodeItem.path("item_name").asText();
+                            image = nodeItem.path("item_image").asText();
+                            price = nodeItem.path("price").asText();
+                            promo_price = nodeItem.path("promo_price").asText();
 
                             dataList.add(dataAr);
                             System.out.println("ITEM :" + dataAr);
@@ -175,8 +180,7 @@ public class ClHome extends Fragment {
                             }
                          }
                         else{
-                            Toast.makeText(getActivity(),"สิ้นสุดการค้นหา",LENGTH_LONG).show();
-                            System.out.println("else");
+                            Toast.makeText(getActivity(),"สิ้นสุดการค้นหา",Toast.LENGTH_SHORT).show();
                     }
                 }
             }

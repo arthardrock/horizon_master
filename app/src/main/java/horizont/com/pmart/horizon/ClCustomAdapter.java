@@ -3,6 +3,7 @@ package horizont.com.pmart.horizon;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -62,8 +63,8 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     onLoadMoreListener.onLoadMore();
                 }
                 isLoading = true;
+                }
             }
-        }
         });
     }
     public void setOnLoadMoreListener(OnLoadMoreListener mOnLoadMoreListener) {
@@ -73,7 +74,6 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public int getItemViewType(int position) {
         return my_data.get(position) == null ? VIEW_TYPE_LOADING : VIEW_TYPE_ITEM;
     }
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -96,6 +96,7 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             UserViewHolder viewHolder = (UserViewHolder)holder;
             viewHolder.item.setText(dataItem.getItem_name());
             viewHolder.price.setText(dataItem.getPrice());
+            viewHolder.promo_price.setText(dataItem.getPromo_price());
             Glide.with(context).load(dataItem.getItem_image()).into(viewHolder.image);
 
             viewHolder.mCardView.setOnClickListener(new View.OnClickListener() {
@@ -172,12 +173,16 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         public ImageView image;
         public TextView price;
         public CardView mCardView;
+        public TextView promo_price;
+
         public UserViewHolder(View itemView) {
             super(itemView);
             mCardView = (CardView) itemView.findViewById(R.id.card_view);
             item = (TextView) itemView.findViewById(R.id.txt_item);
             image = (ImageView) itemView.findViewById(R.id.img_item);
             price = (TextView) itemView.findViewById(R.id.txt_price);
+            promo_price = (TextView)itemView.findViewById(R.id.txt_pro_price);
+            price.setPaintFlags(price.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
         }
     }
 }

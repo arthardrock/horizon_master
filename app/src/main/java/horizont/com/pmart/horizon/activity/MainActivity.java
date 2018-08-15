@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 
         // Set Text version name
         versionName = (TextView)findViewById(R.id.txt_version);
+        getPackageName();
         versionName.setText("Version : "+ BuildConfig.VERSION_NAME);
 
         findViewById(R.id.txt_nav_profile).setOnClickListener(this);
@@ -209,7 +210,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
             PendingIntent pendingIntent =
                     stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-            Notification notification = new NotificationCompat
+            Notification notification = new Notification
                     .Builder(this)
                             .setWhen(System.currentTimeMillis())
                             .setSmallIcon(R.drawable.icon1)

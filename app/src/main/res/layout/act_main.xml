@@ -28,7 +28,6 @@
         <android.support.design.widget.BottomNavigationView
             style="@style/Text_10dp"
             android:id="@+id/navigation"
-            android:background="@color/colorRed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

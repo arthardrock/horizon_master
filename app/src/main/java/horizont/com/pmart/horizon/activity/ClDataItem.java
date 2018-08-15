@@ -5,11 +5,17 @@ public class ClDataItem {
     private String item_name;
     private String item_image;
     private String price;
+    private String promo_price;
 
-    public ClDataItem(String item_name, String item_image, String price) {
+    public ClDataItem(String item_name, String item_image, String price,String promo_price) {
         this.item_name = item_name;
         this.item_image = item_image;
         this.price = price;
+        this.promo_price = promo_price;
+    }
+
+    public String getPromo_price() {
+        return promo_price;
     }
 
     public String getItem_name() {

@@ -16,7 +16,8 @@
         <activity
             android:name=".activity.MainActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".activity.ClItemDetail"
             android:configChanges="orientation"
@@ -52,6 +53,9 @@
                 android:value=".activity.MainActivity"/>
         </activity>
         <activity android:name=".activity.ClCateActivity">
+
+        </activity>
+        <activity android:name=".activity.PopPriceList">
 
         </activity>
 
