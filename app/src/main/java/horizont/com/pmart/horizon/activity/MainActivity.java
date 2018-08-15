@@ -37,9 +37,9 @@ import horizont.com.pmart.horizon.fragment.ClProfile;
 import horizont.com.pmart.horizon.fragment.ClPromotion;
 import horizont.com.pmart.horizon.R;
 
-public class MainActivity extends AppCompatActivity implements  View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Toolbar myToolbar;
-    private TextView  versionName;
+    private TextView versionName;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private Button myButton;
@@ -56,9 +56,9 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         pushActivity.get_notification();
 
         // Set Text version name
-        versionName = (TextView)findViewById(R.id.txt_version);
+        versionName = (TextView) findViewById(R.id.txt_version);
         getPackageName();
-        versionName.setText("Version : "+ BuildConfig.VERSION_NAME);
+        versionName.setText("Version : " + BuildConfig.VERSION_NAME);
 
         findViewById(R.id.txt_nav_profile).setOnClickListener(this);
         findViewById(R.id.txt_nav_cart).setOnClickListener(this);
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         PushActivity pushActivity = new PushActivity();
         pushActivity.get_notification();
 
-        myButton = (Button)findViewById(R.id.btn_noti);
+        myButton = (Button) findViewById(R.id.btn_noti);
         myButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
                         return true;
                     }
                 });
-        startActivity(new Intent(MainActivity.this,PopInfo.class));
+        startActivity(new Intent(MainActivity.this, PopInfo.class));
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_layout, ClHome.newInstance());
         transaction.commit();
@@ -115,16 +115,17 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        if (id == R.id.txt_nav_profile){
+        if (id == R.id.txt_nav_profile) {
             openRegis();
         }
-        if(id == R.id.txt_nav_cart){
+        if (id == R.id.txt_nav_cart) {
             openCart();
         }
-        if(id == R.id.txt_nav_store){
+        if (id == R.id.txt_nav_store) {
 
         }
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
@@ -134,42 +135,47 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
             super.onBackPressed();
         }
     }
-    private void setToolbar(){
+
+    private void setToolbar() {
         myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
+
     /*Set HamburgerButton
         drawerLayout
     */
     @SuppressLint("ResourceAsColor")
-    private void setHamburgerButton(){
+    private void setHamburgerButton() {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this
-                ,drawerLayout
-                ,R.string.navigation_drawer_open
-                ,R.string.navigation_drawer_close);
+                , drawerLayout
+                , R.string.navigation_drawer_open
+                , R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
     @Override
     protected void onPostCreate(@Nullable Bundle saveInstanceState) {
         super.onPostCreate(saveInstanceState);
         actionBarDrawerToggle.syncState();
     }
+
     // Search Data
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_search, menu);
         MenuItem item = menu.findItem(R.id.menu_search);
-        SearchView searchView = (SearchView)item.getActionView();
+        SearchView searchView = (SearchView) item.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 return false;
             }
+
             @Override
             public boolean onQueryTextChange(String s) {
                 //adapter.getFilter().filter(s);
@@ -178,52 +184,56 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         });
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
-    public void onConfigurationChanged(Configuration newConfig){
+    public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         actionBarDrawerToggle.onConfigurationChanged(newConfig);
     }
+
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        if(actionBarDrawerToggle.onOptionsItemSelected(item)){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
-    public void openRegis(){
-        Intent intent = new Intent(this,RegisterActivity.class);
+
+    public void openRegis() {
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
-    public void openCart(){
-        Intent intent = new Intent(this,ClCartShopping.class);
+
+    public void openCart() {
+        Intent intent = new Intent(this, ClCartShopping.class);
         startActivity(intent);
     }
 
     // set Onclick On xml file
-        public void get_notification() {
-            Intent intent = new Intent(this, PushActivity.class);
-            intent.putExtra("title", title);
-            intent.putExtra("message", message);
-            TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-            stackBuilder.addParentStack(PushActivity.class);
-            stackBuilder.addNextIntent(intent);
-            PendingIntent pendingIntent =
-                    stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+    public void get_notification() {
+        Intent intent = new Intent(this, PushActivity.class);
+        intent.putExtra("title", title);
+        intent.putExtra("message", message);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addParentStack(PushActivity.class);
+        stackBuilder.addNextIntent(intent);
+        PendingIntent pendingIntent =
+                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-            Notification notification = new Notification
-                    .Builder(this)
-                            .setWhen(System.currentTimeMillis())
-                            .setSmallIcon(R.drawable.icon1)
-                            .setContentTitle(pushActivity.title)
-                            .setContentText(pushActivity.message)
-                            .setVibrate(new long[] { 1000, 300})
-                            .setLights(Color.GREEN, 3000, 3000)
-                            .setAutoCancel(true)
-                            .setContentIntent(pendingIntent)
-                            .setNumber(1)
-                            .build();
-            NotificationManager notificationManager =
-                    (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            notificationManager.notify(1000, notification);
-        }
+        Notification notification = new Notification
+                .Builder(this)
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.drawable.icon1)
+                .setContentTitle(pushActivity.title)
+                .setContentText(pushActivity.message)
+                .setVibrate(new long[]{1000, 300})
+                .setLights(Color.GREEN, 3000, 3000)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
+                .setNumber(1)
+                .build();
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.notify(1000, notification);
     }
+}

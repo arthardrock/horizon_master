@@ -7,7 +7,7 @@ import android.content.Context;
 import android.support.v4.app.DialogFragment;
 
 public class ClDialogBox extends DialogFragment {
-    public static ProgressDialog getHttpLoading(Context context){
+    public static ProgressDialog getHttpLoading(Context context) {
         ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.setTitle("");
         progressDialog.setMessage("กำลังโหลด...");
@@ -15,7 +15,8 @@ public class ClDialogBox extends DialogFragment {
         progressDialog.setCancelable(false);
         return progressDialog;
     }
-    public static AlertDialog.Builder gerErrorDialog(Context context){
+
+    public static AlertDialog.Builder gerErrorDialog(Context context) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
         alertDialog.setMessage("เกิดข้อผิดพลาด");
         alertDialog.setCancelable(true);

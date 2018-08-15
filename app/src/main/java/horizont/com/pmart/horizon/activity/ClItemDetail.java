@@ -22,19 +22,20 @@ import horizont.com.pmart.horizon.R;
 import static android.app.PendingIntent.getActivity;
 
 public class ClItemDetail extends AppCompatActivity {
- private TextView txt_item,myTextView,txt_price,displayInteger;
- private ImageView img_item ,img_back,btn_pricelist;
- private Toolbar myToolbar;
- private LinearLayout btn_add,decrease;
- private RecyclerView carditem;
- int minteger = 0;
+    private TextView txt_item, myTextView, txt_price, displayInteger,count_notif;
+    private ImageView img_item, img_back, btn_pricelist;
+    private Toolbar myToolbar;
+    private LinearLayout btn_add, decrease;
+    private RecyclerView carditem;
+    int minteger = 0;
 
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ly_detailitem);
-        myTextView = (TextView)findViewById(R.id.txt_title);
+        myTextView = (TextView) findViewById(R.id.txt_title);
         setToolbar();
+        count_notif = findViewById(R.id.count_notif);
         txt_item = findViewById(R.id.txt_item);
         img_item = findViewById(R.id.img_item);
         txt_price = findViewById(R.id.txt_price);
@@ -42,19 +43,19 @@ public class ClItemDetail extends AppCompatActivity {
         btn_pricelist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ClItemDetail.this,PopPriceList.class);
+                Intent intent = new Intent(ClItemDetail.this, PopPriceList.class);
                 startActivity(intent);
 
             }
         });
 
-        decrease = (LinearLayout)findViewById(R.id.btn_decrease);
+        decrease = (LinearLayout) findViewById(R.id.btn_decrease);
 
-        displayInteger  = (TextView) findViewById(R.id.qty_number);
+        displayInteger = (TextView) findViewById(R.id.qty_number);
 
 
         Bundle mBundle = getIntent().getExtras();
-        if (mBundle != null){
+        if (mBundle != null) {
             txt_item.setText(mBundle.getString("item"));
             myTextView.setText(mBundle.getString("item"));
             txt_price.setText(mBundle.getString("price"));
@@ -67,41 +68,47 @@ public class ClItemDetail extends AppCompatActivity {
         btn_add = findViewById(R.id.btn_add);
         decrease.setVisibility(View.INVISIBLE);
     }
+
     public void increaseInteger(View view) {
         minteger = minteger + 1;
         display(minteger);
 
-    }public void decreaseInteger(View view) {
+    }
+
+    public void decreaseInteger(View view) {
         minteger = minteger - 1;
         display(minteger);
-        if (minteger == 0){
+        if (minteger == 0) {
             decrease.setVisibility(View.INVISIBLE);
         }
     }
 
     private void display(final int number) {
         displayInteger.setText("" + number);
-        if (displayInteger.toString().length() == 0){
+        if (displayInteger.toString().length() == 0) {
             decrease.setVisibility(View.INVISIBLE);
-        }
-        else {
+        } else {
+            count_notif.setText(""+number);
             decrease.setVisibility(View.VISIBLE);
         }
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(number==0){
+                if (number == 0) {
                     Toast.makeText(ClItemDetail.this, "เพิ่มจำนวนสินค้า",
                             Toast.LENGTH_LONG).show();
-                }
-                else
-                Toast.makeText(ClItemDetail.this, "จำนวน : "+number,
-                        Toast.LENGTH_LONG).show();
+                } else
+                    Toast.makeText(ClItemDetail.this, "จำนวน : " + number,
+                            Toast.LENGTH_LONG).show();
+
             }
+
         });
     }
-    private void setToolbar(){
+
+    private void setToolbar() {
         myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
+        count_notif = findViewById(R.id.count_notif);
         img_back = findViewById(R.id.img_back);
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override

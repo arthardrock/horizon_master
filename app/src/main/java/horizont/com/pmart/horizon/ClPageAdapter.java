@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClPageAdapter extends FragmentPagerAdapter {
-    private final List<Fragment>fragmentList = new ArrayList<>();
-    private final List<String>FragmentTitles = new ArrayList<>();
+    private final List<Fragment> fragmentList = new ArrayList<>();
+    private final List<String> FragmentTitles = new ArrayList<>();
 
-    public ClPageAdapter(FragmentManager fm){
+    public ClPageAdapter(FragmentManager fm) {
         super(fm);
     }
 
@@ -32,7 +32,8 @@ public class ClPageAdapter extends FragmentPagerAdapter {
 
         return FragmentTitles.get(position);
     }
-    public void AddFragment(Fragment fragment,String Title){
+
+    public void AddFragment(Fragment fragment, String Title) {
         fragmentList.add(fragment);
         FragmentTitles.add(Title);
     }

@@ -12,10 +12,10 @@ import android.widget.ImageView;
 public class AdViewPagerAdapter extends PagerAdapter {
     private Context context;
     private LayoutInflater layoutInflater;
-    private Integer [] image = {R.drawable.headerapp,R.drawable.headerapp,R.drawable.headerapp};
+    private Integer[] image = {R.drawable.headerapp, R.drawable.headerapp, R.drawable.headerapp};
 
-    public AdViewPagerAdapter (Context context){
-        this.context= context;
+    public AdViewPagerAdapter(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -24,25 +24,26 @@ public class AdViewPagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public boolean isViewFromObject(View view,  Object object) {
+    public boolean isViewFromObject(View view, Object object) {
         return view == object;
     }
+
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.ly_adperger, null);
-        ImageView imageView = (ImageView)view.findViewById(R.id.img_ad);
+        ImageView imageView = (ImageView) view.findViewById(R.id.img_ad);
         imageView.setImageResource(image[position]);
 
-        ViewPager vp =(ViewPager) container;
-        vp.addView(view,0);
+        ViewPager vp = (ViewPager) container;
+        vp.addView(view, 0);
         return view;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-            ViewPager vp = (ViewPager)container;
-            View view = (View) object;
-            vp.removeView(view);
+        ViewPager vp = (ViewPager) container;
+        View view = (View) object;
+        vp.removeView(view);
     }
 }

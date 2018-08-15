@@ -32,12 +32,12 @@ public class PopPriceList extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
         String[] price = getResources().getStringArray(R.array.club);
-        ArrayAdapter<String> adapterEnglish  = new ArrayAdapter<String>(this,R.layout.simple_dropdown,price);
+        ArrayAdapter<String> adapterEnglish = new ArrayAdapter<String>(this, R.layout.simple_dropdown, price);
         spinner.setAdapter(adapterEnglish);
 
         int width = dm.widthPixels;
         int hight = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*.9),(int)(hight*.7));
+        getWindow().setLayout((int) (width * .9), (int) (hight * .7));
     }
 }
