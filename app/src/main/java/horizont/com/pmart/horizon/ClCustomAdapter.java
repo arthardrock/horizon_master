@@ -109,7 +109,7 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     Intent intent = new Intent(context, ClItemDetail.class);
                     intent.putExtra("item", dataItem.getItem_name());
                     intent.putExtra("image", dataItem.getItem_image());
-                    intent.putExtra("price", dataItem.getPrice());
+                    intent.putExtra("promo_price", dataItem.getPromo_price());
                     context.startActivity(intent);
                     Log.d("", "TEXT" + dataItem.getItem_name());
                     Log.d("", "TEXT" + dataItem.getItem_image());

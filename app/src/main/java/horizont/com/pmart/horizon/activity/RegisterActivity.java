@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,8 +18,7 @@ import horizont.com.pmart.horizon.fragment.ClLogin;
 import horizont.com.pmart.horizon.fragment.ClRegister;
 
 public class RegisterActivity extends AppCompatActivity {
-    private TextView myTextView;
-    private ImageView img_back, img_busket;
+    private ImageView img_back;
     private Toolbar myToolbar;
     private AppBarLayout appBarLayout;
     private TabLayout tabLayout;
@@ -28,8 +28,6 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_register);
-        myTextView = (TextView) findViewById(R.id.txt_title);
-        myTextView.setText(R.string.title_register);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         appBarLayout = (AppBarLayout) findViewById(R.id.appbar_layout);
@@ -47,7 +45,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void setToolbar() {
         myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
-        img_busket.setVisibility(View.INVISIBLE);
+        ImageView imageView = (ImageView)findViewById(R.id.img_title);
+        imageView.setImageResource(R.drawable.logohor);
+        FrameLayout img_basket = (FrameLayout) findViewById(R.id.img_basket);
+        img_basket.setVisibility(View.INVISIBLE);
         img_back = (ImageView) findViewById(R.id.img_back);
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override

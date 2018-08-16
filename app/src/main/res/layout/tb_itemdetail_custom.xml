@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/custom_toolbar"
         android:layout_width="match_parent"
@@ -21,15 +22,15 @@
             android:layout_width="50dp"
             android:layout_height="?attr/actionBarSize" />
 
-        <TextView
-            style="@style/Text_20dp"
-            android:id="@+id/txt_title"
-            android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/img_title"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:textColor="@color/colorWhite"
-            tools:text="untitle" />
+            android:layout_gravity="center"/>
         <FrameLayout
+            android:id="@+id/img_basket"
             style="?attr/actionButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="?attr/actionBarSize"

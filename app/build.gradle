@@ -49,4 +49,5 @@ dependencies {
     compile 'com.github.ybq:Android-SpinKit:1.1.0'
     compile 'com.akexorcist:localizationactivity:1.2.2'
     compile 'org.jsoup:jsoup:1.8.3'
+    compile "me.leolin:ShortcutBadger:1.1.22@aar"
 }

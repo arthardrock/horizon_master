@@ -26,6 +26,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import horizont.com.pmart.horizon.BuildConfig;
@@ -36,6 +38,7 @@ import horizont.com.pmart.horizon.fragment.ClLocation;
 import horizont.com.pmart.horizon.fragment.ClProfile;
 import horizont.com.pmart.horizon.fragment.ClPromotion;
 import horizont.com.pmart.horizon.R;
+import me.leolin.shortcutbadger.ShortcutBadger;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Toolbar myToolbar;
@@ -53,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.act_main);
         setToolbar();
         setHamburgerButton();
-        pushActivity.get_notification();
 
         // Set Text version name
         versionName = (TextView) findViewById(R.id.txt_version);
@@ -64,8 +66,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.txt_nav_cart).setOnClickListener(this);
         findViewById(R.id.txt_nav_store).setOnClickListener(this);
 
-
-        PushActivity pushActivity = new PushActivity();
         pushActivity.get_notification();
 
         myButton = (Button) findViewById(R.id.btn_noti);
@@ -73,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View view) {
                 get_notification();
+                int badgeCount = 1;
+                ShortcutBadger.applyCount(MainActivity.this, badgeCount);
             }
         });
 
@@ -138,6 +140,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setToolbar() {
         myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
+        ImageView imageView = (ImageView)findViewById(R.id.img_logo);
+        imageView.setImageResource(R.drawable.logohor);
+        FrameLayout busket = (FrameLayout)findViewById(R.id.img_basket);
+    /*    busket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,ClCateActivity.class);
+                startActivity(intent);
+            }
+        });*/
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }

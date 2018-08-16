@@ -1,5 +1,6 @@
 package horizont.com.pmart.horizon.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import com.github.ybq.android.spinkit.SpinKitView;
 
 import horizont.com.pmart.horizon.R;
+import me.leolin.shortcutbadger.ShortcutBadger;
 
 public class SplashScreen extends AppCompatActivity {
     private Handler handler;
@@ -30,6 +32,7 @@ public class SplashScreen extends AppCompatActivity {
                 openMainAct();
             }
         };
+        Context context = SplashScreen.this;
     }
     public void openMainAct() {
         welcome.setText(R.string.txt_wel_EN);
