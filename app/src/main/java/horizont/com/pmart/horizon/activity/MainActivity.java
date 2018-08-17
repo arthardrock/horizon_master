@@ -124,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (id == R.id.txt_nav_store) {
         }
+        view.setPressed(true);
     }
 
     @Override
@@ -143,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         busket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.setPressed(true);
                 Intent intent = new Intent(MainActivity.this,ClCartShopping.class);
                 startActivity(intent);
             }

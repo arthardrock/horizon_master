@@ -62,9 +62,7 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                             onLoadMoreListener.onLoadMore();
                         }
                         isLoading = true;
-                        System.out.println("DY < 0");
                     }
-                System.out.println("DY > 0");
                 }
         });
     }

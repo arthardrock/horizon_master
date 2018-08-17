@@ -16,6 +16,8 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <ImageView
+            android:onClick="onClick"
+            android:focusable="true"
             android:layout_above="@+id/frame_layout"
             android:id="@+id/img_back"
             android:background="@drawable/ic_action_back"

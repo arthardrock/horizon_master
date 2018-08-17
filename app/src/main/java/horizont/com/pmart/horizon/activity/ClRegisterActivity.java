@@ -54,6 +54,7 @@ public class ClRegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+                view.setPressed(true);
             }
         });
         setSupportActionBar(myToolbar);

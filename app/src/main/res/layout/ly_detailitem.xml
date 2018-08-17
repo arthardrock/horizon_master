@@ -57,6 +57,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <ImageView
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
                             android:id="@+id/btn_pricelist"
                             android:src="@drawable/ic_action_set_price"
                             android:layout_width="20dp"
@@ -91,6 +93,8 @@
         android:layout_height="50dp">
 
         <LinearLayout
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:id="@+id/btn_decrease"
             android:onClick="decreaseInteger"
             android:background="@drawable/shape_item_inside"
@@ -106,7 +110,6 @@
         <LinearLayout
         android:layout_width="50dp"
         android:layout_height="match_parent">
-
         <TextView
             android:id="@+id/qty_number"
             style="@style/Text_40dp"
@@ -118,6 +121,8 @@
     </LinearLayout>
 
         <LinearLayout
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:id="@+id/btn_increase"
             android:onClick="increaseInteger"
             android:background="@drawable/shape_item_inside"
@@ -140,7 +145,10 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true" >
+
         <TextView
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:textColor="@color/colorWhite"
             style="@style/Text_20dp"
             android:textAlignment="center"

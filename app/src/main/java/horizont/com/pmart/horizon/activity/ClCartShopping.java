@@ -30,6 +30,7 @@ public class ClCartShopping extends AppCompatActivity {
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.setPressed(true);
                 finish();
             }
         });

@@ -46,6 +46,7 @@ public class ClItemDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ClItemDetail.this, PopPriceList.class);
+                view.setPressed(true);
                 startActivity(intent);
             }
         });
@@ -79,6 +80,7 @@ public class ClItemDetail extends AppCompatActivity {
     public void increaseInteger(View view) {
         minteger = minteger + 1;
         display(minteger);
+        view.setPressed(true);
     }
 
     public void decreaseInteger(View view) {
@@ -86,7 +88,7 @@ public class ClItemDetail extends AppCompatActivity {
         display(minteger);
         if (minteger == 0) {
             decrease.setVisibility(View.INVISIBLE);
-
+            view.setPressed(true);
         }
     }
     private void display(final int number) {
@@ -102,16 +104,16 @@ public class ClItemDetail extends AppCompatActivity {
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                view.setPressed(true);
                 if (number == 0) {
                     Toast.makeText(ClItemDetail.this, "เพิ่มจำนวนสินค้า",
                             Toast.LENGTH_LONG).show();
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.commit();
+
                 } else
                     Toast.makeText(ClItemDetail.this, "จำนวน : " + number,
                             Toast.LENGTH_LONG).show();
-
-                SharedPreferences.Editor editor = sp.edit();
-                editor.commit();
             }
         });
     }
@@ -132,6 +134,7 @@ public class ClItemDetail extends AppCompatActivity {
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.setPressed(true);
                 finish();
             }
         });
