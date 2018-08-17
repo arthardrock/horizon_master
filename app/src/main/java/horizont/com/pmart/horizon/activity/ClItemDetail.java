@@ -47,14 +47,13 @@ public class ClItemDetail extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ClItemDetail.this, PopPriceList.class);
                 startActivity(intent);
-
             }
         });
         Context context = getApplicationContext();
         sp = getSharedPreferences("PREF_NAMBER", context.MODE_PRIVATE);
 
         editor = sp.edit();
-        editor.putInt("number", number);
+        editor.putInt("", number);
         editor.commit();
         // remove IconApp
         ShortcutBadger.removeCount(context);
@@ -118,12 +117,12 @@ public class ClItemDetail extends AppCompatActivity {
     }
 
     private void setToolbar() {
-        myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
+        myToolbar = (Toolbar) findViewById(R.id.custom_detail_toolbar);
         FrameLayout basket = (FrameLayout)findViewById(R.id.img_basket);
         basket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ClItemDetail.this,ClCateActivity.class);
+                Intent intent = new Intent(ClItemDetail.this,ClCartShopping.class);
                 startActivity(intent);
             }
         });

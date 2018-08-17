@@ -1,5 +1,9 @@
 package horizont.com.pmart.horizon.activity;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -8,12 +12,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
+
+import java.io.InputStream;
+
 import horizont.com.pmart.horizon.R;
 
 public class PopInfo extends AppCompatActivity {
     public String promotion;
     private ImageView img_promotion;
-    //Bitmap bitmap;
+    //
+    Bitmap bitmap;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,8 +31,10 @@ public class PopInfo extends AppCompatActivity {
         img_promotion = (ImageView) findViewById(R.id.img_promotion);
         img_promotion.setImageResource(R.drawable.mom);
 
-        String URLIMAGE = "http://172.17.9.238:3000/api/promotion/2";
-        //new get_promotion(img_promotion).execute(URLIMAGE);
+        //String URLIMAGE = "http://172.17.9.11:3000/api/promotion/2";
+       get_promotion Get_promotion = new get_promotion();
+       Get_promotion.get_promotion(img_promotion,PopInfo.this);
+
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         LinearLayout btn_close = (LinearLayout) findViewById(R.id.btn_close);
@@ -39,12 +50,15 @@ public class PopInfo extends AppCompatActivity {
 
         getWindow().setLayout((int)(width*.8),(int)(hight*.6));
     }
-   /* @SuppressLint("StaticFieldLeak")
-    public class get_promotion extends AsyncTask<String, Void, Bitmap>{
+    public class get_promotion extends AsyncTask<String, Void, Bitmap> {
         ImageView imageView;
 
-        public get_promotion(ImageView img_promotion){
+        public void get_promotion(ImageView img_promotion, Context context){
             this.imageView = img_promotion;
+            Glide.with(context)
+                    .load("http://172.17.9.11:3000/api/promotion/2")
+                    .into(img_promotion);
+            //img_promotion.setImageBitmap(bitmap);
         }
         @Override
         protected Bitmap doInBackground(String... url) {
@@ -61,7 +75,7 @@ public class PopInfo extends AppCompatActivity {
         @Override
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmap);
-            img_promotion.setImageBitmap(bitmap);
+
         }
-    }*/
+    }
 }

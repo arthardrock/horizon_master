@@ -26,6 +26,8 @@
             android:textColor="@color/colorWhite" />
 
         <FrameLayout
+            android:id="@+id/img_basket"
+            android:onClick="onClick"
             style="?attr/actionButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="?attr/actionBarSize"

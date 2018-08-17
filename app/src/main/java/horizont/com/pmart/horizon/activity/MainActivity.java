@@ -13,7 +13,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -54,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_main);
-        setToolbar();
+        setToolBar();
         setHamburgerButton();
 
         // Set Text version name
@@ -124,7 +123,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             openCart();
         }
         if (id == R.id.txt_nav_store) {
-
         }
     }
 
@@ -137,26 +135,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             super.onBackPressed();
         }
     }
-
-    private void setToolbar() {
+    public void setToolBar() {
         myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
         ImageView imageView = (ImageView)findViewById(R.id.img_logo);
         imageView.setImageResource(R.drawable.logohor);
         FrameLayout busket = (FrameLayout)findViewById(R.id.img_basket);
-    /*    busket.setOnClickListener(new View.OnClickListener() {
+        busket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,ClCateActivity.class);
+                Intent intent = new Intent(MainActivity.this,ClCartShopping.class);
                 startActivity(intent);
             }
-        });*/
+        });
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
-
     /*Set HamburgerButton
-        drawerLayout
-    */
+        drawerLayout*/
     @SuppressLint("ResourceAsColor")
     private void setHamburgerButton() {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
@@ -174,7 +169,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onPostCreate(saveInstanceState);
         actionBarDrawerToggle.syncState();
     }
-
     // Search Data
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -196,13 +190,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         return super.onCreateOptionsMenu(menu);
     }
-
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         actionBarDrawerToggle.onConfigurationChanged(newConfig);
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
@@ -212,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void openRegis() {
-        Intent intent = new Intent(this, RegisterActivity.class);
+        Intent intent = new Intent(this, ClRegisterActivity.class);
         startActivity(intent);
     }
 
@@ -221,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
-    // set Onclick On xml file
+    // Set Onclick On xml file
     public void get_notification() {
         Intent intent = new Intent(this, PushActivity.class);
         intent.putExtra("title", title);

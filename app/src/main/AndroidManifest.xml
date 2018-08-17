@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE"/>
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon1"
@@ -17,34 +16,35 @@
         <activity
             android:name=".activity.MainActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".activity.ClItemDetail"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".activity.SplashScreen"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activity.PopInfo"
             android:configChanges="orientation"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".activity.RegisterActivity">
-        </activity>
-        <activity android:name=".Information">
-        </activity>
-        <activity android:name=".activity.ClCartShopping">
-        </activity>
+        <activity android:name=".activity.ClRegisterActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.ClCartShopping"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".PushActivity"
@@ -53,13 +53,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.MainActivity"/>
         </activity>
-        <activity android:name=".activity.ClCateActivity">
 
-        </activity>
-        <activity android:name=".activity.PopPriceList">
+        <activity android:name=".activity.ClCateActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
 
-        </activity>
+        <activity android:name=".activity.PopPriceList"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
 
     </application>
-
 </manifest>

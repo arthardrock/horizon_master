@@ -1,7 +1,6 @@
 package horizont.com.pmart.horizon;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -31,7 +30,7 @@ public class AdViewPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.ly_adperger, null);
+        View view = layoutInflater.inflate(R.layout.ly_adpage, null);
         ImageView imageView = (ImageView) view.findViewById(R.id.img_ad);
         imageView.setImageResource(image[position]);
 

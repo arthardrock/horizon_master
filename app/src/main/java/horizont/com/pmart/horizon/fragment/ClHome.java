@@ -62,7 +62,7 @@ public class ClHome extends Fragment {
 
     ViewPager viewAdPager;
     LinearLayout linearLayoutHead;
-    int page = 5;
+    int page = 1;
 
     public static ClHome newInstance() {
         ClHome fragment = new ClHome();

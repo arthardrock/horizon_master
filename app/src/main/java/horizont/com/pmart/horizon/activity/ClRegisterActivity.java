@@ -17,7 +17,7 @@ import horizont.com.pmart.horizon.R;
 import horizont.com.pmart.horizon.fragment.ClLogin;
 import horizont.com.pmart.horizon.fragment.ClRegister;
 
-public class RegisterActivity extends AppCompatActivity {
+public class ClRegisterActivity extends AppCompatActivity {
     private ImageView img_back;
     private Toolbar myToolbar;
     private AppBarLayout appBarLayout;
@@ -44,10 +44,10 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void setToolbar() {
-        myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
-        ImageView imageView = (ImageView)findViewById(R.id.img_title);
-        imageView.setImageResource(R.drawable.logohor);
+        myToolbar = (Toolbar) findViewById(R.id.custom_detail_toolbar);
         FrameLayout img_basket = (FrameLayout) findViewById(R.id.img_basket);
+        TextView title = (TextView)findViewById(R.id.txt_tile);
+        title.setText(R.string.title_register);
         img_basket.setVisibility(View.INVISIBLE);
         img_back = (ImageView) findViewById(R.id.img_back);
         img_back.setOnClickListener(new View.OnClickListener() {

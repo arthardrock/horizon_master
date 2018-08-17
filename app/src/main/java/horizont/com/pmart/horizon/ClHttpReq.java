@@ -44,8 +44,6 @@ public class ClHttpReq {
         Log.d("URL is: ", LOCAL_URL_ENDPOINT + path);
         return LOCAL_URL_ENDPOINT + path;
     }
-
-
     public static String getDataPosPdt(String path, String pPara) {
         String url = getUrlWithPart(path); //getUrlWithPath(path);   //"http://172.16.0.31:88/";//http://61.7.141.119:88/apimember?para=1;MjAxOC0wNi0yNyAxNzoyODowNC4zODg4OTk=
         URL object = null;
@@ -71,10 +69,7 @@ public class ClHttpReq {
             input.close();
             String output;
             BufferedReader br = null;
-
             System.out.println(con.getResponseCode());
-
-
             st.delete(0, st.length());
             if (con.getResponseCode() == 200) {
                 br = new BufferedReader(new InputStreamReader((con.getInputStream()), "UTF-8"));
@@ -125,9 +120,7 @@ public class ClHttpReq {
             input.close();
             String output;
             BufferedReader br = null;
-
             System.out.println(con.getResponseCode());
-
             st.delete(0, st.length());
             if (con.getResponseCode() == 200) {
                 br = new BufferedReader(new InputStreamReader((con.getInputStream()), "UTF-8"));
@@ -178,7 +171,6 @@ public class ClHttpReq {
         jo.addProperty("EREC", "");
         jo.addProperty("TPAGE", "");
         jo.addProperty("RCOUNT", "");
-
         jo.addProperty("MKTC_KEY", "");
         jo.addProperty("MKTC_ID_CARD_NO", "");
         jo.addProperty("MCMA_CELL_PHONE1", phone);

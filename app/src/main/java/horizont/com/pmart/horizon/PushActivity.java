@@ -45,7 +45,6 @@ public class PushActivity extends AppCompatActivity {
         TextView textView = (TextView) findViewById(R.id.txt_message);
         textView.setText(message);
     }
-
     @SuppressLint("StaticFieldLeak")
     public void get_notification() {
         new AsyncTask<Void, Void, String>() {

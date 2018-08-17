@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -40,8 +41,6 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private int lastVisibleItem, totalItemCount;
     ValueFilter valueFilter;
     ViewPager viewAdPager;
-    LinearLayout linearLayoutHead;
-    private ImageView iconfav;
 
     private Context context;
     private List<ClDataItem> my_data;
@@ -56,15 +55,17 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                totalItemCount = linearLayoutManager.getItemCount();
-                lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition();
-                if (!isLoading && totalItemCount <= (lastVisibleItem + visibleThreshold)) {
-                    if (onLoadMoreListener != null) {
-                        onLoadMoreListener.onLoadMore();
+                    totalItemCount = linearLayoutManager.getItemCount();
+                    lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition();
+                    if (!isLoading && totalItemCount <= (lastVisibleItem + visibleThreshold)) {
+                        if (onLoadMoreListener != null) {
+                            onLoadMoreListener.onLoadMore();
+                        }
+                        isLoading = true;
+                        System.out.println("DY < 0");
                     }
-                    isLoading = true;
+                System.out.println("DY > 0");
                 }
-            }
         });
     }
 
@@ -82,8 +83,8 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         if (viewType == VIEW_TYPE_ITEM) {
             View itemView = LayoutInflater.from(activity).inflate(R.layout.ly_cardview, parent, false);
-
             return new UserViewHolder(itemView);
+
         } else if (viewType == VIEW_TYPE_LOADING) {
             View view = LayoutInflater.from(activity).inflate(R.layout.ly_loading, parent, false);
             return new LoadingViewHolder(view);
@@ -111,8 +112,6 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     intent.putExtra("image", dataItem.getItem_image());
                     intent.putExtra("promo_price", dataItem.getPromo_price());
                     context.startActivity(intent);
-                    Log.d("", "TEXT" + dataItem.getItem_name());
-                    Log.d("", "TEXT" + dataItem.getItem_image());
                 }
             });
 
