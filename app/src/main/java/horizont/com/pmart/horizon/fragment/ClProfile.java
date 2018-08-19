@@ -43,7 +43,7 @@ public class ClProfile extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_profile, container, false);
-        get_item(getContext());
+        get_item(getActivity());
 
         txt_name = (TextView)view.findViewById(R.id.txt_name);
         txt_titlename = (TextView)view.findViewById(R.id.txt_titlename);

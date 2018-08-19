@@ -84,6 +84,13 @@
         </LinearLayout>
     </FrameLayout>
 
+    <ImageView
+        android:id="@+id/img_QRCode"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ImageView>
+
     <LinearLayout
         android:layout_marginRight="6dp"
         android:layout_alignParentRight="true"

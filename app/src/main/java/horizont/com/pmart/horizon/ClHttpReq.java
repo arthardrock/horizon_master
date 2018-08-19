@@ -33,7 +33,7 @@ import java.util.Locale;
 
 public class ClHttpReq {
     private final static String URL_ENDPOINT = "http://hoz.horizont.co.th:88/";
-    private final static String LOCAL_URL_ENDPOINT = "http://172.17.9.11:3000/";// 172.17.9.11 ,192.168.43.17
+    private final static String LOCAL_URL_ENDPOINT = "http://192.168.43.17:3000/";// 172.17.9.11 ,192.168.43.17
 
     private static String getUrlWithPart(String path) {
         Log.d("URL is: ", URL_ENDPOINT + path);
@@ -131,14 +131,14 @@ public class ClHttpReq {
                 con.disconnect();
                 return st.toString();
             } else {
-                Log.d("Log", "Failed to download file..");
+                Log.d("HttpReq", "Failed to download file..");
                 con.disconnect();
                 return "error";
             }
 
         } catch (Exception e) {
             con.disconnect();
-            Log.e(getDateAndTime() + "", String.valueOf(e));
+            Log.e(getDateAndTime() + "HttpReq", String.valueOf(e));
             return "error";
 
         } finally {

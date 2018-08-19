@@ -50,4 +50,5 @@ dependencies {
     compile 'com.akexorcist:localizationactivity:1.2.2'
     compile 'org.jsoup:jsoup:1.8.3'
     compile "me.leolin:ShortcutBadger:1.1.22@aar"
+    compile 'com.google.zxing:core:3.2.1'
 }

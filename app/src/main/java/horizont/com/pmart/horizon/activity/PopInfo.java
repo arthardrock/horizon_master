@@ -31,9 +31,9 @@ public class PopInfo extends AppCompatActivity {
         img_promotion = (ImageView) findViewById(R.id.img_promotion);
         img_promotion.setImageResource(R.drawable.mom);
 
-        //String URLIMAGE = "http://172.17.9.11:3000/api/promotion/2";
-       get_promotion Get_promotion = new get_promotion();
-       Get_promotion.get_promotion(img_promotion,PopInfo.this);
+        String URLIMAGE = "http://172.17.9.11:3000/api/promotion/2";
+        get_promotion Get_promotion = new get_promotion();
+        Get_promotion.get_promotion(img_promotion,PopInfo.this);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -56,7 +56,7 @@ public class PopInfo extends AppCompatActivity {
         public void get_promotion(ImageView img_promotion, Context context){
             this.imageView = img_promotion;
             Glide.with(context)
-                    .load("http://172.17.9.11:3000/api/promotion/2")
+                    .load("http://gallery.devpmm.tech/main.php?g2_view=core.DownloadItem&g2_itemId=406&g2_serialNumber=1")
                     .into(img_promotion);
             //img_promotion.setImageBitmap(bitmap);
         }

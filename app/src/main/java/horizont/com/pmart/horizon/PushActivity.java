@@ -5,10 +5,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -60,6 +62,7 @@ public class PushActivity extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(String s) {
+                Log.d("sss",s);
                 super.onPostExecute(s);
 
                 ObjectMapper rootMapper = new ObjectMapper();

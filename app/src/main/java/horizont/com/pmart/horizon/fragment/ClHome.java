@@ -81,9 +81,9 @@ public class ClHome extends Fragment {
         super.onActivityCreated(savedInstanceState);
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new MyTimeTask(),2000,4000);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
-        adapter = new ClCustomAdapter(recyclerView, getContext(), dataList, getActivity());
+        adapter = new ClCustomAdapter(recyclerView, getActivity(), dataList, getActivity());
         recyclerView.setAdapter(adapter);
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
@@ -99,7 +99,7 @@ public class ClHome extends Fragment {
             }
         });
         if (savedInstanceState == null) {
-                get_itemMore(getContext());
+                get_itemMore(getActivity());
         }
         else {
         }
@@ -134,6 +134,7 @@ public class ClHome extends Fragment {
         new AsyncTask<Void, Void, String>() {
             ProgressDialog progressDialog = getHttpLoading(context);
             AlertDialog.Builder errorDialog = gerErrorDialog(context);
+
             @Override
             protected String doInBackground(Void... voids) {
                      //config Class HttpReq
@@ -215,7 +216,7 @@ public class ClHome extends Fragment {
                     public void run() {
                         dataList.remove(dataList.size() - 1);
                         adapter.notifyItemRemoved(dataList.size());
-                        get_itemMore(getContext());
+                        get_itemMore(getActivity());
                         adapter.notifyDataSetChanged();
                     }
                 }, 3000);
