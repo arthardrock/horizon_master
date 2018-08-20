@@ -1,5 +1,6 @@
 package horizont.com.pmart.horizon.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,28 +15,36 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
+import java.math.BigInteger;
 import java.util.Hashtable;
+import java.util.concurrent.Phaser;
 
+import horizont.com.pmart.horizon.EncryptMD5;
 import horizont.com.pmart.horizon.R;
 import me.leolin.shortcutbadger.ShortcutBadger;
+
+import static horizont.com.pmart.horizon.activity.ClDialogBox.getHttpLoading;
 
 public class ClItemDetail extends AppCompatActivity {
     private TextView txt_item, txt_price, displayInteger, count_notif;
     private ImageView img_item, img_back, btn_pricelist, myImgTitle;
     private Toolbar myToolbar;
     private LinearLayout btn_add, decrease;
-    private RecyclerView carditem;
-    public int number ;
+    public int number;
     int minteger = 0;
     private Context context;
     SharedPreferences sp;
@@ -113,28 +122,48 @@ public class ClItemDetail extends AppCompatActivity {
 
         }
         btn_add.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 view.setPressed(true);
                 if (number == 0) {
                     Toast.makeText(ClItemDetail.this, "เพิ่มจำนวนสินค้า",
                             Toast.LENGTH_LONG).show();
-                    SharedPreferences.Editor editor = sp.edit();
-                    editor.commit();
+                } else {
+//                      String OpenStock = "จำนวน : "+number+ " สินค้า : "+txt_item.getText().toString()+" ราคา : "+txt_price.getText().toString();
+                        JsonObject jsonObj = new JsonObject();
+                        JsonObject  jaOrder = new JsonObject();
+                        String price = txt_price.getText().toString();
+                        jaOrder.add("Order",jsonObj);
+                        jsonObj.addProperty("Qty",String.valueOf(number));
+                        jsonObj.addProperty("Name",txt_item.getText().toString());
+                        jsonObj.addProperty("Price",price);
+                        jsonObj.addProperty("Total",(number*Integer.parseInt(price)));
 
-                } else
-                    Toast.makeText(ClItemDetail.this, "จำนวน : " + number+txt_item.getText().toString(),
+                        jaOrder.toString();
+                        Log.d("JSON",""+jaOrder);
+
+                    byte[] md5Text = jaOrder.toString().getBytes();
+                    BigInteger md5Data = null;
+                    try {
+                        md5Data = new BigInteger(1, EncryptMD5.encryptMD5(md5Text));
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    String md5Str = md5Data.toString(16);
+                    Log.d("MD5",""+md5Str);
+
+                    Toast.makeText(ClItemDetail.this,  jaOrder.toString(),
                             Toast.LENGTH_LONG).show();
-                            String OpenStock ="จำนวน : "+number+ " สินค้า : "+txt_item.getText().toString()+" ราคา : "+txt_price.getText().toString();
-                            Log.d("PRINT",""+OpenStock);
-                        try {
-                            bitmap = TextToImageEncode(OpenStock);
-                            ImageView img_QRCode = (ImageView)findViewById(R.id.img_QRCode);
-
-                            img_QRCode.setImageBitmap(bitmap);
-                        } catch (WriterException e) {
-                            e.printStackTrace();
-                        }
+                    try {
+                        //QRGennerrate qrGennerrate = new QRGennerrate();
+                        bitmap = TextToImageEncode(md5Str);
+                        ImageView img_QRCode = (ImageView)findViewById(R.id.img_QRCode);
+                        img_QRCode.setImageBitmap(bitmap);
+                    } catch (WriterException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
     }
@@ -162,7 +191,7 @@ public class ClItemDetail extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
-    Bitmap TextToImageEncode(String Value) throws WriterException {
+     Bitmap TextToImageEncode(String Value) throws WriterException {
         BitMatrix bitMatrix;
         Hashtable hints = new Hashtable();
         hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");

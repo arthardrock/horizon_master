@@ -99,9 +99,11 @@ public class ClHome extends Fragment {
             }
         });
         if (savedInstanceState == null) {
-                get_itemMore(getActivity());
+            get_itemMore(getContext());
+            recyclerView.setAdapter(adapter);
         }
         else {
+
         }
     }
 

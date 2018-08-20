@@ -56,7 +56,7 @@ public class PopInfo extends AppCompatActivity {
         public void get_promotion(ImageView img_promotion, Context context){
             this.imageView = img_promotion;
             Glide.with(context)
-                    .load("http://gallery.devpmm.tech/main.php?g2_view=core.DownloadItem&g2_itemId=406&g2_serialNumber=1")
+                    .load("http://gallery.devpmm.tech/main.php?g2_view=core.DownloadItem&g2_itemId=414&g2_serialNumber=1")
                     .into(img_promotion);
             //img_promotion.setImageBitmap(bitmap);
         }

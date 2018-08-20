@@ -85,9 +85,10 @@
     </FrameLayout>
 
     <ImageView
+        android:layout_below="@id/toolbar"
         android:id="@+id/img_QRCode"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="250dp">
 
     </ImageView>
 
@@ -101,7 +102,6 @@
 
         <LinearLayout
             android:focusable="true"
-            android:focusableInTouchMode="true"
             android:id="@+id/btn_decrease"
             android:onClick="decreaseInteger"
             android:background="@drawable/shape_item_inside"
@@ -129,7 +129,6 @@
 
         <LinearLayout
             android:focusable="true"
-            android:focusableInTouchMode="true"
             android:id="@+id/btn_increase"
             android:onClick="increaseInteger"
             android:background="@drawable/shape_item_inside"
