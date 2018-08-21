@@ -114,14 +114,12 @@ public class ClItemDetail extends AppCompatActivity {
 
         }
         btn_add.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 view.setPressed(true);
                 if (number == 0) {
                     Toast.makeText(ClItemDetail.this, "เพิ่มจำนวนสินค้า",
                             Toast.LENGTH_LONG).show();
-                    ImageView img_QrCode = (ImageView)findViewById(R.id.img_QRCode);
                 } else {
 //                      String OpenStock = "จำนวน : "+number+ " สินค้า : "+txt_item.getText().toString()+" ราคา : "+txt_price.getText().toString();
                         JsonObject jsonObj = new JsonObject();
@@ -149,7 +147,6 @@ public class ClItemDetail extends AppCompatActivity {
                     Toast.makeText(ClItemDetail.this,  jaOrder.toString(),
                             Toast.LENGTH_LONG).show();
                     try {
-                        //QRGennerrate qrGennerrate = new QRGennerrate();
                         bitmap = TextToImageEncode(md5Str);
                         ImageView img_QRCode = (ImageView)findViewById(R.id.img_QRCode);
                         img_QRCode.setImageBitmap(bitmap);
@@ -214,7 +211,7 @@ public class ClItemDetail extends AppCompatActivity {
                         getResources().getColor(R.color.colorBlack):getResources().getColor(R.color.colorWhite);
             }
         }
-        Bitmap bitmap = Bitmap.createBitmap(bitMatrixWidth, bitMatrixHeight, Bitmap.Config.ARGB_4444);
+        Bitmap bitmap = Bitmap.createBitmap(bitMatrixWidth, bitMatrixHeight, Bitmap.Config.RGB_565 );
         bitmap.setPixels(pixels, 0, 500, 0, 0, bitMatrixWidth, bitMatrixHeight);
         return bitmap;
     }

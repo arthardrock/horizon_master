@@ -114,7 +114,6 @@ public class ClHome extends Fragment {
         //slideDots = (LinearLayout)findViewById(R.id.sliderDot);
         AdViewPagerAdapter adViewPagerAdapter = new AdViewPagerAdapter(getActivity());
         viewAdPager.setAdapter(adViewPagerAdapter);
-
         LinearLayout cateid = view.findViewById(R.id.cateid);
         for (int i = 0; i < 6; i++){
             View v = inflater.inflate(R.layout.ly_item_cate,cateid,false);
@@ -135,7 +134,6 @@ public class ClHome extends Fragment {
             @Override
             protected String doInBackground(Void... voids) {
                      //config Class HttpReq
-
                 return getDataPosPdtLocal( "api/menu/"+page, fnPreparingSynDataPdt(""));//"api/menu/"+page ,api/apitestitem.jsp
             }
             @Override
@@ -147,7 +145,6 @@ public class ClHome extends Fragment {
             @Override
             protected void onPostExecute(String s) {
                 progressDialog.dismiss();
-
                 if (s.equals("error")) {
                     errorDialog.show();
                 } else {
@@ -164,15 +161,14 @@ public class ClHome extends Fragment {
                     System.out.println("data size is"+data.size());
                     if(data.size()>0){
                         for (JsonNode nodeItem : data) {
-                            ClDataItem dataAr = new ClDataItem(nodeItem.path("item_name").asText(), nodeItem.path("item_image").asText(),
+                            ClDataItem dataItem = new ClDataItem(nodeItem.path("item_name").asText(), nodeItem.path("item_image").asText(),
                                     nodeItem.path("price").asText(),nodeItem.path("promo_price").asText());
                             item = nodeItem.path("item_name").asText();
                             image = nodeItem.path("item_image").asText();
                             price = nodeItem.path("price").asText();
                             promo_price = nodeItem.path("promo_price").asText();
+                            dataList.add(dataItem);
 
-                            dataList.add(dataAr);
-                            System.out.println("ITEM :" + dataAr);
                             adapter.notifyDataSetChanged();
                             adapter.setLoaded();
                             }

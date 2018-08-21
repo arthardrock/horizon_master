@@ -40,9 +40,8 @@ public class PushActivity extends AppCompatActivity {
             }
         });
 
-        //String message = bundle.getString("message");
+        String message = bundle.getString("message");
         get_notification();
-
         TextView textView = (TextView) findViewById(R.id.txt_message);
         textView.setText(message);
     }
@@ -61,8 +60,8 @@ public class PushActivity extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(String s) {
-                Log.d("sss",s);
                 super.onPostExecute(s);
+                Log.d("sss",s);
 
                 ObjectMapper rootMapper = new ObjectMapper();
                 JsonNode obj = null;
@@ -78,7 +77,7 @@ public class PushActivity extends AppCompatActivity {
                             nodeNotifi.path("img_noti").asText());
                     title = nodeNotifi.path("title_notifi").asText();
                     message = nodeNotifi.path("message_notifi").asText();
-                    System.out.println("Title : " + clDataNotifi);
+                    //System.out.println("Title : " + clDataNotifi);
 
                     clDataNotifi.setTitle(title);
                     clDataNotifi.setMessage(message);

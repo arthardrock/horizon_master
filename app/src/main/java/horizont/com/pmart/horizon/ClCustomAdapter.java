@@ -100,7 +100,7 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             viewHolder.mCardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //การส่งค่า ไปยัง activity ClItemDetail
+                    //การส่งค่า ไปยัง activity ClItemDetail.class
                     Intent intent = new Intent(context, ClItemDetail.class);
                     intent.putExtra("item", dataItem.getItem_name());
                     intent.putExtra("image", dataItem.getItem_image());
