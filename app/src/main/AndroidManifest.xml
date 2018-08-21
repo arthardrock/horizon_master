@@ -41,7 +41,7 @@
         </activity>
 
         <activity
-            android:name=".activity.PopInfo"
+            android:name=".activity.ClPopIndex"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
 

@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.github.ybq.android.spinkit.SpinKitView;
 
 import horizont.com.pmart.horizon.R;
-import me.leolin.shortcutbadger.ShortcutBadger;
+
 
 public class SplashScreen extends AppCompatActivity {
     private Handler handler;
@@ -32,7 +32,6 @@ public class SplashScreen extends AppCompatActivity {
                 openMainAct();
             }
         };
-        Context context = SplashScreen.this;
     }
     public void openMainAct() {
         welcome.setText(R.string.txt_wel_EN);

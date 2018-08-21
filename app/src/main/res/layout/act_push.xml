@@ -21,14 +21,14 @@
         <TextView
             android:gravity="center_vertical|center_horizontal"
             style="@style/Text_bold_30dp"
-            android:text="ข่าวสาร"
+            android:text="@string/txt_news"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"/>
         <TextView
             android:gravity="center_vertical|center_horizontal"
             style="@style/Text_30dp"
-            android:text="ข่าวสาร"
+            android:text="@string/txt_news"
             android:id="@+id/txt_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

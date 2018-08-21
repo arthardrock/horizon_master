@@ -80,5 +80,9 @@
             <item name="android:textStyle">bold</item>
         </style>
 
+    <style name="ThemeOverlay"></style>
+
+    <style name="Theme"></style>
+
 
 </resources>

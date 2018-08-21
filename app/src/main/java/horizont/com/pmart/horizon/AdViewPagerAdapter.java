@@ -30,7 +30,7 @@ public class AdViewPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.ly_adpage, null);
+        View view = layoutInflater.inflate(R.layout.ly_adpage_header, null);
         ImageView imageView = (ImageView) view.findViewById(R.id.img_ad);
         imageView.setImageResource(image[position]);
 

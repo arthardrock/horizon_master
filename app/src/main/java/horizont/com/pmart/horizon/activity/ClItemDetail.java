@@ -1,6 +1,5 @@
 package horizont.com.pmart.horizon.activity;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,20 +7,16 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -31,13 +26,10 @@ import com.google.zxing.common.BitMatrix;
 
 import java.math.BigInteger;
 import java.util.Hashtable;
-import java.util.concurrent.Phaser;
 
 import horizont.com.pmart.horizon.EncryptMD5;
 import horizont.com.pmart.horizon.R;
 import me.leolin.shortcutbadger.ShortcutBadger;
-
-import static horizont.com.pmart.horizon.activity.ClDialogBox.getHttpLoading;
 
 public class ClItemDetail extends AppCompatActivity {
     private TextView txt_item, txt_price, displayInteger, count_notif;
@@ -129,6 +121,7 @@ public class ClItemDetail extends AppCompatActivity {
                 if (number == 0) {
                     Toast.makeText(ClItemDetail.this, "เพิ่มจำนวนสินค้า",
                             Toast.LENGTH_LONG).show();
+                    ImageView img_QrCode = (ImageView)findViewById(R.id.img_QRCode);
                 } else {
 //                      String OpenStock = "จำนวน : "+number+ " สินค้า : "+txt_item.getText().toString()+" ราคา : "+txt_price.getText().toString();
                         JsonObject jsonObj = new JsonObject();

@@ -13,7 +13,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +24,6 @@ import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.ybq.android.spinkit.SpinKitView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,13 +33,10 @@ import java.util.TimerTask;
 
 import horizont.com.pmart.horizon.AdViewPagerAdapter;
 import horizont.com.pmart.horizon.ClCustomAdapter;
-import horizont.com.pmart.horizon.ClDetectConnection;
 import horizont.com.pmart.horizon.activity.ClDataItem;
 import horizont.com.pmart.horizon.OnLoadMoreListener;
 import horizont.com.pmart.horizon.R;
-import horizont.com.pmart.horizon.activity.MainActivity;
 
-import static android.widget.Toast.LENGTH_LONG;
 import static horizont.com.pmart.horizon.activity.ClDialogBox.gerErrorDialog;
 import static horizont.com.pmart.horizon.activity.ClDialogBox.getHttpLoading;
 import static horizont.com.pmart.horizon.ClHttpReq.fnPreparingSynDataPdt;
@@ -122,7 +117,7 @@ public class ClHome extends Fragment {
 
         LinearLayout cateid = view.findViewById(R.id.cateid);
         for (int i = 0; i < 6; i++){
-            View v = inflater.inflate(R.layout.item_cate,cateid,false);
+            View v = inflater.inflate(R.layout.ly_item_cate,cateid,false);
             TextView textView = v.findViewById(R.id.text_cate);
             textView.setText("Category : "+i);
             ImageView imageView = v.findViewById(R.id.img_cate);

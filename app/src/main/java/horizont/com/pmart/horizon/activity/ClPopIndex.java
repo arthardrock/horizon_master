@@ -18,7 +18,7 @@ import java.io.InputStream;
 
 import horizont.com.pmart.horizon.R;
 
-public class PopInfo extends AppCompatActivity {
+public class ClPopIndex extends AppCompatActivity {
     public String promotion;
     private ImageView img_promotion;
     //
@@ -31,9 +31,8 @@ public class PopInfo extends AppCompatActivity {
         img_promotion = (ImageView) findViewById(R.id.img_promotion);
         img_promotion.setImageResource(R.drawable.mom);
 
-        String URLIMAGE = "http://172.17.9.11:3000/api/promotion/2";
         get_promotion Get_promotion = new get_promotion();
-        Get_promotion.get_promotion(img_promotion,PopInfo.this);
+        Get_promotion.get_promotion(img_promotion,ClPopIndex.this);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);

@@ -30,6 +30,7 @@
     <string name="txt_wel_TH">ยินดีต้อนรับ</string>
     <string name="txt_wel_EN">Welcome</string>
     <string name="txt_forgetpass">ลืมรหัสผ่าน?</string>
+    <string name="txt_news">ข่าวสาร</string>
     <!--TextTitle-->
     <string name="title_register">เข้าสู่ระบบ/สมัครสมาชิก</string>
 
