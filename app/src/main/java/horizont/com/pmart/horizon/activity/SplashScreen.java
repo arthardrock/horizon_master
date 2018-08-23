@@ -2,9 +2,11 @@ package horizont.com.pmart.horizon.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.github.ybq.android.spinkit.SpinKitView;
@@ -24,6 +26,7 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ly_splash_screen);
+        getAndroidVersion();
         welcome = (TextView)findViewById(R.id.txt_welcome);
         handler = new Handler();
         runnable = new Runnable() {
@@ -50,5 +53,11 @@ public class SplashScreen extends AppCompatActivity {
         super.onStop();
         handler.removeCallbacks(runnable);
         time = delay_time - (System.currentTimeMillis()-time);
+    }
+    public String getAndroidVersion() {
+        String release = Build.VERSION.RELEASE;
+        int sdkVersion = Build.VERSION.SDK_INT;
+        Log.d("SDKVersion","Android SDK: "+ sdkVersion +"(" + release +")");
+        return "Android SDK: " + sdkVersion + " (" + release +")";
     }
 }

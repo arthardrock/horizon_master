@@ -132,7 +132,7 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return valueFilter;
     }
 
-    private class ValueFilter extends Filter {
+    public class ValueFilter extends Filter {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();

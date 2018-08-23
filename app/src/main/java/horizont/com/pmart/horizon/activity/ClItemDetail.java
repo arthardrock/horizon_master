@@ -36,7 +36,7 @@ public class ClItemDetail extends AppCompatActivity {
     private ImageView img_item, img_back, btn_pricelist, myImgTitle;
     private Toolbar myToolbar;
     private LinearLayout btn_add, decrease;
-    public int number;
+    public int number  ;
     int minteger = 0;
     private Context context;
     SharedPreferences sp;
@@ -133,6 +133,8 @@ public class ClItemDetail extends AppCompatActivity {
 
                         jaOrder.toString();
                         Log.d("JSON",""+jaOrder);
+                        Toast.makeText(ClItemDetail.this,  jaOrder.toString(),
+                            Toast.LENGTH_LONG).show();
 
                     byte[] md5Text = jaOrder.toString().getBytes();
                     BigInteger md5Data = null;
@@ -143,9 +145,6 @@ public class ClItemDetail extends AppCompatActivity {
                     }
                     String md5Str = md5Data.toString(16);
                     Log.d("MD5",""+md5Str);
-
-                    Toast.makeText(ClItemDetail.this,  jaOrder.toString(),
-                            Toast.LENGTH_LONG).show();
                     try {
                         bitmap = TextToImageEncode(md5Str);
                         ImageView img_QRCode = (ImageView)findViewById(R.id.img_QRCode);

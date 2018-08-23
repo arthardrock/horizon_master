@@ -30,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import horizont.com.pmart.horizon.BuildConfig;
+import horizont.com.pmart.horizon.ClCustomAdapter;
 import horizont.com.pmart.horizon.PushActivity;
 import horizont.com.pmart.horizon.fragment.ClFavorite;
 import horizont.com.pmart.horizon.fragment.ClHome;
@@ -186,7 +187,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public boolean onQueryTextChange(String s) {
-                //adapter.getFilter().filter(s);
+                ClCustomAdapter.ValueFilter valueFilter;
+               // valueFilter.getFilter().filter(s);
                 return false;
             }
         });

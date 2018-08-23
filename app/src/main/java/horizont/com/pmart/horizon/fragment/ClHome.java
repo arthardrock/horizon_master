@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -47,6 +48,8 @@ public class ClHome extends Fragment {
     private RecyclerView recyclerView;
     private ClCustomAdapter adapter;
     private List<ClDataItem> dataList;
+    private ImageView[] dots;
+    private int dotcount;
 
     ProgressBar progress;
 
@@ -56,7 +59,7 @@ public class ClHome extends Fragment {
     public String promo_price;
 
     ViewPager viewAdPager;
-    LinearLayout linearLayoutHead;
+    LinearLayout SliderDots;
     int page = 1;
 
     public static ClHome newInstance() {
@@ -107,14 +110,48 @@ public class ClHome extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_home, container, false);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.rcy_item);
+        recyclerView = view.findViewById(R.id.rcy_item);
         dataList = new ArrayList<>();
-        linearLayoutHead = view.findViewById(R.id.liner_head);
-        viewAdPager = (ViewPager)view.findViewById(R.id.viewAdPager);
-        //slideDots = (LinearLayout)findViewById(R.id.sliderDot);
-        AdViewPagerAdapter adViewPagerAdapter = new AdViewPagerAdapter(getActivity());
+        SliderDots = view.findViewById(R.id.sliderDots);
+        viewAdPager = view.findViewById(R.id.viewAdPager);
+
+        AdViewPagerAdapter adViewPagerAdapter = new AdViewPagerAdapter(this.getActivity());
         viewAdPager.setAdapter(adViewPagerAdapter);
         LinearLayout cateid = view.findViewById(R.id.cateid);
+
+        dotcount = adViewPagerAdapter.getCount();
+        dots = new ImageView[dotcount];
+
+      /* for(int i = 0;1 < dotcount; i++ ){
+            dots[i] = new ImageView(view.getContext());
+            dots[i].setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(),R.drawable.noactive_dot));
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(8,0,8,0);
+            SliderDots.addView(dots[i], params);
+
+        }
+        dots[0].setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(),R.drawable.active_dot));
+        viewAdPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+                for(int i = 0; i < dotcount; i++){
+                    dots[i].setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(),R.drawable.noactive_dot));
+                }
+                dots[position].setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(),R.drawable.active_dot));
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });*/
         for (int i = 0; i < 6; i++){
             View v = inflater.inflate(R.layout.ly_item_cate,cateid,false);
             TextView textView = v.findViewById(R.id.text_cate);
@@ -139,7 +176,6 @@ public class ClHome extends Fragment {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-
                 progressDialog.show();
             }
             @Override
@@ -168,7 +204,6 @@ public class ClHome extends Fragment {
                             price = nodeItem.path("price").asText();
                             promo_price = nodeItem.path("promo_price").asText();
                             dataList.add(dataItem);
-
                             adapter.notifyDataSetChanged();
                             adapter.setLoaded();
                             }
@@ -188,9 +223,11 @@ public class ClHome extends Fragment {
                 public void run() {
                     if(viewAdPager.getCurrentItem() == 0){
                         viewAdPager.setCurrentItem(1);
+
                     } else if (viewAdPager.getCurrentItem() == 1){
                         viewAdPager.setCurrentItem(2);
-                    }else {
+
+                    } else{
                         viewAdPager.setCurrentItem(0);
                     }
                 }

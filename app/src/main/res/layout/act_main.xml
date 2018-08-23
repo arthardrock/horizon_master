@@ -19,6 +19,7 @@
         </include>
 
         <FrameLayout
+            android:background="@color/colorGray"
             android:layout_above="@id/navigation"
             android:id="@+id/frame_layout"
             android:layout_width="match_parent"
