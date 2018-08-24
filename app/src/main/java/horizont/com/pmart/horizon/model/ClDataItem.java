@@ -1,4 +1,4 @@
-package horizont.com.pmart.horizon.activity;
+package horizont.com.pmart.horizon.model;
 
 public class ClDataItem {
 

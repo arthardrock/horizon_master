@@ -23,8 +23,18 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,8 +44,9 @@ import java.util.TimerTask;
 
 import horizont.com.pmart.horizon.AdViewPagerAdapter;
 import horizont.com.pmart.horizon.ClCustomAdapter;
-import horizont.com.pmart.horizon.activity.ClDataItem;
-import horizont.com.pmart.horizon.OnLoadMoreListener;
+import horizont.com.pmart.horizon.model.ClDataItem;
+import horizont.com.pmart.horizon.model.ClSlideUnit;
+import horizont.com.pmart.horizon.model.OnLoadMoreListener;
 import horizont.com.pmart.horizon.R;
 
 import static horizont.com.pmart.horizon.activity.ClDialogBox.gerErrorDialog;
@@ -50,6 +61,11 @@ public class ClHome extends Fragment {
     private List<ClDataItem> dataList;
     private ImageView[] dots;
     private int dotcount;
+
+    RequestQueue rq;
+    List<ClSlideUnit> sliderImg;
+    AdViewPagerAdapter adViewPagerAdapter;
+
 
     ProgressBar progress;
 
@@ -83,6 +99,12 @@ public class ClHome extends Fragment {
         recyclerView.setLayoutManager(gridLayoutManager);
         adapter = new ClCustomAdapter(recyclerView, getActivity(), dataList, getActivity());
         recyclerView.setAdapter(adapter);
+
+        rq = Volley.newRequestQueue(getActivity());
+        sliderImg = new ArrayList<>();
+
+        sendRequest();
+
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
@@ -114,24 +136,9 @@ public class ClHome extends Fragment {
         dataList = new ArrayList<>();
         SliderDots = view.findViewById(R.id.sliderDots);
         viewAdPager = view.findViewById(R.id.viewAdPager);
-
-        AdViewPagerAdapter adViewPagerAdapter = new AdViewPagerAdapter(this.getActivity());
-        viewAdPager.setAdapter(adViewPagerAdapter);
         LinearLayout cateid = view.findViewById(R.id.cateid);
 
-        dotcount = adViewPagerAdapter.getCount();
-        dots = new ImageView[dotcount];
 
-      /* for(int i = 0;1 < dotcount; i++ ){
-            dots[i] = new ImageView(view.getContext());
-            dots[i].setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(),R.drawable.noactive_dot));
-
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(8,0,8,0);
-            SliderDots.addView(dots[i], params);
-
-        }
-        dots[0].setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(),R.drawable.active_dot));
         viewAdPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -141,17 +148,19 @@ public class ClHome extends Fragment {
             @Override
             public void onPageSelected(int position) {
 
-                for(int i = 0; i < dotcount; i++){
-                    dots[i].setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(),R.drawable.noactive_dot));
+                for(int i = 0; i< dotcount; i++){
+                    dots[i].setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.active_dot));
                 }
-                dots[position].setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(),R.drawable.active_dot));
+
+                dots[position].setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.noactive_dot));
+
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
 
             }
-        });*/
+        });
         for (int i = 0; i < 6; i++){
             View v = inflater.inflate(R.layout.ly_item_cate,cateid,false);
             TextView textView = v.findViewById(R.id.text_cate);
@@ -253,5 +262,53 @@ public class ClHome extends Fragment {
                 adapter.setLoaded();
             }
         });
+    }
+
+    public void sendRequest(){
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, "http://172.17.8.147:3000/api/promotiononlimit",
+                null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                    for (int i = 0; i < response.length();i++){
+
+                        ClSlideUnit clSlideUnit = new ClSlideUnit();
+                        try {
+                           JSONObject jsonObject = response.getJSONObject(i);
+                            clSlideUnit.setSliderImgUrl(jsonObject.getString("promo_images"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        sliderImg.add(clSlideUnit);
+                    }
+                adViewPagerAdapter = new AdViewPagerAdapter(sliderImg,getActivity());
+                viewAdPager.setAdapter(adViewPagerAdapter);
+
+                dotcount = adViewPagerAdapter.getCount();
+                dots = new ImageView[dotcount];
+
+                for(int i = 0; i < dotcount; i++){
+
+                    dots[i] = new ImageView(getActivity());
+                    dots[i].setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.noactive_dot));
+
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+                    params.setMargins(8, 0, 8, 0);
+
+                    SliderDots.addView(dots[i], params);
+
+                }
+
+                dots[0].setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.active_dot));
+
+
+            }
+            }, new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError error){
+
+            }
+        });
+        rq.add(jsonArrayRequest);
     }
 }

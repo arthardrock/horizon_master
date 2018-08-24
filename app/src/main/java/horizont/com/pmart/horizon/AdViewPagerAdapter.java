@@ -8,18 +8,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.android.volley.toolbox.ImageLoader;
+
+import java.util.List;
+
+import horizont.com.pmart.horizon.model.ClSlideUnit;
+
 public class AdViewPagerAdapter extends PagerAdapter {
     private Context context;
     private LayoutInflater layoutInflater;
-    private Integer[] image = {R.drawable.headerapp, R.drawable.headerapp, R.drawable.headerapp};
+    private List<ClSlideUnit>slidImg;
+    private ImageLoader imageLoader;
+    //private Integer[] image = {R.drawable.comming, R.drawable.comming, R.drawable.comming};
 
-    public AdViewPagerAdapter(Context context) {
+    public AdViewPagerAdapter(List<ClSlideUnit>slidImg, Context context) {
+        this.slidImg = slidImg;
         this.context = context;
     }
 
     @Override
     public int getCount() {
-        return image.length;
+        return slidImg.size();
     }
 
     @Override
@@ -31,8 +40,16 @@ public class AdViewPagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.ly_adpage_header, null);
+
+        ClSlideUnit unit = slidImg.get(position);
+
+
         ImageView imageView = (ImageView) view.findViewById(R.id.img_ad);
-        imageView.setImageResource(image[position]);
+        //imageView.setImageResource(image[position]);
+
+        imageLoader = ClPageSlide.getInstance(context).getImageLoader();
+        imageLoader.get(unit.getSliderImgUrl(),ImageLoader.getImageListener(imageView, R.drawable.icon1,android.R.drawable.ic_dialog_alert));
+
 
         ViewPager vp = (ViewPager) container;
         vp.addView(view, 0);

@@ -12,7 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import horizont.com.pmart.horizon.ClPageAdapter;
+import horizont.com.pmart.horizon.model.ClCategory;
 import horizont.com.pmart.horizon.R;
 import horizont.com.pmart.horizon.fragment.ClLogin;
 import horizont.com.pmart.horizon.fragment.ClRegister;
@@ -33,7 +33,7 @@ public class ClRegisterActivity extends AppCompatActivity {
         appBarLayout = (AppBarLayout) findViewById(R.id.appbar_layout);
         tabLayout = (TabLayout) findViewById(R.id.tabs_layout);
 
-        ClPageAdapter pageAdapter = new ClPageAdapter(getSupportFragmentManager());
+        ClCategory pageAdapter = new ClCategory(getSupportFragmentManager());
         // Adding Fragments
         pageAdapter.AddFragment(new ClLogin(), "เข้าสู่ระบบ");
         pageAdapter.AddFragment(new ClRegister(), "สมัครสมาชิก");

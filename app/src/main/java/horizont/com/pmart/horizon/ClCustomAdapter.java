@@ -23,7 +23,8 @@ import com.github.ybq.android.spinkit.SpinKitView;
 import java.util.ArrayList;
 import java.util.List;
 
-import horizont.com.pmart.horizon.activity.ClDataItem;
+import horizont.com.pmart.horizon.model.OnLoadMoreListener;
+import horizont.com.pmart.horizon.model.ClDataItem;
 import horizont.com.pmart.horizon.activity.ClItemDetail;
 
 public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Filterable {
