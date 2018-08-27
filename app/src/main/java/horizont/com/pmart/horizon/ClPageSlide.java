@@ -21,7 +21,6 @@ public class ClPageSlide {
     public ClPageSlide(Context context) {
         this.context = context;
         this.requestQueue = getResquestQueue();
-
         imageLoader = new ImageLoader(requestQueue, new ImageLoader.ImageCache() {
             private final LruCache<String,Bitmap> cache = new LruCache<String,Bitmap>(20);
             @Override
@@ -35,6 +34,7 @@ public class ClPageSlide {
             }
         });
     }
+
     public static synchronized ClPageSlide getInstance(Context context){
         if(clPageSlide == null){
             clPageSlide = new ClPageSlide(context);
@@ -52,7 +52,6 @@ public class ClPageSlide {
         return requestQueue;
     }
         public ImageLoader getImageLoader(){
-
             return imageLoader;
         }
 }

@@ -1,5 +1,6 @@
 package horizont.com.pmart.horizon.activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,9 @@ public class ClCateActivity extends AppCompatActivity {
 
             ImageView imageView = view.findViewById(R.id.img_cate);
             imageView.setImageResource(R.drawable.cate_beef);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                imageView.setClipToOutline(true);
+            }
             cateid.addView(view);
         }
     }

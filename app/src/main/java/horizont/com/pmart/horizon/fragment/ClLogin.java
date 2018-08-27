@@ -105,8 +105,8 @@ public class ClLogin extends Fragment {
         });
     }
     public void forgetPass(){
-        Intent intent = new Intent(context,ClForgetPassword.class);
-        context.startActivity(intent);
+        Intent intent = new Intent(getContext(),ClForgetPassword.class);
+        startActivity(intent);
     }
     private boolean isValidPhone(String phone)
     {

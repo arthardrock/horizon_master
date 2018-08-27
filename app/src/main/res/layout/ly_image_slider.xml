@@ -13,25 +13,9 @@
             android:id="@+id/view_slide"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-        <LinearLayout
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:orientation="vertical"
-            android:id="@+id/btn_close"
-            android:layout_alignParentRight="true"
-            android:layout_width="30dp"
-            android:layout_height="30dp">
-            <ImageView
-                android:tint="@color/colorWhite"
-                android:src="@drawable/ic_action_cancle"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </LinearLayout>
-
 
         <LinearLayout
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="50dp"
             android:gravity="center"
             android:orientation="vertical"
             android:layout_alignParentBottom="true"
@@ -45,9 +29,13 @@
                 android:layout_height="wrap_content">
             </LinearLayout>
             <TextView
+                android:paddingLeft="10dp"
+                android:padding="5dp"
+                android:background="@drawable/conner"
+                android:layout_gravity="center"
                 android:id="@+id/btn_skip"
                 android:textColor="@color/colorWhite"
-                style="@style/Text_50dp"
+                style="@style/Text_20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="เข้าระบบ(Skip)..." />

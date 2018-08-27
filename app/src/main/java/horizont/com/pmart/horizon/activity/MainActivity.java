@@ -108,7 +108,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         return true;
                     }
                 });
-        startActivity(new Intent(MainActivity.this, ClPopIndex.class));
+        startActivity(new Intent(MainActivity.this,ClImageSlide.class));
+        //startActivity(new Intent(MainActivity.this, ClPopIndex.class));
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_layout, ClHome.newInstance());
         transaction.commit();

@@ -1,11 +1,13 @@
 package horizont.com.pmart.horizon.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,6 +26,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
 import java.util.TimerTask;
 
 import horizont.com.pmart.horizon.AdViewPagerAdapter;
@@ -35,12 +38,12 @@ public class ClImageSlide extends AppCompatActivity {
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
     private TextView skip;
-    ViewPager viewad;
+    ViewPager viewAd;
     LinearLayout sliderDotspanel;
     private int dotscount;
     private ImageView[] dott;
 
-    String requrl = "http://172.17.8.147:3000/api/promotiononlimit";
+    String requrl = "http://172.17.9.196:3000/api/promotiononlimit/slide";
 
     RequestQueue rq;
     List<ClSlideUnit> sliderImg;
@@ -50,16 +53,26 @@ public class ClImageSlide extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ly_image_slider);
-        viewad = (ViewPager) findViewById(R.id.view_slide);
+        viewAd = (ViewPager) findViewById(R.id.view_slide);
         sliderDotspanel = findViewById(R.id.sliderDots);
-        /*Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new MyTimeTask(),3000,4000);*/
+
+        skip = (TextView)findViewById(R.id.btn_skip);
+
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new MyTimeTask(),3000,4000);
 
         rq = Volley.newRequestQueue(this);
         sliderImg = new ArrayList<>();
         sendRequest();
 
-        viewad.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewAd.setPageTransformer(false,new FadePageTransformer());
+        viewAd.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -69,10 +82,10 @@ public class ClImageSlide extends AppCompatActivity {
             public void onPageSelected(int position) {
 
                 for(int i = 0; i< dotscount; i++){
-                    dott[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.noactive_dot));
+                    dott[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
                 }
 
-                dott[position].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
+                dott[position].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.noactive_dot));
 
             }
 
@@ -88,37 +101,40 @@ public class ClImageSlide extends AppCompatActivity {
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    if(viewad.getCurrentItem() == 0){
-                        viewad.setCurrentItem(1);
 
-                    } else if (viewad.getCurrentItem() == 1){
-                        viewad.setCurrentItem(2);
+                    if(viewAd.getCurrentItem() == 0){
+                        viewAd.setCurrentItem(1);
+
+                    } else if (viewAd.getCurrentItem() == 1){
+                        viewAd.setCurrentItem(2);
 
                     } else{
-                        viewad.setCurrentItem(0);
+                        //viewAd.setCurrentItem(0);
+                        finish();
                     }
                 }
             });
         }
     }
     public void sendRequest(){
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, "http://172.17.8.147:3000/api/promotiononlimit/slide",
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, requrl,
                 null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                for (int i = 0; i < response.length();i++){
+                    Log.d("RESPONSE",""+response);
+                    for (int i = 0; i < response.length();i++){
 
-                    ClSlideUnit clSlideUnit = new ClSlideUnit();
-                    try {
-                        JSONObject jsonObject = response.getJSONObject(i);
-                        clSlideUnit.setSliderImgUrl(jsonObject.getString("promo_images"));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                        ClSlideUnit clSlideUnit = new ClSlideUnit();
+                        try {
+                            JSONObject jsonObject = response.getJSONObject(i);
+                            clSlideUnit.setSliderImgUrl(jsonObject.getString("promo_images"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        sliderImg.add(clSlideUnit);
                     }
-                    sliderImg.add(clSlideUnit);
-                }
                 viewPagerAdapter = new AdViewPagerAdapter(sliderImg,ClImageSlide.this);
-                viewad.setAdapter(viewPagerAdapter);
+                viewAd.setAdapter(viewPagerAdapter);
 
                 dotscount = viewPagerAdapter.getCount();
                 dott = new ImageView[dotscount];
@@ -126,19 +142,16 @@ public class ClImageSlide extends AppCompatActivity {
                 for(int i = 0; i < dotscount; i++){
 
                     dott[i] = new ImageView(ClImageSlide.this);
-                    dott[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.noactive_dot));
+                    dott[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
 
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
                     params.setMargins(8, 0, 8, 0);
 
                     sliderDotspanel.addView(dott[i], params);
-
                 }
 
-                dott[0].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
-
-
+                dott[0].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.noactive_dot));
             }
         }, new Response.ErrorListener(){
             @Override
@@ -148,5 +161,23 @@ public class ClImageSlide extends AppCompatActivity {
         });
         rq.add(jsonArrayRequest);
     }
+    public void openMainAct() {
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+        //finish();
+    }
+    public class FadePageTransformer implements ViewPager.PageTransformer {
+        public void transformPage(View view, float position) {
+            view.setTranslationX(view.getWidth() * - position);
 
+            if (position <= -1.0F || position >= 1.0F) {
+                view.setAlpha(0.0F);
+            } else if (position == 0.0F) {
+                view.setAlpha(1.0F);
+            } else {
+                // position is between -1.0F & 0.0F OR 0.0F & 1.0F
+                view.setAlpha(1.0F - Math.abs(position));
+            }
+        }
+    }
 }

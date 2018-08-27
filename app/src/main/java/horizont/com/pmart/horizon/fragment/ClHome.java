@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
@@ -62,17 +63,16 @@ public class ClHome extends Fragment {
     private ImageView[] dots;
     private int dotcount;
 
+    String urlReq = "http://172.17.9.196:3000/api/promotiononlimit";
+
     RequestQueue rq;
     List<ClSlideUnit> sliderImg;
     AdViewPagerAdapter adViewPagerAdapter;
 
-
     ProgressBar progress;
+    Context context;
 
-    public String item;
-    public String image;
-    public String price;
-    public String promo_price;
+    public String item,image,price,promo_price;
 
     ViewPager viewAdPager;
     LinearLayout SliderDots;
@@ -84,7 +84,6 @@ public class ClHome extends Fragment {
     }
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,17 +92,15 @@ public class ClHome extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new MyTimeTask(),2000,4000);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
+
+        context = getActivity().getApplicationContext();
         adapter = new ClCustomAdapter(recyclerView, getActivity(), dataList, getActivity());
-        recyclerView.setAdapter(adapter);
 
         rq = Volley.newRequestQueue(getActivity());
-        sliderImg = new ArrayList<>();
 
-        sendRequest();
+        sliderImg = new ArrayList<>();
 
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
@@ -119,8 +116,12 @@ public class ClHome extends Fragment {
             }
         });
         if (savedInstanceState == null) {
-            get_itemMore(getContext());
+            getItemMore(getContext());
             recyclerView.setAdapter(adapter);
+
+            sendRequest();
+            Timer timer = new Timer();
+            timer.scheduleAtFixedRate(new MyTimeTask(),2000,4000);
         }
         else {
 
@@ -149,10 +150,10 @@ public class ClHome extends Fragment {
             public void onPageSelected(int position) {
 
                 for(int i = 0; i< dotcount; i++){
-                    dots[i].setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.active_dot));
+                    dots[i].setImageDrawable(ContextCompat.getDrawable(context, R.drawable.active_dot));
                 }
 
-                dots[position].setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.noactive_dot));
+                dots[position].setImageDrawable(ContextCompat.getDrawable(context, R.drawable.noactive_dot));
 
             }
 
@@ -172,7 +173,7 @@ public class ClHome extends Fragment {
         return view;
     }
     @SuppressLint("StaticFieldLeak")
-    public void get_itemMore(final Context context) {
+    public void getItemMore(final Context context) {
         new AsyncTask<Void, Void, String>() {
             ProgressDialog progressDialog = getHttpLoading(context);
             AlertDialog.Builder errorDialog = gerErrorDialog(context);
@@ -193,7 +194,7 @@ public class ClHome extends Fragment {
                 if (s.equals("error")) {
                     errorDialog.show();
                 } else {
-                    loaddata();
+                    loadData();
                     super.onPostExecute(s);
                     ObjectMapper rootMapper = new ObjectMapper();
                     JsonNode obj = null;
@@ -218,7 +219,7 @@ public class ClHome extends Fragment {
                             }
                          }
                         else{
-                            Toast.makeText(getActivity(),"สิ้นสุดการค้นหา",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(),"สิ้นสุดการค้นหา",Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -228,6 +229,7 @@ public class ClHome extends Fragment {
         @Override
         public void run() {
             mHandler.post(new Runnable() {
+
                 @Override
                 public void run() {
                     if(viewAdPager.getCurrentItem() == 0){
@@ -236,14 +238,15 @@ public class ClHome extends Fragment {
                     } else if (viewAdPager.getCurrentItem() == 1){
                         viewAdPager.setCurrentItem(2);
 
-                    } else{
+                    }
+                    else{
                         viewAdPager.setCurrentItem(0);
                     }
                 }
             });
         }
     }
-    public void loaddata() {
+    public void loadData() {
         adapter.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
@@ -255,7 +258,7 @@ public class ClHome extends Fragment {
                     public void run() {
                         dataList.remove(dataList.size() - 1);
                         adapter.notifyItemRemoved(dataList.size());
-                        get_itemMore(getActivity());
+                        getItemMore(getActivity());
                         adapter.notifyDataSetChanged();
                     }
                 }, 3000);
@@ -265,7 +268,7 @@ public class ClHome extends Fragment {
     }
 
     public void sendRequest(){
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, "http://172.17.8.147:3000/api/promotiononlimit",
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, urlReq,
                 null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -289,7 +292,7 @@ public class ClHome extends Fragment {
                 for(int i = 0; i < dotcount; i++){
 
                     dots[i] = new ImageView(getActivity());
-                    dots[i].setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.noactive_dot));
+                    dots[i].setImageDrawable(ContextCompat.getDrawable(context, R.drawable.active_dot));
 
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
@@ -299,7 +302,7 @@ public class ClHome extends Fragment {
 
                 }
 
-                dots[0].setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.active_dot));
+                dots[0].setImageDrawable(ContextCompat.getDrawable(context, R.drawable.noactive_dot));
 
 
             }

@@ -48,7 +48,7 @@ public class AdViewPagerAdapter extends PagerAdapter {
         //imageView.setImageResource(image[position]);
 
         imageLoader = ClPageSlide.getInstance(context).getImageLoader();
-        imageLoader.get(unit.getSliderImgUrl(),ImageLoader.getImageListener(imageView, R.drawable.icon1,android.R.drawable.ic_dialog_alert));
+        imageLoader.get(unit.getSliderImgUrl(),ImageLoader.getImageListener(imageView, R.color.colorBlack,android.R.drawable.ic_dialog_alert));
 
 
         ViewPager vp = (ViewPager) container;
