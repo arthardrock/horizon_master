@@ -44,37 +44,44 @@
         </style>
 
         <style name="Text_20dp">
+            <item name="android:textColor">@color/colorBlack</item>
             <item name="android:fontFamily">@font/rusrecular</item>
             <item name="android:textSize">20dp</item>
         </style>
 
         <style name="Text_30dp">
+            <item name="android:textColor">@color/colorBlack</item>
             <item name="android:fontFamily">@font/rusrecular</item>
             <item name="android:textSize">30dp</item>
         </style>
 
         <style name="Text_40dp">
+            <item name="android:textColor">@color/colorBlack</item>
             <item name="android:fontFamily">@font/rusrecular</item>
             <item name="android:textSize">40dp</item>
         </style>
 
         <style name="Text_50dp">
+            <item name="android:textColor">@color/colorBlack</item>
             <item name="android:fontFamily">@font/rusrecular</item>
             <item name="android:textSize">50dp</item>
         </style>
 
         <style name="Text_bold_15dp">
+            <item name="android:textColor">@color/colorBlack</item>
             <item name="android:fontFamily">@font/rusrecular</item>
             <item name="android:textSize">15dp</item>
             <item name="android:textStyle">bold</item>
         </style>
 
         <style name="Text_bold_20dp">
+            <item name="android:textColor">@color/colorBlack</item>
             <item name="android:fontFamily">@font/rusrecular</item>
             <item name="android:textSize">20dp</item>
             <item name="android:textStyle">bold</item>
         </style>
         <style name="Text_bold_30dp">
+            <item name="android:textColor">@color/colorBlack</item>
             <item name="android:fontFamily">@font/rusrecular</item>
             <item name="android:textSize">30dp</item>
             <item name="android:textStyle">bold</item>

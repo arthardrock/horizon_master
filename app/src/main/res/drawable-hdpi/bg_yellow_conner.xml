@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
-    <solid android:color="#00ffffff" />
-    android:shape="rectangle"
-    android:layout_height="wrap_content"
-    android:layout_width="wrap_content">
-
     <corners
-        android:radius="12dp" />
+        android:bottomLeftRadius="12dp"
+        android:bottomRightRadius="12dp"/>
 
     <gradient
         android:angle="135"
@@ -14,5 +10,5 @@
 
     <!--If your shape requires only one solid color-->
     <solid
-        android:color="@color/colorBlack_Trap"/>
+        android:color="@color/colorYellow"/>
 </shape>

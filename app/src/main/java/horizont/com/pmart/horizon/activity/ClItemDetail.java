@@ -32,10 +32,10 @@ import horizont.com.pmart.horizon.R;
 import me.leolin.shortcutbadger.ShortcutBadger;
 
 public class ClItemDetail extends AppCompatActivity {
-    private TextView txt_item, txt_price, displayInteger, count_notif;
+    private TextView txt_item, txt_price, displayInteger, count_notif,btn_add,txt_promotion;
     private ImageView img_item, img_back, btn_pricelist, myImgTitle;
     private Toolbar myToolbar;
-    private LinearLayout btn_add, decrease;
+    private LinearLayout  decrease;
     public int number  ;
     int minteger = 0;
     private Context context;
@@ -54,6 +54,8 @@ public class ClItemDetail extends AppCompatActivity {
         img_item = findViewById(R.id.img_item);
         txt_price = findViewById(R.id.txt_price);
         btn_pricelist = findViewById(R.id.btn_pricelist);
+        btn_add = findViewById(R.id.btn_add);
+        txt_promotion = findViewById(R.id.txt_promotion);
         btn_pricelist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,36 +65,36 @@ public class ClItemDetail extends AppCompatActivity {
             }
         });
         Context context = getApplicationContext();
-        sp = getSharedPreferences("PREF_NAMBER", context.MODE_PRIVATE);
+  /*      sp = getSharedPreferences("PREF_NAMBER", context.MODE_PRIVATE);
 
         editor = sp.edit();
         editor.putInt("", number);
-        editor.commit();
+        editor.commit();*/
         // remove IconApp
         ShortcutBadger.removeCount(context);
 
-        number = sp.getInt("number",-1);
+        //number = sp.getInt("number",-1);
         decrease = (LinearLayout) findViewById(R.id.btn_decrease);
-
+        btn_add.setText(R.string.btn_selectItem);
         displayInteger = (TextView) findViewById(R.id.qty_number);
 
         Bundle mBundle = getIntent().getExtras();
         if (mBundle != null) {
             txt_item.setText(mBundle.getString("item"));
             txt_price.setText(mBundle.getString("promo_price"));
+            txt_promotion.setText(mBundle.getString("item_promodesc"));
             String image = getIntent().getExtras().getString("image");
             Glide.with(this)
                     .load(image)
-                    .placeholder(R.drawable.iconhorizon)
+                    .placeholder(R.color.colorBlack_Trap)
                     .into(img_item);
         }
-        btn_add = findViewById(R.id.btn_add);
         decrease.setVisibility(View.INVISIBLE);
+        //display(0);
     }
     public void increaseInteger(View view) {
         minteger = minteger + 1;
         display(minteger);
-        view.setPressed(true);
     }
 
     public void decreaseInteger(View view) {
@@ -100,7 +102,7 @@ public class ClItemDetail extends AppCompatActivity {
         display(minteger);
         if (minteger == 0) {
             decrease.setVisibility(View.INVISIBLE);
-            view.setPressed(true);
+            btn_add.setText(R.string.btn_selectItem);
         }
     }
     private void display(final int number) {
@@ -109,33 +111,34 @@ public class ClItemDetail extends AppCompatActivity {
         if (displayInteger.toString().length() == 0) {
             decrease.setVisibility(View.INVISIBLE);
         } else {
+            btn_add.setText(R.string.btn_addBasket);
             decrease.setVisibility(View.VISIBLE);
             count_notif.setText("" + number);
-
         }
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                view.setPressed(true);
-                if (number == 0) {
+                if (number == 0 ) {
+                    Log.d("Count",""+number);
                     Toast.makeText(ClItemDetail.this, "เพิ่มจำนวนสินค้า",
                             Toast.LENGTH_LONG).show();
                 } else {
-//                      String OpenStock = "จำนวน : "+number+ " สินค้า : "+txt_item.getText().toString()+" ราคา : "+txt_price.getText().toString();
-                        JsonObject jsonObj = new JsonObject();
-                        JsonObject  jaOrder = new JsonObject();
-                        String price = txt_price.getText().toString();
-                        jaOrder.add("Order",jsonObj);
-                        jsonObj.addProperty("Qty",String.valueOf(number));
-                        jsonObj.addProperty("Name",txt_item.getText().toString());
-                        jsonObj.addProperty("Price",price);
-                        jsonObj.addProperty("Total",(number*Integer.parseInt(price)));
+                    JsonObject jsonObj = new JsonObject();
+                    JsonObject  jaOrder = new JsonObject();
+                    String price = txt_price.getText().toString();
+                    jaOrder.add("Order",jsonObj);
+                    jsonObj.addProperty("Qty",String.valueOf(number));
+                    jsonObj.addProperty("Name",txt_item.getText().toString());
+                    jsonObj.addProperty("Price",price);
+                    jsonObj.addProperty("Total",(number*Integer.parseInt(price)));
 
-                        jaOrder.toString();
-                        Log.d("JSON",""+jaOrder);
-                        Toast.makeText(ClItemDetail.this,  jaOrder.toString(),
+                    //String to Json format
+                    jaOrder.toString();
+                    Log.d("JSON",""+jaOrder);
+                    Toast.makeText(ClItemDetail.this,  jaOrder.toString(),
                             Toast.LENGTH_LONG).show();
 
+                    //Encypt Json to Md5
                     byte[] md5Text = jaOrder.toString().getBytes();
                     BigInteger md5Data = null;
                     try {
@@ -180,7 +183,7 @@ public class ClItemDetail extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
-     Bitmap TextToImageEncode(String Value) throws WriterException {
+    Bitmap TextToImageEncode(String Value) throws WriterException {
         BitMatrix bitMatrix;
         Hashtable hints = new Hashtable();
         hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");

@@ -25,16 +25,42 @@
             android:layout_height="wrap_content">
 
             <!--Image-->
-            <LinearLayout
-                android:orientation="vertical"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="250dp">
+
+                <ScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></ScrollView>
                 <ImageView
                     android:scaleType="fitXY"
                     android:id="@+id/img_item"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </LinearLayout>
+                    android:layout_centerInParent="true"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"/>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="@color/colorWhite"
+                        android:padding="5dp"
+                        android:background="@drawable/bg_green_conner"
+                        android:layout_marginRight="5dp"
+                        android:id="@+id/txt_promotion"
+                        android:layout_alignParentRight="true"
+                        android:text="item"
+                        style="@style/Text_20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <TextView
+                    android:layout_marginLeft="10dp"
+                    style="@style/Text_10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:text="@string/txt_descImg_forPromote"/>
+            </RelativeLayout>
             <!--Descrption-->
                 <LinearLayout
                     android:orientation="vertical"
@@ -47,6 +73,7 @@
                         android:orientation="horizontal"
                         android:paddingRight="0dp"
                         android:layout_gravity="right">
+
                         <TextView
                             style="@style/Text_30dp"
                             android:id="@+id/txt_price"
@@ -105,7 +132,7 @@
     <LinearLayout
         android:layout_marginRight="6dp"
         android:layout_alignParentRight="true"
-        android:layout_above="@+id/btn_add"
+        android:layout_above="@+id/ly_btn_add"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="50dp">
@@ -155,20 +182,19 @@
 
     <!--Button-->
     <LinearLayout
-        android:layout_margin="5dp"
-        android:id="@+id/btn_add"
+        android:id="@+id/ly_btn_add"
+        android:layout_margin="3dp"
         android:background="@drawable/shape_item"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true" >
-
         <TextView
+            android:id="@+id/btn_add"
             android:textColor="@color/colorWhite"
             style="@style/Text_20dp"
             android:textAlignment="center"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:text="@string/add_bucket"
+            android:layout_gravity="center_vertical"
+            android:text="@string/btn_selectItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>

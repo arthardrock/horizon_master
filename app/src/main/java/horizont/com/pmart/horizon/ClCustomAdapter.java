@@ -4,17 +4,20 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -38,6 +41,8 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private int lastVisibleItem, totalItemCount;
     ValueFilter valueFilter;
     ViewPager viewAdPager;
+    Drawable pathName;
+
 
     private Context context;
     private List<ClDataItem> my_data;
@@ -96,6 +101,15 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             viewHolder.item.setText(dataItem.getItem_name());
             viewHolder.price.setText(dataItem.getPrice());
             viewHolder.promo_price.setText(dataItem.getPromo_price());
+
+            if (dataItem.getItem_promodesc() == ""){
+                viewHolder.ly_promotion.setVisibility(View.INVISIBLE);
+            }
+            else{
+                    viewHolder.ly_promotion.setVisibility(View.VISIBLE);
+                    viewHolder.txt_promotion.setText(dataItem.getItem_promodesc());
+                }
+
             Glide.with(context).load(dataItem.getItem_image()).into(viewHolder.image);
 
             viewHolder.mCardView.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +120,8 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     intent.putExtra("item", dataItem.getItem_name());
                     intent.putExtra("image", dataItem.getItem_image());
                     intent.putExtra("promo_price", dataItem.getPromo_price());
+                    intent.putExtra("item_promodesc",dataItem.getItem_promodesc());
+                    intent.putExtra("item_image2",dataItem.getItem_image_2());
                     context.startActivity(intent);
                 }
             });
@@ -171,20 +187,21 @@ public class ClCustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
-        public TextView item;
-        public ImageView image;
-        public TextView price;
+        public TextView item,price,promo_price,txt_promotion;
+        private RelativeLayout ly_promotion;
+        private ImageView image;
         public CardView mCardView;
-        public TextView promo_price;
 
         public UserViewHolder(View itemView) {
             super(itemView);
-            mCardView = (CardView) itemView.findViewById(R.id.card_view);
-            item = (TextView) itemView.findViewById(R.id.txt_item);
-            image = (ImageView) itemView.findViewById(R.id.img_item);
-            price = (TextView) itemView.findViewById(R.id.txt_price);
-            promo_price = (TextView) itemView.findViewById(R.id.txt_pro_price);
+            mCardView = itemView.findViewById(R.id.card_view);
+            item =  itemView.findViewById(R.id.txt_item);
+            image = itemView.findViewById(R.id.img_item);
+            price = itemView.findViewById(R.id.txt_price);
             price.setPaintFlags(price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            promo_price = itemView.findViewById(R.id.txt_pro_price);
+            txt_promotion = itemView.findViewById(R.id.txt_promotion);
+            ly_promotion = itemView.findViewById(R.id.ly_promotion);
         }
     }
 }

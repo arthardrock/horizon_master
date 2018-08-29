@@ -15,6 +15,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +64,7 @@ public class ClHome extends Fragment {
     private ImageView[] dots;
     private int dotcount;
 
-    String urlReq = "http://172.17.9.196:3000/api/promotiononlimit";
+    String urlReq = "http://172.17.9.64:3000/api/promotiononlimit";
 
     RequestQueue rq;
     List<ClSlideUnit> sliderImg;
@@ -72,7 +73,7 @@ public class ClHome extends Fragment {
     ProgressBar progress;
     Context context;
 
-    public String item,image,price,promo_price;
+    public String item,image,imagemore,price,promo_price,promo_desc;
 
     ViewPager viewAdPager;
     LinearLayout SliderDots;
@@ -118,7 +119,6 @@ public class ClHome extends Fragment {
         if (savedInstanceState == null) {
             getItemMore(getContext());
             recyclerView.setAdapter(adapter);
-
             sendRequest();
             Timer timer = new Timer();
             timer.scheduleAtFixedRate(new MyTimeTask(),2000,4000);
@@ -208,11 +208,19 @@ public class ClHome extends Fragment {
                     if(data.size()>0){
                         for (JsonNode nodeItem : data) {
                             ClDataItem dataItem = new ClDataItem(nodeItem.path("item_name").asText(), nodeItem.path("item_image").asText(),
-                                    nodeItem.path("price").asText(),nodeItem.path("promo_price").asText());
+                                    nodeItem.path("price").asText(),nodeItem.path("promo_price").asText(),nodeItem.path("item_promodesc").asText(),
+                                    nodeItem.path("item_image2").asText());
+
                             item = nodeItem.path("item_name").asText();
                             image = nodeItem.path("item_image").asText();
+                            imagemore = nodeItem.path("item_image2").asText();
                             price = nodeItem.path("price").asText();
                             promo_price = nodeItem.path("promo_price").asText();
+                            promo_desc=nodeItem.path("item_promodesc").asText();
+
+                            Log.d("ITEM_","IMG1"+image);
+                            Log.d("ITEM_","IMG2"+imagemore);
+
                             dataList.add(dataItem);
                             adapter.notifyDataSetChanged();
                             adapter.setLoaded();
@@ -303,7 +311,6 @@ public class ClHome extends Fragment {
                 }
 
                 dots[0].setImageDrawable(ContextCompat.getDrawable(context, R.drawable.noactive_dot));
-
 
             }
             }, new Response.ErrorListener(){

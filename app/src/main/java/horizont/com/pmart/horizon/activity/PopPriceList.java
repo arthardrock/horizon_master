@@ -19,7 +19,7 @@ public class PopPriceList extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.popup_pricelist);
+        setContentView(R.layout.ly_popup_pricelist);
         spinner = findViewById(R.id.sp_branch);
 
         btn_con = findViewById(R.id.btn_confirm);

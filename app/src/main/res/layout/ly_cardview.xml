@@ -22,24 +22,42 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_gravity="center_vertical|center_horizontal"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:orientation="vertical">
+            android:layout_height="100dp">
 
             <ImageView
                 android:scaleType="fitXY"
                 android:id="@+id/img_item"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </LinearLayout>
+                android:layout_centerInParent="true"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"/>
+
+            <RelativeLayout
+                android:id="@+id/ly_promotion"
+                android:background="@drawable/bg_green_conner"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_margin="3dp"
+                    style="@style/Text_10dp"
+                    android:id="@+id/txt_promotion"
+                    android:textColor="@color/colorWhite"
+                    android:text="best seller"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+        </RelativeLayout>
 
                 <TextView
-                    android:textColor="@color/colorBlack"
+                    android:background="@drawable/bg_red_conner"
+                    android:textColor="@color/colorWhite"
                     android:id="@+id/txt_item"
                     style="@style/Text_bold_15dp"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/image"
                     android:paddingLeft="5dp"

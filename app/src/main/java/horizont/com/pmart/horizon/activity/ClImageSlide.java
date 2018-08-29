@@ -43,7 +43,7 @@ public class ClImageSlide extends AppCompatActivity {
     private int dotscount;
     private ImageView[] dott;
 
-    String requrl = "http://172.17.9.196:3000/api/promotiononlimit/slide";
+    String requrl = "http://172.17.9.64:3000/api/promotiononlimit/slide";
 
     RequestQueue rq;
     List<ClSlideUnit> sliderImg;
@@ -84,9 +84,7 @@ public class ClImageSlide extends AppCompatActivity {
                 for(int i = 0; i< dotscount; i++){
                     dott[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
                 }
-
                 dott[position].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.noactive_dot));
-
             }
 
             @Override

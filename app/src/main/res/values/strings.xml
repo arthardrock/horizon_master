@@ -17,7 +17,8 @@
     <!--TextBtn-->
     <string name="btn_close">ปิด</string>
     <string name="btn_confirm">ยืนยัน</string>
-    <string name="add_bucket">เพิ่มลงตะกร้า</string>
+    <string name="btn_addBasket">เพิ่มลงตะกร้า</string>
+    <string name="btn_selectItem">กรุณาเลือกจำนวนสินค้า</string>
     <!--TextView-->
     <string name="txt_price">ราคา</string>
     <string name="txt_password">รหัสผ่าน</string>
@@ -31,6 +32,8 @@
     <string name="txt_wel_EN">Welcome</string>
     <string name="txt_forgetpass">ลืมรหัสผ่าน?</string>
     <string name="txt_news">ข่าวสาร</string>
+    <string name="txt_descImg_forPromote">* ภาพนี้ใช้สำหรับการโฆษณา</string>
+
     <!--TextTitle-->
     <string name="title_register">เข้าสู่ระบบ/สมัครสมาชิก</string>
 

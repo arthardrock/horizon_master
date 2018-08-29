@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"/>
         <TextView
+            android:textColor="@color/colorWhite"
             android:gravity="center_vertical"
             style="@style/Text_bold_15dp"
             android:id="@+id/txt_tile"
