@@ -64,7 +64,7 @@ public class ClHome extends Fragment {
     private ImageView[] dots;
     private int dotcount;
 
-    String urlReq = "http://172.17.9.64:3000/api/promotiononlimit";
+    String urlReq = "http://172.17.8.17:3000/api/promotiononlimit";
 
     RequestQueue rq;
     List<ClSlideUnit> sliderImg;
@@ -162,6 +162,7 @@ public class ClHome extends Fragment {
 
             }
         });
+        // category
         for (int i = 0; i < 6; i++){
             View v = inflater.inflate(R.layout.ly_item_cate,cateid,false);
             TextView textView = v.findViewById(R.id.text_cate);
@@ -240,15 +241,15 @@ public class ClHome extends Fragment {
 
                 @Override
                 public void run() {
-                    if(viewAdPager.getCurrentItem() == 0){
-                        viewAdPager.setCurrentItem(1);
-
-                    } else if (viewAdPager.getCurrentItem() == 1){
-                        viewAdPager.setCurrentItem(2);
-
-                    }
-                    else{
-                        viewAdPager.setCurrentItem(0);
+                    for(int i = 0; i < dotcount; i++) {
+                        if (viewAdPager.getCurrentItem() == 0) {
+                            viewAdPager.setCurrentItem(i++);
+                        }  else if (viewAdPager.getCurrentItem()> 0){
+                            viewAdPager.setCurrentItem(i);
+                        }
+                        else if (viewAdPager.getCurrentItem()== 3) {
+                            viewAdPager.setCurrentItem(0);
+                        }
                     }
                 }
             });

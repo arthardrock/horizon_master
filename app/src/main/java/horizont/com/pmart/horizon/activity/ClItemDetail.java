@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,9 +27,12 @@ import com.google.zxing.common.BitMatrix;
 
 import java.math.BigInteger;
 import java.util.Hashtable;
+import java.util.List;
 
+import horizont.com.pmart.horizon.ClCustomAdapter;
 import horizont.com.pmart.horizon.EncryptMD5;
 import horizont.com.pmart.horizon.R;
+import horizont.com.pmart.horizon.model.ClDataItem;
 import me.leolin.shortcutbadger.ShortcutBadger;
 
 public class ClItemDetail extends AppCompatActivity {
@@ -36,6 +40,7 @@ public class ClItemDetail extends AppCompatActivity {
     private ImageView img_item, img_back, btn_pricelist, myImgTitle;
     private Toolbar myToolbar;
     private LinearLayout  decrease;
+    private RelativeLayout ly_promotion;
     public int number  ;
     int minteger = 0;
     private Context context;
@@ -43,6 +48,7 @@ public class ClItemDetail extends AppCompatActivity {
     SharedPreferences.Editor editor;
     public final static int QRcodeWidth = 500 ;
     Bitmap bitmap ;
+    private List<ClDataItem> my_data;
 
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
@@ -56,6 +62,7 @@ public class ClItemDetail extends AppCompatActivity {
         btn_pricelist = findViewById(R.id.btn_pricelist);
         btn_add = findViewById(R.id.btn_add);
         txt_promotion = findViewById(R.id.txt_promotion);
+        ly_promotion = findViewById(R.id.ly_promotion);
         btn_pricelist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,11 +72,7 @@ public class ClItemDetail extends AppCompatActivity {
             }
         });
         Context context = getApplicationContext();
-  /*      sp = getSharedPreferences("PREF_NAMBER", context.MODE_PRIVATE);
-
-        editor = sp.edit();
-        editor.putInt("", number);
-        editor.commit();*/
+        ly_promotion.setVisibility(View.INVISIBLE);
         // remove IconApp
         ShortcutBadger.removeCount(context);
 
@@ -82,7 +85,18 @@ public class ClItemDetail extends AppCompatActivity {
         if (mBundle != null) {
             txt_item.setText(mBundle.getString("item"));
             txt_price.setText(mBundle.getString("promo_price"));
-            txt_promotion.setText(mBundle.getString("item_promodesc"));
+            ClDataItem dataItem = new ClDataItem("item_name","item_image",
+                    "price","promo_price","item_promodesc","item_image2");
+
+            if (dataItem.getItem_promodesc() == ""){
+                ly_promotion.setVisibility(View.VISIBLE);
+                txt_promotion.setText("null");
+
+            }
+            else{
+                ly_promotion.setVisibility(View.INVISIBLE);
+                txt_promotion.setText(mBundle.getString("item_promodesc"));
+            }
             String image = getIntent().getExtras().getString("image");
             Glide.with(this)
                     .load(image)
