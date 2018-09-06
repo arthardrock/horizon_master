@@ -43,7 +43,7 @@ public class ClImageSlide extends AppCompatActivity {
     private int dotscount;
     private ImageView[] dott;
 
-    String requrl = "http://172.17.8.17:3000/api/promotiononlimit/slide";
+    String requrl = "http://172.17.8.91:3000/api/promotiononlimit/slide";
 
     RequestQueue rq;
     List<ClSlideUnit> sliderImg;

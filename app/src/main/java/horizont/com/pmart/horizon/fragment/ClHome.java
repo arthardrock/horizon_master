@@ -64,7 +64,7 @@ public class ClHome extends Fragment {
     private ImageView[] dots;
     private int dotcount;
 
-    String urlReq = "http://172.17.8.17:3000/api/promotiononlimit";
+    String urlReq = "http://172.17.8.91:3000/api/promotiononlimit";
 
     RequestQueue rq;
     List<ClSlideUnit> sliderImg;

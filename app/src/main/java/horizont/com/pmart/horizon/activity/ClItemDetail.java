@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;;
@@ -41,7 +42,9 @@ public class ClItemDetail extends AppCompatActivity {
     private Toolbar myToolbar;
     private LinearLayout  decrease;
     private RelativeLayout ly_promotion;
+    private Button QRbutton;
     public int number  ;
+    public String jaOrder;
     int minteger = 0;
     private Context context;
     SharedPreferences sp;
@@ -55,7 +58,6 @@ public class ClItemDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ly_detailitem);
         myImgTitle = (ImageView) findViewById(R.id.img_title);
-        setToolbar();
         txt_item = findViewById(R.id.txt_item);
         img_item = findViewById(R.id.img_item);
         txt_price = findViewById(R.id.txt_price);
@@ -63,6 +65,10 @@ public class ClItemDetail extends AppCompatActivity {
         btn_add = findViewById(R.id.btn_add);
         txt_promotion = findViewById(R.id.txt_promotion);
         ly_promotion = findViewById(R.id.ly_promotion);
+        QRbutton = findViewById(R.id.btn_genQR);
+        QRbutton.setVisibility(View.INVISIBLE);
+        setToolbar();
+
         btn_pricelist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,7 +97,6 @@ public class ClItemDetail extends AppCompatActivity {
             if (dataItem.getItem_promodesc() == ""){
                 ly_promotion.setVisibility(View.VISIBLE);
                 txt_promotion.setText("null");
-
             }
             else{
                 ly_promotion.setVisibility(View.INVISIBLE);
@@ -133,6 +138,7 @@ public class ClItemDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (number == 0 ) {
+                    QRbutton.setVisibility(View.INVISIBLE);
                     Log.d("Count",""+number);
                     Toast.makeText(ClItemDetail.this, "เพิ่มจำนวนสินค้า",
                             Toast.LENGTH_LONG).show();
@@ -151,24 +157,9 @@ public class ClItemDetail extends AppCompatActivity {
                     Log.d("JSON",""+jaOrder);
                     Toast.makeText(ClItemDetail.this,  jaOrder.toString(),
                             Toast.LENGTH_LONG).show();
+                   // QRbutton.setVisibility(View.VISIBLE);
+                    genQRCode();
 
-                    //Encypt Json to Md5
-                    byte[] md5Text = jaOrder.toString().getBytes();
-                    BigInteger md5Data = null;
-                    try {
-                        md5Data = new BigInteger(1, EncryptMD5.encryptMD5(md5Text));
-                    } catch (Exception e){
-                        e.printStackTrace();
-                    }
-                    String md5Str = md5Data.toString(16);
-                    Log.d("MD5",""+md5Str);
-                    try {
-                        bitmap = TextToImageEncode(md5Str);
-                        ImageView img_QRCode = (ImageView)findViewById(R.id.img_QRCode);
-                        img_QRCode.setImageBitmap(bitmap);
-                    } catch (WriterException e) {
-                        e.printStackTrace();
-                    }
                 }
             }
         });
@@ -196,7 +187,31 @@ public class ClItemDetail extends AppCompatActivity {
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
-
+    public void genQRCode(){
+        QRbutton.setVisibility(View.VISIBLE);
+        QRbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Encypt Json to Md5
+                byte[] md5Text = jaOrder.toString().getBytes();
+                BigInteger md5Data = null;
+                try {
+                    md5Data = new BigInteger(1, EncryptMD5.encryptMD5(md5Text));
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+                String md5Str = md5Data.toString(16);
+                Log.d("MD5",""+md5Str);
+                try {
+                    bitmap = TextToImageEncode(md5Str);
+                    ImageView img_QRCode = (ImageView)findViewById(R.id.img_QRCode);
+                    img_QRCode.setImageBitmap(bitmap);
+                } catch (WriterException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
     Bitmap TextToImageEncode(String Value) throws WriterException {
         BitMatrix bitMatrix;
         Hashtable hints = new Hashtable();
