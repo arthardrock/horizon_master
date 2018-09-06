@@ -33,6 +33,8 @@ import horizont.com.pmart.horizon.AdViewPagerAdapter;
 import horizont.com.pmart.horizon.R;
 import horizont.com.pmart.horizon.model.ClSlideUnit;
 
+import static horizont.com.pmart.horizon.ClHttpReq.getUrlWithPartLocal;
+
 
 public class ClImageSlide extends AppCompatActivity {
 
@@ -43,7 +45,6 @@ public class ClImageSlide extends AppCompatActivity {
     private int dotscount;
     private ImageView[] dott;
 
-    String requrl = "http://172.17.8.17:3000/api/promotiononlimit/slide";
 
     RequestQueue rq;
     List<ClSlideUnit> sliderImg;
@@ -115,7 +116,7 @@ public class ClImageSlide extends AppCompatActivity {
         }
     }
     public void sendRequest(){
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, requrl,
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, getUrlWithPartLocal("api/promotiononlimit/slide"),
                 null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
