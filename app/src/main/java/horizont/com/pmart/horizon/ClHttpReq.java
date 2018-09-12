@@ -25,7 +25,7 @@ public class ClHttpReq {
         return URL_ENDPOINT + path;
     }
 
-    private static String getUrlWithPartLocal(String path) {
+    public static String getUrlWithPartLocal(String path) {
         Log.d("URL is: ", LOCAL_URL_ENDPOINT + path);
         return LOCAL_URL_ENDPOINT + path;
     }
