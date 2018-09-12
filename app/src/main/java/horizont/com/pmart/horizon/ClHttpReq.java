@@ -18,14 +18,14 @@ import java.util.Locale;
 
 public class ClHttpReq {
     private final static String URL_ENDPOINT = "http://hoz.horizont.co.th:88/";
-    private final static String LOCAL_URL_ENDPOINT = "http://172.17.8.166:3000/";// 172.17.9.11 ,192.168.43.17
+    private final static String LOCAL_URL_ENDPOINT = "http://172.17.8.17:3000/";// 172.17.9.11 ,192.168.43.17
 
-    public static String getUrlWithPart(String path) {
+    private static String getUrlWithPart(String path) {
         Log.d("URL is: ", URL_ENDPOINT + path);
         return URL_ENDPOINT + path;
     }
 
-    public static String getUrlWithPartLocal(String path) {
+    private static String getUrlWithPartLocal(String path) {
         Log.d("URL is: ", LOCAL_URL_ENDPOINT + path);
         return LOCAL_URL_ENDPOINT + path;
     }

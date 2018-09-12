@@ -19,6 +19,7 @@ import java.io.IOException;
 
 import horizont.com.pmart.horizon.R;
 
+import static horizont.com.pmart.horizon.ClHttpReq.getDataPosPdtLocal;
 import static horizont.com.pmart.horizon.activity.ClDialogBox.gerErrorDialog;
 import static horizont.com.pmart.horizon.activity.ClDialogBox.getHttpLoading;
 import static horizont.com.pmart.horizon.ClHttpReq.fnPreparingSynDataPdt;
@@ -66,7 +67,7 @@ public class ClProfile extends Fragment{
             @Override
 
             protected String doInBackground(Void... voids) {
-                return getDataPosPdt("apimember?para=1;MjAxOC0wNi0yNyAxNzoyODowNC4zODg4OTk=", fnPreparingSynDataPdt("4445555555"));
+                return getDataPosPdtLocal("api/member", fnPreparingSynDataPdt("0845377141"));
             }
 
             @Override
@@ -92,19 +93,19 @@ public class ClProfile extends Fragment{
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    System.out.println("ROOT : " + obj.get("MCMC_NO").asText());
-                    System.out.println("Phone : " + obj.get("MCMA_CELL_PHONE1").asText());
+                    //System.out.println("ROOT : " + obj.get("MCMC_NO").asText());
+                    //System.out.println("Phone : " + obj.get("phone").asText());
 
                     JsonNode objmember = obj.path("member");
                     for (JsonNode nodeMember : objmember) {
-                        name = nodeMember.path("MKTC_NAME").asText();
-                        sername = nodeMember.path("MKTC_SURNAME").asText();
-                        company = nodeMember.path("MKTC_COMPANY").asText();
-                        titlename = nodeMember.path("MCMI_CODE").asText();
+                        name = nodeMember.path("name").asText();
+                        sername = nodeMember.path("name").asText();
+                        company = nodeMember.path("birth").asText();
+                        titlename = nodeMember.path("title_name").asText();
 
                         System.out.println("Member : " + titlename + name + sername + company);
                     }
-                    JsonNode objaddress = obj.path("address");
+                   /* JsonNode objaddress = obj.path("address");
                     for (JsonNode nodeAddress : objaddress) {
                         address = nodeAddress.path("MCMA_ADDR_ADDR").asText();
                         sub_district = nodeAddress.path("MCMA_ADDR_DISTICT").asText();
@@ -112,8 +113,8 @@ public class ClProfile extends Fragment{
                         province = nodeAddress.path("MCMA_ADDR_PROVINCE").asText();
 
 
-                    }
-                    System.out.println("Address : " + address + sub_district + district + province);
+                    }*/
+                    //System.out.println("Address : " + address + sub_district + district + province);
 
                     txt_titlename.setText(titlename);
                     txt_name.setText(name);
