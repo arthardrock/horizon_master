@@ -51,6 +51,7 @@ import horizont.com.pmart.horizon.model.ClSlideUnit;
 import horizont.com.pmart.horizon.model.OnLoadMoreListener;
 import horizont.com.pmart.horizon.R;
 
+import static horizont.com.pmart.horizon.ClHttpReq.getUrlWithPartLocal;
 import static horizont.com.pmart.horizon.activity.ClDialogBox.gerErrorDialog;
 import static horizont.com.pmart.horizon.activity.ClDialogBox.getHttpLoading;
 import static horizont.com.pmart.horizon.ClHttpReq.fnPreparingSynDataPdt;
@@ -63,8 +64,6 @@ public class ClHome extends Fragment {
     private List<ClDataItem> dataList;
     private ImageView[] dots;
     private int dotcount;
-
-    String urlReq = "http://172.17.8.91:3000/api/promotiononlimit";
 
     RequestQueue rq;
     List<ClSlideUnit> sliderImg;
@@ -277,7 +276,7 @@ public class ClHome extends Fragment {
     }
 
     public void sendRequest(){
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, urlReq,
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, getUrlWithPartLocal("api/promotiononlimit"),
                 null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
