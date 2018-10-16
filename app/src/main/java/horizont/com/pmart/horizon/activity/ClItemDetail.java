@@ -66,6 +66,7 @@ public class ClItemDetail extends AppCompatActivity {
         txt_promotion = findViewById(R.id.txt_promotion);
         ly_promotion = findViewById(R.id.ly_promotion);
         QRbutton = findViewById(R.id.btn_genQR);
+
         QRbutton.setVisibility(View.INVISIBLE);
         setToolbar();
 
@@ -153,7 +154,7 @@ public class ClItemDetail extends AppCompatActivity {
                     jsonObj.addProperty("Total",(number*Integer.parseInt(price)));
 
                     //String to Json format
-                    jaOrder.toString();
+
                     Log.d("JSON",""+jaOrder);
                     Toast.makeText(ClItemDetail.this,  jaOrder.toString(),
                             Toast.LENGTH_LONG).show();

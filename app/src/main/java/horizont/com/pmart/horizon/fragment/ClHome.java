@@ -139,13 +139,11 @@ public class ClHome extends Fragment {
         viewAdPager = view.findViewById(R.id.viewAdPager);
         LinearLayout cateid = view.findViewById(R.id.cateid);
 
-
         viewAdPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
             }
-
             @Override
             public void onPageSelected(int position) {
 

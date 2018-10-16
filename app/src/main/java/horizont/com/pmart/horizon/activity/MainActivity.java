@@ -29,6 +29,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
+
 import horizont.com.pmart.horizon.BuildConfig;
 import horizont.com.pmart.horizon.ClCustomAdapter;
 import horizont.com.pmart.horizon.PushActivity;
@@ -46,8 +49,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private Button myButton;
+
     String title;
     String message;
+
     PushActivity pushActivity = new PushActivity();
 
     @Override
@@ -78,41 +83,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        final BottomNavigationView bottomNavigationView = (BottomNavigationView)
-                findViewById(R.id.navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener
-                (new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        Fragment selectedFragment = null;
-                        switch (item.getItemId()) {
-                            case R.id.nav_home:
-                                selectedFragment = ClHome.newInstance();
-                                break;
-                            case R.id.nav_location:
-                                selectedFragment = ClLocation.newInstance();
-                                break;
-                            case R.id.nav_favorite:
-                                selectedFragment = ClFavorite.newInstance();
-                                break;
-                            case R.id.nav_promotion:
-                                selectedFragment = ClPromotion.newInstance();
-                                break;
-                            case R.id.nav_profile:
-                                selectedFragment = ClProfile.newInstance();
-                                break;
-                        }
-                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_layout, selectedFragment);
-                        transaction.commit();
-                        return true;
-                    }
-                });
+        BottomBar buttonBar = (BottomBar)findViewById(R.id.buttonbar);
+        buttonBar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(int tabId) {
+                Fragment selectedFragment = null;
+                if(tabId == R.id.tab_nome){
+                    selectedFragment = ClHome.newInstance();
+                }
+                if(tabId == R.id.tab_location){
+                    selectedFragment = ClLocation.newInstance();
+                }
+                if(tabId == R.id.tab_favorite){
+                    selectedFragment = ClFavorite.newInstance();
+                }
+                if(tabId == R.id.tab_promotion){
+                    selectedFragment = ClPromotion.newInstance();
+                }
+                if(tabId == R.id.tab_profile){
+                    selectedFragment = ClProfile.newInstance();
+                }
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout,selectedFragment);
+                transaction.commit();
+
+            }
+        });
+
         startActivity(new Intent(MainActivity.this,ClImageSlide.class));
-        //startActivity(new Intent(MainActivity.this, ClPopIndex.class));
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout, ClHome.newInstance());
-        transaction.commit();
     }
 
     @Override

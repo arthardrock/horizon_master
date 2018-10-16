@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_nome"
+        icon="@drawable/ic_action_home"
+        title="@string/nav_home"
+        tint="@color/colorBlack"/>
+    <tab
+        id="@+id/tab_location"
+        icon="@drawable/ic_action_location"
+        title="@string/nav_location"
+        tint="@color/colorBlack"/>
+    <tab
+        id="@+id/tab_favorite"
+        icon="@drawable/ic_action_favorite"
+        title="@string/nav_favorite"
+        tint="@color/colorBlack"/>
+    <tab
+        id="@+id/tab_promotion"
+        icon="@drawable/ic_action_promotion"
+        title="@string/nav_promotion"
+        tint="@color/colorBlack"/>
+    <tab
+        id="@+id/tab_profile"
+        icon="@drawable/ic_action_profile"
+        title="@string/nav_profile"
+        tint="@color/colorBlack"/>
+</tabs>

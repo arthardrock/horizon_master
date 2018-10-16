@@ -27,17 +27,14 @@
             android:layout_below="@id/toolbar">
         </FrameLayout>
 
-        <android.support.design.widget.BottomNavigationView
-            style="@style/Text_10dp"
-            android:focusable="true"
-            android:id="@+id/navigation"
+        <com.roughike.bottombar.BottomBar
+            android:background="@color/colorRed"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            app:itemBackground="@color/colorRed"
-            app:itemIconTint="@color/colorWhite"
-            app:itemTextColor="@color/colorWhite"
-            app:menu="@menu/bottom_nav_menu"/>
+            android:layout_height="60dp"
+            android:id="@+id/buttonbar"
+            app:bb_tabXmlResource="@xml/button_tab"
+            android:layout_alignParentBottom="true">
+        </com.roughike.bottombar.BottomBar>
 
     </RelativeLayout>
 
@@ -159,4 +156,5 @@
                 android:text="version :"/>
         </LinearLayout>
     </LinearLayout>
+
 </android.support.v4.widget.DrawerLayout>
