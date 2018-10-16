@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+   <!--Toolsbar-->
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/tb_itemdetail_custom">
+    </include>
+    <!--Frame-->
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:layout_above="@+id/navigation"
+        android:background="@color/colorWhite"
+        android:animateLayoutChanges="true">
+        <!--Detail Item-->
+        <LinearLayout
+            android:id="@+id/list_detail"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--Image-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="250dp">
+
+                <ImageView
+                    android:scaleType="fitXY"
+                    android:id="@+id/img_item"
+                    android:layout_centerInParent="true"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"/>
+                <RelativeLayout
+                    android:id="@+id/ly_promotion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="@color/colorWhite"
+                        android:padding="5dp"
+                        android:background="@drawable/bg_green_conner"
+                        android:layout_marginRight="5dp"
+                        android:id="@+id/txt_promotion"
+                        android:layout_alignParentRight="true"
+                        android:text="item"
+                        style="@style/Text_20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <TextView
+                    android:layout_marginLeft="10dp"
+                    style="@style/Text_10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:text="@string/txt_descImg_forPromote"/>
+            </RelativeLayout>
+            <!--Descrption-->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <!--Price-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingRight="0dp"
+                        android:layout_gravity="right">
+
+                        <TextView
+                            style="@style/Text_30dp"
+                            android:id="@+id/txt_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_gravity="right"
+                            android:text="TextView" />
+                        <!--Text ฿-->
+                        <TextView
+                            android:paddingLeft="2dp"
+                            style="@style/Text_30dp"
+                            android:text="฿"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+
+                        <!--Img_pricelist-->
+                        <ImageView
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:id="@+id/btn_pricelist"
+                            android:src="@drawable/ic_action_set_price"
+                            android:layout_width="20dp"
+                            android:layout_height="30dp" />
+                    </LinearLayout>
+                    <!--Name-->
+                    <TextView
+                        style="@style/Text_20dp"
+                        android:id="@+id/txt_item"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_gravity="center"
+                        android:text="TextView" />
+                    <!--Description-->
+                    <TextView
+                        style="@style/Text_20dp"
+                        android:id="@+id/txt_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_gravity="center"
+                        android:text="รายละเอียด" />
+
+                    <!--Btn-QRCode-->
+                    <Button
+                        android:id="@+id/btn_genQR"
+                        android:padding="10dp"
+                        android:layout_gravity="right"
+                        android:text="QRCode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+    <!--img_QRCode-->
+    <ImageView
+        android:layout_below="@id/toolbar"
+        android:id="@+id/img_QRCode"
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
+    </ImageView>
+
+    <LinearLayout
+        android:layout_marginRight="6dp"
+        android:layout_alignParentRight="true"
+        android:layout_above="@+id/ly_btn_add"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp">
+
+        <LinearLayout
+            android:focusable="true"
+            android:id="@+id/btn_decrease"
+            android:onClick="decreaseInteger"
+            android:background="@drawable/shape_item_inside"
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+            <ImageView
+                android:tint="@color/colorBlack"
+                android:src="@drawable/ic_action_remove"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+        android:layout_width="50dp"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/qty_number"
+            style="@style/Text_40dp"
+            android:gravity="center"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:text="0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+        <LinearLayout
+            android:focusable="true"
+            android:id="@+id/btn_increase"
+            android:onClick="increaseInteger"
+            android:background="@drawable/shape_item_inside"
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:tint="@color/colorBlack"
+                android:src="@drawable/ic_action_add_qty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--Button-->
+    <LinearLayout
+        android:id="@+id/ly_btn_add"
+        android:layout_margin="3dp"
+        android:background="@drawable/shape_item"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true" >
+        <TextView
+            android:id="@+id/btn_add"
+            android:textColor="@color/colorWhite"
+            style="@style/Text_20dp"
+            android:textAlignment="center"
+            android:layout_gravity="center_vertical"
+            android:text="@string/btn_selectItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</RelativeLayout>

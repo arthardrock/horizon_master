@@ -3,10 +3,20 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorWhite</item>
+        <item name="colorPrimaryDark">@color/colorBlack</item>
+        <item name="colorAccent">@color/colorRed</item>
+        <item name="android:fontFamily">@font/rusrecular</item>
         <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorRed</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/rusrecular</item>
     </style>
 
         <style name="AppTheme.NoActionBar">
@@ -22,29 +32,64 @@
             <item name="android:windowIsTranslucent">true</item>
             <item name="android:windowCloseOnTouchOutside">true</item>
         </style>
+
         <style name="Text_10dp">
-            <item name="android:fontFamily">@font/thsaraunnew</item>
+            <item name="android:fontFamily">@font/rusrecular</item>
             <item name="android:textSize">10dp</item>
         </style>
 
+        <style name="Text_15dp">
+            <item name="android:fontFamily">@font/rusrecular</item>
+            <item name="android:textSize">15dp</item>
+        </style>
+
         <style name="Text_20dp">
-            <item name="android:fontFamily">@font/thsaraunnew</item>
+            <item name="android:textColor">@color/colorBlack</item>
+            <item name="android:fontFamily">@font/rusrecular</item>
             <item name="android:textSize">20dp</item>
         </style>
 
         <style name="Text_30dp">
-            <item name="android:fontFamily">@font/thsaraunnew</item>
+            <item name="android:textColor">@color/colorBlack</item>
+            <item name="android:fontFamily">@font/rusrecular</item>
             <item name="android:textSize">30dp</item>
         </style>
 
         <style name="Text_40dp">
-            <item name="android:fontFamily">@font/thsaraunnew</item>
+            <item name="android:textColor">@color/colorBlack</item>
+            <item name="android:fontFamily">@font/rusrecular</item>
             <item name="android:textSize">40dp</item>
         </style>
 
         <style name="Text_50dp">
-            <item name="android:fontFamily">@font/thsaraunnew</item>
+            <item name="android:textColor">@color/colorBlack</item>
+            <item name="android:fontFamily">@font/rusrecular</item>
             <item name="android:textSize">50dp</item>
         </style>
+
+        <style name="Text_bold_15dp">
+            <item name="android:textColor">@color/colorBlack</item>
+            <item name="android:fontFamily">@font/rusrecular</item>
+            <item name="android:textSize">15dp</item>
+            <item name="android:textStyle">bold</item>
+        </style>
+
+        <style name="Text_bold_20dp">
+            <item name="android:textColor">@color/colorBlack</item>
+            <item name="android:fontFamily">@font/rusrecular</item>
+            <item name="android:textSize">20dp</item>
+            <item name="android:textStyle">bold</item>
+        </style>
+        <style name="Text_bold_30dp">
+            <item name="android:textColor">@color/colorBlack</item>
+            <item name="android:fontFamily">@font/rusrecular</item>
+            <item name="android:textSize">30dp</item>
+            <item name="android:textStyle">bold</item>
+        </style>
+
+    <style name="ThemeOverlay"></style>
+
+    <style name="Theme"></style>
+
 
 </resources>

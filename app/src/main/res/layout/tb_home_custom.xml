@@ -15,23 +15,45 @@
         app:contentInsetStart="0dp"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <TextView
-            style="@style/Text_50dp"
-            android:id="@+id/txt_title"
-            android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/img_logo"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textColor="@color/colorWhite"
-            tools:text="untitle" />
+            android:textColor="@color/colorWhite" />
 
-        <ImageView
-            android:layout_marginRight="10dp"
+        <FrameLayout
+            android:id="@+id/img_basket"
+            android:onClick="onClick"
+            style="?attr/actionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+            android:clipToPadding="false"
             android:layout_gravity="right"
-            android:id="@+id/img_srarch"
-            android:background="@drawable/ic_action_search"
+            android:focusable="true">
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/ic_action_busket"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/count_notif"
+            style="@style/Text_10dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="right|end|top"
+            android:layout_marginEnd="-5dp"
+            android:layout_marginRight="-5dp"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/badge_backgroud"
+            android:gravity="center_horizontal"
+            android:padding="3dp"
+            android:text="0" />
+        </FrameLayout>
 
     </android.support.v7.widget.Toolbar>
 
